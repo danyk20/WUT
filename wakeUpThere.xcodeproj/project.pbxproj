@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		9B0E8562283A85DB00114FF4 /* wakeUpThereApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B0E8561283A85DB00114FF4 /* wakeUpThereApp.swift */; };
-		9B0E8564283A85DB00114FF4 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B0E8563283A85DB00114FF4 /* ContentView.swift */; };
 		9B0E8566283A85E400114FF4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9B0E8565283A85E400114FF4 /* Assets.xcassets */; };
 		9B0E8569283A85E400114FF4 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9B0E8568283A85E400114FF4 /* Preview Assets.xcassets */; };
 		9B0E8578283AA5E000114FF4 /* SelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B0E8577283AA5E000114FF4 /* SelectView.swift */; };
@@ -17,7 +16,6 @@
 /* Begin PBXFileReference section */
 		9B0E855E283A85DB00114FF4 /* wakeUpThere.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = wakeUpThere.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B0E8561283A85DB00114FF4 /* wakeUpThereApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = wakeUpThereApp.swift; sourceTree = "<group>"; };
-		9B0E8563283A85DB00114FF4 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		9B0E8565283A85E400114FF4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9B0E8568283A85E400114FF4 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		9B0E8577283AA5E000114FF4 /* SelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectView.swift; sourceTree = "<group>"; };
@@ -54,7 +52,6 @@
 			isa = PBXGroup;
 			children = (
 				9B0E8561283A85DB00114FF4 /* wakeUpThereApp.swift */,
-				9B0E8563283A85DB00114FF4 /* ContentView.swift */,
 				9B0E8577283AA5E000114FF4 /* SelectView.swift */,
 				9B0E8565283A85E400114FF4 /* Assets.xcassets */,
 				9B0E8567283A85E400114FF4 /* Preview Content */,
@@ -140,7 +137,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9B0E8564283A85DB00114FF4 /* ContentView.swift in Sources */,
 				9B0E8562283A85DB00114FF4 /* wakeUpThereApp.swift in Sources */,
 				9B0E8578283AA5E000114FF4 /* SelectView.swift in Sources */,
 			);
@@ -271,6 +267,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"wakeUpThere/Preview Content\"";
+				DEVELOPMENT_TEAM = 5VFP4D6SX2;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -299,6 +296,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"wakeUpThere/Preview Content\"";
+				DEVELOPMENT_TEAM = 5VFP4D6SX2;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
