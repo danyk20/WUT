@@ -10,7 +10,8 @@ import MapKit
 import CoreLocationUI
 
 struct SelectView: View {
-    @State private var region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 39.8, longitude: -92.8), span: MKCoordinateSpan(latitudeDelta: 2, longitudeDelta: 2))
+    @StateObject private var mapModel = MapViewModel()
+
     var body: some View {
         VStack(alignment: .center, spacing: 50) {
             Text("WUT")
@@ -45,8 +46,11 @@ struct SelectView: View {
             }
             
             ZStack(alignment: .bottom){
-                Map(coordinateRegion: $region, showsUserLocation: true)
+                Map(coordinateRegion: $mapModel.region, showsUserLocation: true)
                     .ignoresSafeArea()
+                    .onAppear{
+                        mapModel.chcekIfLocationServicesIsEnable()
+                    }
             }
         }
         .font(.title)
@@ -60,3 +64,5 @@ struct SelectView_Previews: PreviewProvider {
             
     }
 }
+
+
