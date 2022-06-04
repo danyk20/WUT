@@ -21,29 +21,10 @@ struct SelectView: View {
             Text("Choose mean of transport:")
                 .fontWeight(.bold)
             
-            HStack{
-                Image(systemName: "ferry.fill")
-                Text("Boat")
-                    .fontWeight(.bold)
-            }
-            
-            HStack{
-                Image(systemName: "bus")
-                Text("Bus")
-                    .fontWeight(.bold)
-            }
-            
-            HStack{
-                Image(systemName: "tram")
-                Text("Train")
-                    .fontWeight(.bold)
-            }
-            
-            HStack{
-                Image(systemName: "airplane")
-                Text("Airplane")
-                    .fontWeight(.bold)
-            }
+            TransportView(transportType: TransportType.Boat)
+            TransportView(transportType: TransportType.Bus)
+            TransportView(transportType: TransportType.Train)
+            TransportView(transportType: TransportType.Airplane)
             
             ZStack(alignment: .bottom){
                 Map(coordinateRegion: $mapModel.region, showsUserLocation: true)

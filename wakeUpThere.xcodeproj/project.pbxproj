@@ -12,6 +12,8 @@
 		9B0E8569283A85E400114FF4 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9B0E8568283A85E400114FF4 /* Preview Assets.xcassets */; };
 		9B0E8578283AA5E000114FF4 /* SelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B0E8577283AA5E000114FF4 /* SelectView.swift */; };
 		9B4419E12845AD5B0046FC9E /* MapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B4419E02845AD5A0046FC9E /* MapViewModel.swift */; };
+		9BB35CB9284BFA3C0034FAB3 /* TransportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB35CB8284BFA3B0034FAB3 /* TransportView.swift */; };
+		9BB35CBB284BFB570034FAB3 /* Transport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB35CBA284BFB570034FAB3 /* Transport.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +24,8 @@
 		9B0E8577283AA5E000114FF4 /* SelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectView.swift; sourceTree = "<group>"; };
 		9B4419E02845AD5A0046FC9E /* MapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewModel.swift; sourceTree = "<group>"; };
 		9B4419E22845B1F30046FC9E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		9BB35CB8284BFA3B0034FAB3 /* TransportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransportView.swift; sourceTree = "<group>"; };
+		9BB35CBA284BFB570034FAB3 /* Transport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transport.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +61,8 @@
 				9B4419E22845B1F30046FC9E /* Info.plist */,
 				9B0E8561283A85DB00114FF4 /* wakeUpThereApp.swift */,
 				9B0E8577283AA5E000114FF4 /* SelectView.swift */,
+				9BB35CB8284BFA3B0034FAB3 /* TransportView.swift */,
+				9BB35CBA284BFB570034FAB3 /* Transport.swift */,
 				9B4419E02845AD5A0046FC9E /* MapViewModel.swift */,
 				9B0E8565283A85E400114FF4 /* Assets.xcassets */,
 				9B0E8567283A85E400114FF4 /* Preview Content */,
@@ -144,6 +150,8 @@
 			files = (
 				9B0E8562283A85DB00114FF4 /* wakeUpThereApp.swift in Sources */,
 				9B0E8578283AA5E000114FF4 /* SelectView.swift in Sources */,
+				9BB35CBB284BFB570034FAB3 /* Transport.swift in Sources */,
+				9BB35CB9284BFA3C0034FAB3 /* TransportView.swift in Sources */,
 				9B4419E12845AD5B0046FC9E /* MapViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
