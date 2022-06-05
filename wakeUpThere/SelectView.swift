@@ -21,18 +21,11 @@ struct SelectView: View {
             Text("Choose mean of transport:")
                 .fontWeight(.bold)
             
-            TransportView(transportType: TransportType.Boat)
-            TransportView(transportType: TransportType.Bus)
-            TransportView(transportType: TransportType.Train)
-            TransportView(transportType: TransportType.Airplane)
-            
-            ZStack(alignment: .bottom){
-                Map(coordinateRegion: $mapModel.region, showsUserLocation: true)
-                    .ignoresSafeArea()
-                    .onAppear{
-                        mapModel.chcekIfLocationServicesIsEnable()
+            ForEach(TransportType.allCases, id: \.rawValue) { vehicle in
+                        TransportView(transportType: vehicle)
                     }
-            }
+            
+            MapView()
         }
         .font(.title)
         

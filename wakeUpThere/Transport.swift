@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum TransportType : String{
+enum TransportType : String, CaseIterable{
     case Bus
     case Airplane
     case Boat
