@@ -12,4 +12,18 @@ enum TransportType : String, CaseIterable{
     case Airplane
     case Boat
     case Train
+    
+    func getIconName () -> String
+    {
+        switch self {
+        case .Bus:
+            return "bus"
+        case .Airplane:
+            return "airplane"
+        case .Boat:
+            return "ferry.fill"
+        case .Train:
+            return "tram"
+        }
+    }
 }

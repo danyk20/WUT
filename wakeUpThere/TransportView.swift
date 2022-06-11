@@ -11,23 +11,9 @@ struct TransportView: View {
     
     let transportType: TransportType
     
-    func getIconName (vehicle: TransportType) -> String
-    {
-        switch vehicle {
-        case .Bus:
-            return "bus"
-        case .Airplane:
-            return "airplane"
-        case .Boat:
-            return "ferry.fill"
-        case .Train:
-            return "tram"
-        }
-    }
-    
     var body: some View {
         HStack{
-            Image(systemName: getIconName(vehicle: transportType))
+            Image(systemName: transportType.getIconName())
             Text("\(transportType.rawValue)")
                 .fontWeight(.bold)
         }
