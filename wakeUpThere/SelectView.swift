@@ -10,10 +10,12 @@ import MapKit
 import CoreLocationUI
 
 struct SelectView: View {
+    
     @StateObject private var mapModel = MapViewModel()
-    @State private var selectedTransportType = "Choose mean of transport:"
     @State private var selectedVehicle : TransportType? = nil
-    @State var selected : Bool = false
+    @State private var selected = false
+    
+    private let prompt = "Choose mean of transport:"
 
     var body: some View {
         ZStack{
@@ -22,23 +24,21 @@ struct SelectView: View {
                     .font(.largeTitle)
                     .fontWeight(.bold)
                 
-                Text(selectedTransportType)
+                Text(prompt)
                     .fontWeight(.bold)
                 
                 ForEach(TransportType.allCases, id: \.rawValue) { vehicle in
-                    Button(action: {
-                        selected = true
+                    Button{
                         selectedVehicle = vehicle
-                        selectedTransportType = vehicle.rawValue
-                    }, label: {
+                        selected = true
+                    } label: {
                         RoundedRectangle(cornerRadius: 35)
                             .fill(Color.white)
                             .shadow(radius: 10)
                             .overlay(TransportView(transportType: vehicle)
                                 .accentColor(Color.black))
                     }
-                    )
-                        }
+                }
                 
                 MapView()
                     .ignoresSafeArea()
@@ -48,16 +48,12 @@ struct SelectView: View {
                 if selected{
                     DestinationView(vehicle: selectedVehicle!, selected: $selected)
                         .transition(.move(edge: .trailing))
-                        .animation(.spring()) // , value = "what is changed"
-
                 }
             }
+            .animation(.spring(), value: selected)
             .zIndex(2.0)
             
         }
-        
-        
-        
     }
 }
 
