@@ -6,24 +6,25 @@
 //
 
 import SwiftUI
+import MapKit
 
 struct DestinationView: View {
     let vehicle : TransportType
-    @State var bbb : Bool = false
-    @State var destination : String = ""
+    @State private var destination : String = ""
+    @State private var mapView = MapView()
     var body: some View {
         VStack{
             TextField("Enter your \(vehicle.rawValue) final destination!", text: $destination)
                 .font(.title2)
                 .multilineTextAlignment(.center)
-            MapView()
+            Button("Find destination", action: {
+                mapView.setLocation(address: destination, delta: 100000)
+            })
+            mapView
                 .ignoresSafeArea()
         }
-//        .navigationTitle(_: Image(systemName: TransportType.Bus.getIconName()))
         .navigationBarTitle(Text(""), displayMode: .inline)
         .navigationBarItems(trailing: Image(systemName: vehicle.getIconName()))
-        
-        
     }
 }
 
