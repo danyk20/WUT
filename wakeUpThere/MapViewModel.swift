@@ -39,15 +39,13 @@ final class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate 
         case .notDetermined:
             locationManager.requestAlwaysAuthorization()
         case .restricted:
-            print("restricted")
+            break
         case .denied:
-            print("denied")
+            break
         case .authorizedAlways:
             region = MKCoordinateRegion(center: locationManager.location!.coordinate, span: MapDetails.defaultSpan)
-            print("allways")
         case .authorizedWhenInUse:
             region = MKCoordinateRegion(center: locationManager.location!.coordinate, span: MapDetails.defaultSpan)
-            print("WhenInUse")
         @unknown default:
             break
         
