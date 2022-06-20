@@ -12,9 +12,14 @@ struct Address: Codable{
     let data: [Datum]
 }
 
-struct Datum: Codable{
+struct Datum: Codable, Hashable{
     let latitude, longitude: Double
-    let name : String?
+    let name : String
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(latitude)
+        hasher.combine(longitude)
+    }
 }
 
 struct Location: Identifiable{
@@ -37,7 +42,7 @@ class MapAPI: ObservableObject{
         self.locations.insert(Location(name: "Pin", coordinate: CLLocationCoordinate2D(latitude: 51, longitude: 0)), at: 0)
     }
     
-    func getLocation(address: String, delta: Double){
+    func getPossiblePlaces(address: String, delta: Double, completion: @escaping (([Datum]) -> Void)){
         let pAddress = address.replacingOccurrences(of: " ", with: "%20")
         let url_string = "\(BASE_URL)?access_key=\(API_KEY)&query=\(pAddress)"
         guard let url = URL(string: url_string) else{
@@ -56,8 +61,15 @@ class MapAPI: ObservableObject{
                 print("Could not find the address...")
                 return
             }
+                self.getLocation(selectedLocation: newCoordinates.data[0], delta: delta)
+                completion(newCoordinates.data)
+        }.resume()
+    }
+    
+    
+    func getLocation(selectedLocation: Datum, delta: Double){
             DispatchQueue.main.async {
-                let details = newCoordinates.data[0]
+                let details = selectedLocation
                 let lat = details.latitude
                 let lon = details.longitude
                 let name = details.name
@@ -65,15 +77,12 @@ class MapAPI: ObservableObject{
                 self.coordinates = [lat, lon]
                 self.region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: lat, longitude: lon), latitudinalMeters: delta, longitudinalMeters: delta)
                 
-                let new_location = Location(name: name ?? "Pin", coordinate: CLLocationCoordinate2D(latitude: lat, longitude: lon))
-                
+                let new_location = Location(name: name, coordinate: CLLocationCoordinate2D(latitude: lat, longitude: lon))
                 self.locations.removeAll()
                 self.locations.insert(new_location, at: 0)
                 
                 print("Sucessfull")
             }
-
-        }.resume()
     }
 }
 

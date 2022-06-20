@@ -12,16 +12,30 @@ struct DestinationView: View {
     let vehicle : TransportType
     @State private var destination : String = ""
     @State private var mapView = MapView()
+    @State private var suggestions: [Datum] = []
     var body: some View {
+        let binding = Binding<String>(get: {
+                    self.destination
+                }, set: {
+                    self.destination = $0
+                    mapView.setLocation(address: destination, delta: 100000){ places in
+                        suggestions = places
+                    }
+                })
         VStack{
-            TextField("Enter your \(vehicle.rawValue) final destination!", text: $destination)
+            TextField("Enter your \(vehicle.rawValue) final destination!", text: binding)
                 .font(.title2)
                 .multilineTextAlignment(.center)
-            Button("Find destination", action: {
-                mapView.setLocation(address: destination, delta: 100000)
+            Button("Set selected destination", action: {
+                // to do
             })
-            mapView
-                .ignoresSafeArea()
+            ZStack{
+                mapView
+                    .ignoresSafeArea()
+                if (!suggestions.isEmpty){
+                        suggestionView(dataArray: $suggestions, mapView: mapView)
+                }
+            }
         }
         .navigationBarTitle(Text(""), displayMode: .inline)
         .navigationBarItems(trailing: Image(systemName: vehicle.getIconName()))

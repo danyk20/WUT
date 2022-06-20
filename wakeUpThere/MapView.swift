@@ -24,8 +24,14 @@ struct MapView: View {
         }
     }
     
-    public func setLocation(address: String, delta: Double){
-        mapAPI.getLocation(address: address, delta: delta)
+    public func setLocation(address: String, delta: Double, completion: @escaping (([Datum])->Void)){
+        mapAPI.getPossiblePlaces(address: address, delta: delta){ places in
+            completion(places)
+        }
+    }
+    
+    public func selectPlace(selectedLocation: Datum, delta: Double){
+        mapAPI.getLocation(selectedLocation: selectedLocation, delta: delta)
     }
 }
 

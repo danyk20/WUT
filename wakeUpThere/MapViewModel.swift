@@ -48,9 +48,7 @@ final class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate 
             region = MKCoordinateRegion(center: locationManager.location!.coordinate, span: MapDetails.defaultSpan)
         @unknown default:
             break
-        
         }
-
     }
     
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
