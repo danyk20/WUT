@@ -54,4 +54,13 @@ final class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate 
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
         chceckLocationAuthorization()
     }
+    
+    func updateZoom(cooeficient: Double){
+        if (self.region.span.longitudeDelta < 130 || cooeficient < 1)
+        {
+                self.region.span.latitudeDelta *= cooeficient
+                self.region.span.longitudeDelta *= cooeficient
+        }
+        print("New zoon is : \(self.region.span.longitudeDelta)")
+    }
 }

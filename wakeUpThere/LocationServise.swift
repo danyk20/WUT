@@ -38,7 +38,6 @@ class MapAPI: ObservableObject{
     
     init() {
         self.region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 51, longitude: 0), latitudinalMeters: 10000, longitudinalMeters: 10000)
-        
         self.locations.insert(Location(name: "Pin", coordinate: CLLocationCoordinate2D(latitude: 51, longitude: 0)), at: 0)
     }
     
@@ -69,13 +68,12 @@ class MapAPI: ObservableObject{
     
     func getLocation(selectedLocation: Datum, delta: Double){
             DispatchQueue.main.async {
-                let details = selectedLocation
-                let lat = details.latitude
-                let lon = details.longitude
-                let name = details.name
+                let lat = selectedLocation.latitude
+                let lon = selectedLocation.longitude
+                let name = selectedLocation.name
                 
                 self.coordinates = [lat, lon]
-                self.region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: lat, longitude: lon), latitudinalMeters: delta, longitudinalMeters: delta)
+                //self.region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: lat, longitude: lon), latitudinalMeters: delta, longitudinalMeters: delta) not used now
                 
                 let new_location = Location(name: name, coordinate: CLLocationCoordinate2D(latitude: lat, longitude: lon))
                 self.locations.removeAll()

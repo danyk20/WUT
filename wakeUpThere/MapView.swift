@@ -21,17 +21,44 @@ struct MapView: View {
                 .onAppear{
                     mapModel.chcekIfLocationServicesIsEnable()
                 }
+            VStack(){
+                Spacer()
+                HStack{
+                    Spacer()
+                    Button(action: {
+                        mapModel.updateZoom(cooeficient: 0.5)
+                    }, label: {
+                        Image(systemName: "plus.magnifyingglass")
+                            .font(.title)
+                        
+                    })
+                    .padding()
+                }
+                HStack{
+                    Spacer()
+                    Button(action: {
+                        mapModel.updateZoom(cooeficient: 2)
+                    }, label: {
+                        Image(systemName: "minus.magnifyingglass")
+                            .font(.title)
+                        
+                    })
+                    .padding()
+                    
+                }
+            }
+            
         }
     }
     
-    public func setLocation(address: String, delta: Double, completion: @escaping (([Datum])->Void)){
-        mapAPI.getPossiblePlaces(address: address, delta: delta){ places in
+    public func setLocation(address: String, completion: @escaping (([Datum])->Void)){
+        mapAPI.getPossiblePlaces(address: address, delta: 100){ places in
             completion(places)
         }
     }
     
-    public func selectPlace(selectedLocation: Datum, delta: Double){
-        mapAPI.getLocation(selectedLocation: selectedLocation, delta: delta)
+    public func selectPlace(selectedLocation: Datum){
+        mapAPI.getLocation(selectedLocation: selectedLocation, delta: 100)
     }
 }
 

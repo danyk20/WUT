@@ -16,7 +16,7 @@ struct suggestionView: View{
             ScrollView{
                 ForEach(dataArray, id: \.self){ place in
                     Button(action: {
-                        mapView.selectPlace(selectedLocation: place, delta: 10000)
+                        mapView.selectPlace(selectedLocation: place)
                     },label: {
                         Text(place.name.uppercased())
                             .padding()

@@ -18,7 +18,7 @@ struct DestinationView: View {
                     self.destination
                 }, set: {
                     self.destination = $0
-                    mapView.setLocation(address: destination, delta: 100000){ places in
+                    mapView.setLocation(address: destination){ places in
                         suggestions = places
                     }
                 })
