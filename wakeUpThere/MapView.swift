@@ -11,7 +11,7 @@ import CoreLocationUI
 
 struct MapView: View {
     @ObservedObject private var mapAPI = MapAPI()
-    @StateObject private var mapModel = MapViewModel()
+    @ObservedObject private var mapModel = MapViewModel()
     var body: some View {
         ZStack(alignment: .bottom){
             Map(coordinateRegion: $mapModel.region, showsUserLocation: true, annotationItems: mapAPI.locations){ location in
@@ -59,6 +59,14 @@ struct MapView: View {
     
     public func selectPlace(selectedLocation: Datum){
         mapAPI.getLocation(selectedLocation: selectedLocation, delta: 100)
+    }
+    
+    public func getDistance() -> Double{
+        guard let currentLocation = mapModel.getCurrentLocation() else
+        {
+            return Double.infinity
+        }
+        return self.mapAPI.getDistance(startLocation: currentLocation)
     }
 }
 

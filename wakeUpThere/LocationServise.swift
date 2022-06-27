@@ -65,6 +65,15 @@ class MapAPI: ObservableObject{
         }.resume()
     }
     
+    func getDistance(startLocation: CLLocationCoordinate2D) -> Double{
+        if locations.isEmpty{
+            return Double.infinity
+        }
+        let currentPosition = MKMapPoint(startLocation)
+        let destinationPosition = MKMapPoint(locations[0].coordinate)
+        return currentPosition.distance(to: destinationPosition)
+    }
+    
     
     func getLocation(selectedLocation: Datum, delta: Double){
             DispatchQueue.main.async {

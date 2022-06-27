@@ -13,6 +13,8 @@ struct DestinationView: View {
     @State private var destination : String = ""
     @State private var mapView = MapView()
     @State private var suggestions: [Datum] = []
+    @State private var distance: Double = Double.infinity
+    @State private var showAlert: Bool = false
     var body: some View {
         let binding = Binding<String>(get: {
                     self.destination
@@ -27,7 +29,8 @@ struct DestinationView: View {
                 .font(.title2)
                 .multilineTextAlignment(.center)
             Button("Set selected destination", action: {
-                // to do
+                distance = mapView.getDistance()
+                showAlert.toggle()
             })
             ZStack{
                 mapView
@@ -36,9 +39,27 @@ struct DestinationView: View {
                         suggestionView(dataArray: $suggestions, mapView: mapView)
                 }
             }
+            .alert(isPresented: $showAlert,content: {
+                getAlert(distance: distance)
+            })
         }
         .navigationBarTitle(Text(""), displayMode: .inline)
         .navigationBarItems(trailing: Image(systemName: vehicle.getIconName()))
+    }
+    
+    private func getAlert(distance: Double) -> Alert{
+        if distance == Double.infinity{
+            return Alert(title: Text("Error ocurred try again later!"))
+        }
+        
+        var formatedDistance = ""
+        if distance > 10000{
+            formatedDistance =  String(format: "%d", locale: Locale.current, Int(round(distance/1000))) +  " km"
+        }
+        else {
+            formatedDistance =  String(format: "%d", locale: Locale.current, Int(round(distance))) +  " m"
+        }
+        return Alert(title: Text("Remaining distance is: \(formatedDistance)"))
     }
 }
 

@@ -51,6 +51,13 @@ final class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate 
         }
     }
     
+    func getCurrentLocation() -> CLLocationCoordinate2D?{
+        guard let locationManager = locationManager else {
+            return nil
+        }
+        return locationManager.location!.coordinate
+    }
+    
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
         chceckLocationAuthorization()
     }
