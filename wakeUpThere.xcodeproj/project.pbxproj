@@ -18,6 +18,8 @@
 		9BB35CB9284BFA3C0034FAB3 /* TransportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB35CB8284BFA3B0034FAB3 /* TransportView.swift */; };
 		9BB35CBB284BFB570034FAB3 /* Transport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB35CBA284BFB570034FAB3 /* Transport.swift */; };
 		9BB35CBD284C0DC90034FAB3 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB35CBC284C0DC90034FAB3 /* MapView.swift */; };
+		9BEFC125286DE2AD005D22AD /* SoundManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BEFC124286DE2AD005D22AD /* SoundManager.swift */; };
+		9BEFC128286DEE61005D22AD /* bell.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9BEFC127286DEE61005D22AD /* bell.mp3 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +36,8 @@
 		9BB35CB8284BFA3B0034FAB3 /* TransportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransportView.swift; sourceTree = "<group>"; };
 		9BB35CBA284BFB570034FAB3 /* Transport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transport.swift; sourceTree = "<group>"; };
 		9BB35CBC284C0DC90034FAB3 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
+		9BEFC124286DE2AD005D22AD /* SoundManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundManager.swift; sourceTree = "<group>"; };
+		9BEFC127286DEE61005D22AD /* bell.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = bell.mp3; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,6 +80,8 @@
 				9B7A36E328600A76006C721F /* suggestionView.swift */,
 				9B4419E02845AD5A0046FC9E /* MapViewModel.swift */,
 				9BB35CBC284C0DC90034FAB3 /* MapView.swift */,
+				9BEFC124286DE2AD005D22AD /* SoundManager.swift */,
+				9BEFC126286DE5C7005D22AD /* Sounds */,
 				9B0E8565283A85E400114FF4 /* Assets.xcassets */,
 				9B0E8567283A85E400114FF4 /* Preview Content */,
 			);
@@ -88,6 +94,14 @@
 				9B0E8568283A85E400114FF4 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		9BEFC126286DE5C7005D22AD /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				9BEFC127286DEE61005D22AD /* bell.mp3 */,
+			);
+			path = Sounds;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -150,6 +164,7 @@
 			files = (
 				9B0E8569283A85E400114FF4 /* Preview Assets.xcassets in Resources */,
 				9B0E8566283A85E400114FF4 /* Assets.xcassets in Resources */,
+				9BEFC128286DEE61005D22AD /* bell.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -169,6 +184,7 @@
 				9BB35CBB284BFB570034FAB3 /* Transport.swift in Sources */,
 				9BB35CB9284BFA3C0034FAB3 /* TransportView.swift in Sources */,
 				9B4419E12845AD5B0046FC9E /* MapViewModel.swift in Sources */,
+				9BEFC125286DE2AD005D22AD /* SoundManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

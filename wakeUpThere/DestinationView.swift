@@ -31,6 +31,9 @@ struct DestinationView: View {
             Button("Set selected destination", action: {
                 distance = mapView.getDistance()
                 showAlert.toggle()
+                if (distance < 20000){
+                    SoundManager.instance.playSound()
+                }
             })
             ZStack{
                 mapView
