@@ -9,16 +9,21 @@ import SwiftUI
 import MapKit
 
 struct DestinationView: View {
-    let vehicle : TransportType
-    @State private var destination : String = ""
     @State private var mapView = MapView()
+    @State private var distanceView : DistanceSelectionView?
     @State private var suggestions: [Datum] = []
-    @State private var distance: Double = Double.infinity
-    @State private var showAlert: Bool = false
+    @State private var destination : String = ""
+    //@State private var distance: Double = Double.infinity
+    @State private var selectedDestination: Bool = false
+    @State private var selectedPerimeter: Bool = false
+    @State private var perimeter: Double = 2.5
+    let vehicle : TransportType
+    
     var body: some View {
         let binding = Binding<String>(get: {
                     self.destination
                 }, set: {
+                    selectedDestination = false
                     self.destination = $0
                     mapView.setLocation(address: destination){ places in
                         suggestions = places
@@ -28,29 +33,45 @@ struct DestinationView: View {
             TextField("Enter your \(vehicle.rawValue) final destination!", text: binding)
                 .font(.title2)
                 .multilineTextAlignment(.center)
-            Button("Set selected destination", action: {
-                distance = mapView.getDistance()
-                showAlert.toggle()
-                if (distance < 20000){
-                    SoundManager.instance.playSound()
-                }
-            })
+            if !selectedDestination {
+                Button("Set selected destination", action: {
+                    selectedDestination = true
+                    selectedPerimeter = false
+                })
+            }
             ZStack{
                 mapView
                     .ignoresSafeArea()
-                if (!suggestions.isEmpty){
+                if (!suggestions.isEmpty && !selectedDestination){
                         suggestionView(dataArray: $suggestions, mapView: mapView)
                 }
+                if (selectedDestination && !selectedPerimeter) {
+                    if let distanceView = distanceView {
+                        distanceView
+                    }
+                }
             }
-            .alert(isPresented: $showAlert,content: {
-                getAlert(distance: distance)
+            .alert(isPresented: $selectedPerimeter,
+                   content: {
+                getAlert(trigerDistance: perimeter)
             })
         }
+        .onAppear(perform: {
+            distanceView = DistanceSelectionView(
+                perimeter: $perimeter,
+                selectedPerimeter: $selectedPerimeter)})
         .navigationBarTitle(Text(""), displayMode: .inline)
         .navigationBarItems(trailing: Image(systemName: vehicle.getIconName()))
     }
     
-    private func getAlert(distance: Double) -> Alert{
+    private func getAlert(trigerDistance: Double) -> Alert{
+        
+        //temporal
+        let distance = mapView.getDistance()
+        if (distance < perimeter * 1000){
+            SoundManager.instance.playSound()
+        }
+        
         if distance == Double.infinity{
             return Alert(title: Text("Error ocurred try again later!"))
         }
@@ -62,7 +83,8 @@ struct DestinationView: View {
         else {
             formatedDistance =  String(format: "%d", locale: Locale.current, Int(round(distance))) +  " m"
         }
-        return Alert(title: Text("Remaining distance is: \(formatedDistance)"))
+        return Alert(title: Text("Remaining distance is: \(formatedDistance)"),
+                     message: Text("You will be notified " + String(format: "%.1f", trigerDistance) + " km before your destination!"))
     }
 }
 
