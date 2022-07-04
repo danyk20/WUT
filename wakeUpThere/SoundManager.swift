@@ -14,8 +14,7 @@ class SoundManager {
     
     var player: AVAudioPlayer?
     
-    func playSound() {
-        
+    public func playSound() {
         guard let url = Bundle.main.url(forResource: "bell", withExtension: ".mp3") else { return }
         
         do {

@@ -12,11 +12,18 @@ import CoreLocationUI
 struct MapView: View {
     @ObservedObject private var mapAPI = MapAPI()
     @ObservedObject private var mapModel = MapViewModel()
+    @State private var destinationColor: Color = .blue
+    
     var body: some View {
         ZStack(alignment: .bottom){
-            Map(coordinateRegion: $mapModel.region, showsUserLocation: true, annotationItems: mapAPI.locations){ location in
-                MapMarker(coordinate: location.coordinate, tint: .blue)
+            Map(coordinateRegion: $mapModel.region,
+                showsUserLocation: true,
+                annotationItems: mapAPI.locations){ location in
+                MapMarker(coordinate: location.coordinate, tint: destinationColor)
             }
+                .onChange(of: self.mapModel.location, perform: { _ in
+                    checkRemainingDistance()
+                })
                 .ignoresSafeArea()
                 .onAppear{
                     mapModel.chcekIfLocationServicesIsEnable()
@@ -30,7 +37,6 @@ struct MapView: View {
                     }, label: {
                         Image(systemName: "plus.magnifyingglass")
                             .font(.title)
-                        
                     })
                     .padding()
                 }
@@ -44,10 +50,8 @@ struct MapView: View {
                         
                     })
                     .padding()
-                    
                 }
             }
-            
         }
     }
     
@@ -67,6 +71,10 @@ struct MapView: View {
             return Double.infinity
         }
         return self.mapAPI.getDistance(startLocation: currentLocation)
+    }
+    
+    private func checkRemainingDistance(){
+        NotificationController.instance.setRemainingDistance(distance: getDistance())
     }
 }
 

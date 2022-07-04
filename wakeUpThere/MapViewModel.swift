@@ -16,16 +16,21 @@ enum MapDetails {
 final class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     
     @Published var region = MKCoordinateRegion(center: MapDetails.startingLocation , span: MapDetails.defaultSpan)
+    @Published var location : CLLocation?
     
     var locationManager: CLLocationManager?
     
     func chcekIfLocationServicesIsEnable() {
         if CLLocationManager.locationServicesEnabled() {
             locationManager = CLLocationManager()
-            locationManager!.delegate = self
+            if let locationManager = locationManager {
+                locationManager.delegate = self
+                locationManager.startUpdatingLocation()
+                locationManager.allowsBackgroundLocationUpdates = true
+            }
         }
         else {
-            print("Show allert")
+            print("Show alert")
         }
     }
     
@@ -45,7 +50,8 @@ final class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate 
         case .authorizedAlways:
             region = MKCoordinateRegion(center: locationManager.location!.coordinate, span: MapDetails.defaultSpan)
         case .authorizedWhenInUse:
-            region = MKCoordinateRegion(center: locationManager.location!.coordinate, span: MapDetails.defaultSpan)
+            print("Wrong permition")
+            locationManager.requestAlwaysAuthorization()
         @unknown default:
             break
         }
@@ -68,6 +74,13 @@ final class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate 
                 self.region.span.latitudeDelta *= cooeficient
                 self.region.span.longitudeDelta *= cooeficient
         }
-        print("New zoon is : \(self.region.span.longitudeDelta)")
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        location = locations.first
+        // centre map to new user location
+        if let newLocation = location {
+            region.center = CLLocationCoordinate2D(latitude: newLocation.coordinate.latitude, longitude: newLocation.coordinate.longitude)
+        }
     }
 }

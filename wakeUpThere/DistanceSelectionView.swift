@@ -36,6 +36,7 @@ struct DistanceSelectionView: View {
                     .keyboardType(.decimalPad)
                     Button {
                         selectedPerimeter.toggle()
+                        NotificationController.instance.setPerimeter(perimeter: perimeter * 1000)
                     } label: {
                         Text("Submit")
                             .padding()

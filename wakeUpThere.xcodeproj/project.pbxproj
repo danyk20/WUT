@@ -13,6 +13,7 @@
 		9B0E8578283AA5E000114FF4 /* SelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B0E8577283AA5E000114FF4 /* SelectView.swift */; };
 		9B4419E12845AD5B0046FC9E /* MapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B4419E02845AD5A0046FC9E /* MapViewModel.swift */; };
 		9B5BEF7C286FCB2900BA6326 /* DistanceSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B5BEF7B286FCB2900BA6326 /* DistanceSelectionView.swift */; };
+		9B5BEF802873448A00BA6326 /* NotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B5BEF7F2873448A00BA6326 /* NotificationController.swift */; };
 		9B7A36E428600A76006C721F /* suggestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B7A36E328600A76006C721F /* suggestionView.swift */; };
 		9B88E8452852DEE50015A024 /* DestinationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B88E8442852DEE50015A024 /* DestinationView.swift */; };
 		9B9ED3C52856DDAA0091181A /* LocationServise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B9ED3C42856DDA90091181A /* LocationServise.swift */; };
@@ -32,6 +33,7 @@
 		9B4419E02845AD5A0046FC9E /* MapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewModel.swift; sourceTree = "<group>"; };
 		9B4419E22845B1F30046FC9E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		9B5BEF7B286FCB2900BA6326 /* DistanceSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DistanceSelectionView.swift; sourceTree = "<group>"; };
+		9B5BEF7F2873448A00BA6326 /* NotificationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationController.swift; sourceTree = "<group>"; };
 		9B7A36E328600A76006C721F /* suggestionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = suggestionView.swift; sourceTree = "<group>"; };
 		9B88E8442852DEE50015A024 /* DestinationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DestinationView.swift; sourceTree = "<group>"; };
 		9B9ED3C42856DDA90091181A /* LocationServise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationServise.swift; sourceTree = "<group>"; };
@@ -82,6 +84,7 @@
 				9B7A36E328600A76006C721F /* suggestionView.swift */,
 				9B4419E02845AD5A0046FC9E /* MapViewModel.swift */,
 				9BB35CBC284C0DC90034FAB3 /* MapView.swift */,
+				9B5BEF7F2873448A00BA6326 /* NotificationController.swift */,
 				9BEFC124286DE2AD005D22AD /* SoundManager.swift */,
 				9B5BEF7B286FCB2900BA6326 /* DistanceSelectionView.swift */,
 				9BEFC126286DE5C7005D22AD /* Sounds */,
@@ -184,6 +187,7 @@
 				9B9ED3C52856DDAA0091181A /* LocationServise.swift in Sources */,
 				9BB35CBD284C0DC90034FAB3 /* MapView.swift in Sources */,
 				9B0E8578283AA5E000114FF4 /* SelectView.swift in Sources */,
+				9B5BEF802873448A00BA6326 /* NotificationController.swift in Sources */,
 				9BB35CBB284BFB570034FAB3 /* Transport.swift in Sources */,
 				9BB35CB9284BFA3C0034FAB3 /* TransportView.swift in Sources */,
 				9B4419E12845AD5B0046FC9E /* MapViewModel.swift in Sources */,

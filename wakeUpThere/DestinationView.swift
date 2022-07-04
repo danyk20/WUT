@@ -66,11 +66,7 @@ struct DestinationView: View {
     
     private func getAlert(trigerDistance: Double) -> Alert{
         
-        //temporal
         let distance = mapView.getDistance()
-        if (distance < perimeter * 1000){
-            SoundManager.instance.playSound()
-        }
         
         if distance == Double.infinity{
             return Alert(title: Text("Error ocurred try again later!"))
