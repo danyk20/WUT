@@ -40,14 +40,20 @@ The application is currently in the early developing stage with fundamental func
 
 ### Main screen :  
 Selection of tranport type.
+
 ![iPhone 13 mini WUT app main screen](Screenshots/select_view.png)
 
 ### destination (second) screen :  
 Entering destination name, list of possible destination over the map.
+
 ![iPhone 13 mini WUT app selecting destination](Screenshots/destination_view.png)
+
 Choosing the distance from the destination by entering number or using slider:
+
 ![iPhone 13 mini WUT app selecting perimeter](Screenshots/select_perimeter.png)
+
 Temporal alert showing entered input.
+
 ![iPhone 13 mini WUT app distance alert](Screenshots/show_distance.png)
 
 ## Acknowledgements  
@@ -61,5 +67,7 @@ This app is based on an idea from Viktoria Husovska, which I would like to thank
 ## Contact  
 
 author: Daniel Kosc
+
 email: daniel.kosc@gmail.com
+
 social: [linkedin](https://www.linkedin.com/in/daniel-košč-3b4983189/)
