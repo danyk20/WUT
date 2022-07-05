@@ -62,7 +62,7 @@ Temporal alert showing entered input.
 [positionstack](https://positionstack.com) - used to get the coordinates from user input
 
 ### Inspiration
-This app is based on an idea from Viktoria Husovska, which I would like to thank this way. 
+This app is based on an idea of [Viktoria Husovska](https://www.linkedin.com/in/viktória-husovská-272528224/), which I would like to thank this way. 
 
 ## Contact  
 
