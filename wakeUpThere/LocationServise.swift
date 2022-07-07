@@ -47,20 +47,16 @@ struct Location: Codable, Hashable, Identifiable{
     }
 }
 
-/// Class dealing with pin-mark on the map using Positionstack API.
+/// Singleton class dealing with pin-mark on the map using Positionstack API.
 class MapAPI: ObservableObject{
+    
+    static let instance = MapAPI()
+    
     private let baseURL = "http://api.positionstack.com/v1/forward"
     private let apiKey = "268d3f7afcbf9cbc398559f20b456ca1"
-    private let initMapCenter = CLLocationCoordinate2D(latitude: 51, longitude: 0)
-    private let initZoom: Double = 1000
     
-    @Published var region: MKCoordinateRegion
-    @Published var coordinates = []
     @Published var locations: [Location] = []
-    
-    init() {
-        self.region = MKCoordinateRegion(center: initMapCenter, latitudinalMeters: initZoom, longitudinalMeters: initZoom)
-    }
+
     
     /// Get all possible suggestions based on entered address.
     /// - Parameters:
@@ -92,31 +88,30 @@ class MapAPI: ObservableObject{
     /// Get air distance from a selected destination in location array and current location.
     /// - Parameter startLocation: current user's coordinates
     /// - Returns: distance in meters
-    func getRemainingDistance(startLocation: CLLocationCoordinate2D) -> Double{
+    func getRemainingDistance(startLocation: CLLocationCoordinate2D? = MapViewModel.getCurrentLocation()) -> Double{
         if locations.isEmpty{
             return Double.infinity
         }
+        guard let startLocation = startLocation else {
+            return Double.infinity
+        }
+        
         let currentPosition = MKMapPoint(startLocation)
         let destinationPosition = MKMapPoint(locations[0].getCoordinates2D())
         return currentPosition.distance(to: destinationPosition)
     }
     
-    
     /// Add selected place to locations array for pin-mark on the map.
     /// - Parameter selectedLocation: place represented as Location instance
     func setDestination(selectedLocation: Location){
             DispatchQueue.main.async {
-                let lat = selectedLocation.latitude
-                let lon = selectedLocation.longitude
-                let name = selectedLocation.name
-                
-                self.coordinates = [lat, lon]
-                //self.region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: lat, longitude: lon), latitudinalMeters: delta, longitudinalMeters: delta) center map based on selectedLocation
-                
                 self.locations.removeAll()
-                self.locations.insert(Location(latitude: lat, longitude: lon, name: name), at: 0)
+                self.locations.insert(Location(latitude: selectedLocation.latitude,
+                             longitude: selectedLocation.longitude,
+                             name: selectedLocation.name), at: 0)
                 
                 print("Sucessfuly founded location")
             }
     }
+
 }

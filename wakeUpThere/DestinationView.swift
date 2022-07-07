@@ -16,7 +16,8 @@ struct DestinationView: View {
     @State private var selectedDestination: Bool = false // user set destination
     @State private var selectedPerimeter: Bool = false // user set perimeter
     @State private var perimeter: Double = 2.5 // in km
-    let vehicle : TransportType
+    let mapAPI: MapAPI = MapAPI.instance
+    let vehicle: TransportType
     
     var body: some View {
         // watch the value of TextField, and if it has been changed, trigger these events
@@ -25,9 +26,12 @@ struct DestinationView: View {
                 }, set: {
                     selectedDestination = false // show again destination list
                     self.destination = $0 // automatically select the first suggested place
-                    mapView.getSuggestions(address: destination){ places in
-                        suggestions = places // load all suggestions
+                    mapAPI.getPossiblePlaces(address: destination) { places in
+                        suggestions = places
                     }
+//                    mapView.getSuggestions(address: destination){ places in
+//                        suggestions = places // load all suggestions
+//                    }
                 })
         VStack{ // START: View
             TextField("Enter your \(vehicle.rawValue) final destination!", text: binding)
@@ -72,7 +76,7 @@ struct DestinationView: View {
     /// - Returns: Alert object with remaining distance and triggered distance info message
     private func getAlert(trigerDistance: Double) -> Alert{
         
-        let distance = mapView.getDistance()
+        let distance = mapAPI.getRemainingDistance()
         
         if distance == Double.infinity{
             return Alert(title: Text("Error ocurred try again later!"))

@@ -13,10 +13,11 @@ enum MapDetails {
     static let defaultSpan = MKCoordinateSpan(latitudeDelta: 2, longitudeDelta: 2)
 }
 
+/// Class to deal with location operation and map display settings.
 final class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     
     @Published var region = MKCoordinateRegion(center: MapDetails.startingLocation , span: MapDetails.defaultSpan)
-    @Published var location : CLLocation?
+    @Published var location : CLLocation? // last updated user location (not in use)
     
     var locationManager: CLLocationManager?
     
@@ -37,7 +38,7 @@ final class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate 
     
     /// Get the user's current location coordinates.
     /// - Returns: coordinates as CLLocationCoordinate2D if found otherwise nil
-    public func getCurrentLocation() -> CLLocationCoordinate2D?{
+    public static func getCurrentLocation(locationManager: CLLocationManager? = CLLocationManager()) -> CLLocationCoordinate2D?{
         guard let locationManager = locationManager else {
             return nil
         }
@@ -86,9 +87,11 @@ final class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate 
     ///   - manager: location manager
     ///   - locations: array of user's locations
     public func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        location = locations.first
+        self.location = locations.first
+        
+        NotificationController.instance.setRemainingDistance(distance: MapAPI.instance.getRemainingDistance())
         // centre map to new user location
-        if let newLocation = location {
+        if let newLocation = self.location {
             region.center = CLLocationCoordinate2D(latitude: newLocation.coordinate.latitude, longitude: newLocation.coordinate.longitude)
         }
     }

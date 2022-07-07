@@ -11,6 +11,7 @@ struct suggestionView: View{
     
     @Binding var dataArray: [Location]
     @State var mapView: MapView
+    let mapAPI: MapAPI = MapAPI.instance
     
     var body: some View {
         
@@ -18,7 +19,7 @@ struct suggestionView: View{
             ScrollView{
                 ForEach(dataArray, id: \.self){ place in
                     Button(action: {
-                        mapView.selectLocation(selectedLocation: place)
+                        mapAPI.setDestination(selectedLocation: place)
                     },label: {
                         Text("\(place.name.uppercased())  \(place.countryCode)")
                             .padding()
