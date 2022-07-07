@@ -10,17 +10,18 @@ import MapKit
 import CoreLocationUI
 
 struct MapView: View {
-    @ObservedObject private var mapAPI = MapAPI()
-    @ObservedObject private var mapModel = MapViewModel()
-    @State private var destinationColor: Color = .blue
+    @ObservedObject private var mapAPI = MapAPI() // API to get suggested places
+    @ObservedObject private var mapModel = MapViewModel() // map settings
+    @State private var destinationColor: Color = .blue // pin-mark color
     
     var body: some View {
         ZStack(alignment: .bottom){
             Map(coordinateRegion: $mapModel.region,
                 showsUserLocation: true,
                 annotationItems: mapAPI.locations){ location in
-                MapMarker(coordinate: location.coordinate, tint: destinationColor)
+                MapMarker(coordinate: location.getCoordinates2D(), tint: destinationColor) // show pin-mark on the map after the user chose the destination
             }
+                // always when the position changed recalculate remaining distance
                 .onChange(of: self.mapModel.location, perform: { _ in
                     checkRemainingDistance()
                 })
@@ -28,7 +29,7 @@ struct MapView: View {
                 .onAppear{
                     mapModel.chcekIfLocationServicesIsEnable()
                 }
-            VStack(){
+            VStack(){ // zoom in/out buttons
                 Spacer()
                 HStack{
                     Spacer()
@@ -55,24 +56,33 @@ struct MapView: View {
         }
     }
     
-    public func setLocation(address: String, completion: @escaping (([Datum])->Void)){
-        mapAPI.getPossiblePlaces(address: address, delta: 100){ places in
+    /// Get suggestions of all possible places based on given address.
+    /// - Parameters:
+    ///   - address: string value representing any place
+    ///   - completion: return value than contain an array of suggestions
+    public func getSuggestions(address: String, completion: @escaping (([Location])->Void)){
+        mapAPI.getPossiblePlaces(address: address){ places in
             completion(places)
         }
     }
     
-    public func selectPlace(selectedLocation: Datum){
-        mapAPI.getLocation(selectedLocation: selectedLocation, delta: 100)
+    /// Put a pin-mark marker on the selected destination on the map.
+    /// - Parameter selectedLocation: pin-marker location
+    public func selectLocation(selectedLocation: Location){
+        mapAPI.setDestination(selectedLocation: selectedLocation)
     }
     
+    /// Get air distance between the selected destination and current location.
+    /// - Returns: air distance in meters
     public func getDistance() -> Double{
         guard let currentLocation = mapModel.getCurrentLocation() else
         {
             return Double.infinity
         }
-        return self.mapAPI.getDistance(startLocation: currentLocation)
+        return self.mapAPI.getRemainingDistance(startLocation: currentLocation)
     }
     
+    /// Call notification handler to check if the user approached close enough to trigger an alert.
     private func checkRemainingDistance(){
         NotificationController.instance.setRemainingDistance(distance: getDistance())
     }

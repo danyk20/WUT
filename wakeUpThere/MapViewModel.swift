@@ -20,6 +20,7 @@ final class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate 
     
     var locationManager: CLLocationManager?
     
+    /// Check if the user has location service turned on with necessary permissions and set background tracking.
     func chcekIfLocationServicesIsEnable() {
         if CLLocationManager.locationServicesEnabled() {
             locationManager = CLLocationManager()
@@ -34,7 +35,20 @@ final class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate 
         }
     }
     
-    private func chceckLocationAuthorization() {
+    /// Get the user's current location coordinates.
+    /// - Returns: coordinates as CLLocationCoordinate2D if found otherwise nil
+    public func getCurrentLocation() -> CLLocationCoordinate2D?{
+        guard let locationManager = locationManager else {
+            return nil
+        }
+        guard let currentLocation = locationManager.location else {
+            return nil
+        }
+        return currentLocation.coordinate
+    }
+    
+    /// Check given permission and centre map based on user position in case of correct permissions triggered by permission change.
+    public func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
         guard let locationManager = locationManager else {
             return
         }
@@ -57,18 +71,9 @@ final class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate 
         }
     }
     
-    func getCurrentLocation() -> CLLocationCoordinate2D?{
-        guard let locationManager = locationManager else {
-            return nil
-        }
-        return locationManager.location!.coordinate
-    }
-    
-    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
-        chceckLocationAuthorization()
-    }
-    
-    func updateZoom(cooeficient: Double){
+    /// Change the zoom of the map.
+    /// - Parameter cooeficient: coefficient of a change bigger than 1 will zoom out and opposite
+    public func updateZoom(cooeficient: Double){
         if (self.region.span.longitudeDelta < 130 || cooeficient < 1)
         {
                 self.region.span.latitudeDelta *= cooeficient
@@ -76,7 +81,11 @@ final class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate 
         }
     }
     
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+    /// Always centre map on the user's current position.
+    /// - Parameters:
+    ///   - manager: location manager
+    ///   - locations: array of user's locations
+    public func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         location = locations.first
         // centre map to new user location
         if let newLocation = location {

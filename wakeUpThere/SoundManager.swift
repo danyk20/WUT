@@ -8,12 +8,14 @@
 import Foundation
 import AVKit
 
+/// Singleton class for dealing with sounds in the app.
 class SoundManager {
     
     static let instance = SoundManager()
     
     var player: AVAudioPlayer?
     
+    /// Play default sound bell.mp3.
     public func playSound() {
         guard let url = Bundle.main.url(forResource: "bell", withExtension: ".mp3") else { return }
         

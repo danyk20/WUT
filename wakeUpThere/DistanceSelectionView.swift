@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+/// Class to allow only numeric values in the textField.
 class NumbersOnly: ObservableObject {
     @Published var value = "" {
         didSet {
@@ -20,9 +21,13 @@ class NumbersOnly: ObservableObject {
 }
 
 struct DistanceSelectionView: View {
+    
+    private let minDistance: Double = 1
+    private let maxDistance: Double = 100
     @Binding var perimeter: Double
     @Binding var selectedPerimeter: Bool
     @ObservedObject var input = NumbersOnly()
+    
     var body: some View {
         VStack {
             VStack{
@@ -54,13 +59,13 @@ struct DistanceSelectionView: View {
         
                 HStack {
                     Slider(value: $perimeter,
-                           in: 1...100,
+                           in: minDistance...maxDistance,
                            step: 0.1,
                            onEditingChanged: { (_) in
                         input.value = String(format: "%.1f", perimeter)
                     },
-                           minimumValueLabel: Text("1 km "),
-                           maximumValueLabel: Text(" 100 km"),
+                           minimumValueLabel: Text("\(String(format: "%.1f", minDistance)) km "),
+                           maximumValueLabel: Text(" \(String(format: "%.1f", maxDistance)) km "),
                            label: {})
                     .padding(.horizontal)
                 }

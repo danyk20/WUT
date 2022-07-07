@@ -13,6 +13,8 @@ enum TransportType : String, CaseIterable{
     case Boat
     case Train
     
+    /// Get string representation of icon from library.
+    /// - Returns: String name of the icon
     func getIconName () -> String
     {
         switch self {

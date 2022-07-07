@@ -10,17 +10,14 @@ import MapKit
 import CoreLocationUI
 
 struct SelectView: View {
-    
-    @StateObject private var mapModel = MapViewModel()
-    @State private var selectedVehicle : TransportType? = nil
-    @State private var selected = false
-    
-    private let prompt = "Choose mean of transport:"
+    private let prompt: String = "Choose mean of transport:"
+    private let appName: String = "WUT"
+    private let screenName: String = "Main screen"
 
     var body: some View {
         NavigationView{
             VStack(alignment: .center, spacing: 30) {
-                Text("WUT")
+                Text(appName)
                     .font(.largeTitle)
                     .fontWeight(.bold)
                 
@@ -43,7 +40,7 @@ struct SelectView: View {
                     .ignoresSafeArea()
             }
             .font(.title)
-            .navigationTitle("Main screen")
+            .navigationTitle(screenName)
             .navigationBarHidden(true)
         }
     }
@@ -52,8 +49,5 @@ struct SelectView: View {
 struct SelectView_Previews: PreviewProvider {
     static var previews: some View {
         SelectView()
-            
     }
 }
-
-

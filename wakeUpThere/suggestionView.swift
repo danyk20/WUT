@@ -8,17 +8,19 @@
 import SwiftUI
 
 struct suggestionView: View{
-    @Binding var dataArray: [Datum]
+    
+    @Binding var dataArray: [Location]
     @State var mapView: MapView
+    
     var body: some View {
         
         VStack{
             ScrollView{
                 ForEach(dataArray, id: \.self){ place in
                     Button(action: {
-                        mapView.selectPlace(selectedLocation: place)
+                        mapView.selectLocation(selectedLocation: place)
                     },label: {
-                        Text(place.name.uppercased())
+                        Text("\(place.name.uppercased())  \(place.countryCode)")
                             .padding()
                             .background(Color.gray.cornerRadius(25).opacity(0.45))
                             .foregroundColor(.white)
@@ -27,18 +29,15 @@ struct suggestionView: View{
                         .foregroundColor(.black)
                 }
             }
-            .frame(maxHeight: UIScreen.main.bounds.height/5)
+            .frame(maxHeight: UIScreen.main.bounds.height/5) // max 20% of the height
             Spacer()
         }
-        
     }
 }
 
 struct suggestionView_Previews: PreviewProvider {
-    static var b: Double = 0.0
-    static var a: Double = 0.0
     static var previews: some View {
-        
-        suggestionView(dataArray: .constant([Datum(latitude: 0.0, longitude: 0.0, name: "Mesto")]), mapView: MapView())
+        suggestionView(dataArray: .constant(
+            [Location(latitude: 0.0, longitude: 0.0, name: "Town")]), mapView: MapView())
     }
 }
