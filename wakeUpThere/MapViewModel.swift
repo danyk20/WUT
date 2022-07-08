@@ -18,6 +18,7 @@ final class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate 
     
     @Published var region = MKCoordinateRegion(center: MapDetails.startingLocation , span: MapDetails.defaultSpan)
     @Published var location : CLLocation? // last updated user location (not in use)
+    @Published var enteredPerimeter: Bool = false
     
     var locationManager: CLLocationManager?
     
@@ -89,7 +90,7 @@ final class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate 
     public func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         self.location = locations.first
         
-        NotificationController.instance.setRemainingDistance(distance: MapAPI.instance.getRemainingDistance())
+        enteredPerimeter = NotificationController.instance.setRemainingDistance(distance: MapAPI.instance.getRemainingDistance())
         // centre map to new user location
         if let newLocation = self.location {
             region.center = CLLocationCoordinate2D(latitude: newLocation.coordinate.latitude, longitude: newLocation.coordinate.longitude)

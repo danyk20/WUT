@@ -16,7 +16,7 @@ struct DestinationView: View {
     @State private var selectedDestination: Bool = false // user set destination
     @State private var selectedPerimeter: Bool = false // user set perimeter
     @State private var perimeter: Double = 2.5 // in km
-    let mapAPI: MapAPI = MapAPI.instance
+    var mapAPI: MapAPI = MapAPI.instance
     let vehicle: TransportType
     
     var body: some View {
@@ -90,7 +90,12 @@ struct DestinationView: View {
             formatedDistance =  String(format: "%d", locale: Locale.current, Int(round(distance))) +  " m"
         }
         return Alert(title: Text("Remaining distance is: \(formatedDistance)"),
-                     message: Text("You will be notified " + String(format: "%.1f", trigerDistance) + " km before your destination!"))
+                     message: Text("You will be notified " + String(format: "%.1f", trigerDistance) + " km before your destination!"),
+                     primaryButton: .default(Text("OK")),
+                     secondaryButton: .destructive(Text("Cancel"), action: {
+            SoundManager.instance.stop()
+            NotificationController.instance.setPerimeter(perimeter: 0.0)
+        }))
     }
 }
 

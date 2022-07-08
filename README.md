@@ -56,6 +56,10 @@ Temporal alert showing entered input.
 
 ![iPhone 13 mini WUT app distance alert](Screenshots/show_distance.png)
 
+Final alert notifying the user about entering the set perimeter.
+
+![iPhone 13 mini WUT app final alert](Screenshots/alert.png)
+
 ## Acknowledgements  
 
 ### API  

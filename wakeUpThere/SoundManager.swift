@@ -13,7 +13,7 @@ class SoundManager {
     
     static let instance = SoundManager()
     
-    var player: AVAudioPlayer?
+    private var player: AVAudioPlayer?
     
     /// Play default sound bell.mp3.
     public func playSound() {
@@ -21,9 +21,15 @@ class SoundManager {
         
         do {
             player = try AVAudioPlayer(contentsOf: url)
+            player?.numberOfLoops = -1
             player?.play()
         } catch let error {
             print("Error while playing the sound. \(error.localizedDescription)")
         }
+    }
+    
+    /// Stop playing sound.
+    public func stop(){
+        player?.stop()
     }
 }

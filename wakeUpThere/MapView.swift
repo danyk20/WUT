@@ -14,6 +14,9 @@ struct MapView: View {
     @ObservedObject private var mapModel = MapViewModel() // map settings
     @State private var destinationColor: Color = .blue // pin-mark color
     
+    private let approachedTitle: String = "You have approached to your destination!"
+    private let approachedMessage: String = "Click Stop button to dismiss the notification."
+    
     var body: some View {
         ZStack(alignment: .bottom){
             Map(coordinateRegion: $mapModel.region,
@@ -50,6 +53,9 @@ struct MapView: View {
                 }
             }
         }
+        .alert(isPresented: $mapModel.enteredPerimeter, content: {
+            return NotificationController.getAlert(title: approachedTitle, message: approachedMessage)
+        })
     }
 }
 

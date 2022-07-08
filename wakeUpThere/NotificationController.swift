@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 /// Singleton class that handles all notifications and alerts for the entire app.
 class NotificationController {
@@ -23,11 +24,29 @@ class NotificationController {
     
     /// Set the remaining distance and check if the alert should be triggered.
     /// - Parameter distance: distance in meters
-    public func setRemainingDistance(distance:Double){
+    /// - Returns: true if the user enter perimeter otherwise false
+    public func setRemainingDistance(distance:Double) -> Bool{
         self.remainingDistance = distance
         
         if (remainingDistance <= perimeter){
             SoundManager.instance.playSound()
+            return true
         }
+        
+        return false
+    }
+    
+    /// Allert to notify the user after entering the set perimeter.
+    /// - Parameters:
+    ///   - title: alert title text
+    ///   - message: alert message text
+    /// - Returns: Alert object with button to stop text and sound notification
+    public static func getAlert(title: String, message: String) -> Alert{
+        return Alert(title: Text(title),
+                     message: Text(message),
+                     dismissButton:  .default(Text("Stop"), action: {
+            SoundManager.instance.stop()
+            NotificationController.instance.setPerimeter(perimeter: 0.0)
+        }))
     }
 }
