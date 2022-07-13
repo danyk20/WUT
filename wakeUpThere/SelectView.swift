@@ -29,10 +29,10 @@ struct SelectView: View {
                         destination: DestinationView(vehicle: vehicle),
                         label: {
                             RoundedRectangle(cornerRadius: 35)
-                                .fill(Color.white)
+                                .fill(.ultraThickMaterial)
                                 .shadow(radius: 10)
                                 .overlay(TransportView(transportType: vehicle)
-                                    .accentColor(Color.black))
+                                    .accentColor(.primary))
                         })
                 }
                 

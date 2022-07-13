@@ -37,28 +37,34 @@ The application is currently in the early developing stage with fundamental func
 - plays a sound when approaching the final destination
 - show scroll list of destinations based on text input
 - calculate remaining distance
+- support dark mode
 
 ### Main screen :  
 Selection of tranport type.
 
 ![iPhone 13 mini WUT app main screen](Screenshots/select_view.png)
+![iPhone 13 mini WUT app main screen](Screenshots/select_view_black.png)
 
 ### destination (second) screen :  
 Entering destination name, list of possible destination over the map.
 
 ![iPhone 13 mini WUT app selecting destination](Screenshots/destination_view.png)
+![iPhone 13 mini WUT app selecting destination](Screenshots/destination_view._blackpng)
 
 Choosing the distance from the destination by entering number or using slider:
 
 ![iPhone 13 mini WUT app selecting perimeter](Screenshots/select_perimeter.png)
+![iPhone 13 mini WUT app selecting perimeter](Screenshots/select_perimeter_black.png)
 
 Temporal alert showing entered input.
 
 ![iPhone 13 mini WUT app distance alert](Screenshots/show_distance.png)
+![iPhone 13 mini WUT app distance alert](Screenshots/show_distance_black.png)
 
 Final alert notifying the user about entering the set perimeter.
 
 ![iPhone 13 mini WUT app final alert](Screenshots/alert.png)
+![iPhone 13 mini WUT app final alert](Screenshots/alert_black.png)
 
 ## Acknowledgements  
 

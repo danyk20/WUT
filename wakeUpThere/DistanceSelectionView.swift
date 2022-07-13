@@ -47,7 +47,7 @@ struct DistanceSelectionView: View {
                             .padding()
                             .background(
                                 Capsule(style: .continuous)
-                                    .fill(.white)
+                                    .fill(.regularMaterial)
                                     .shadow(
                                         color: .gray,
                                         radius: 3
@@ -69,7 +69,7 @@ struct DistanceSelectionView: View {
                            label: {})
                     .padding(.horizontal)
                 }
-            }            .background(Color.white.opacity(0.65))
+            }            .background(.ultraThinMaterial)
             Spacer()
         }
     }

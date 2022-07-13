@@ -23,8 +23,8 @@ struct suggestionView: View{
                     },label: {
                         Text("\(place.name.uppercased())  \(place.countryCode)")
                             .padding()
-                            .background(Color.gray.cornerRadius(25).opacity(0.45))
-                            .foregroundColor(.white)
+                            .background(.ultraThinMaterial)
+                            .cornerRadius(25)
                     })
                         .padding(5)
                         .foregroundColor(.black)
