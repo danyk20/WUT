@@ -49,7 +49,7 @@ Selection of tranport type.
 Entering destination name, list of possible destination over the map.
 
 ![iPhone 13 mini WUT app selecting destination](Screenshots/destination_view.png)
-![iPhone 13 mini WUT app selecting destination](Screenshots/destination_view._blackpng)
+![iPhone 13 mini WUT app selecting destination](Screenshots/destination_view._black.png)
 
 Choosing the distance from the destination by entering number or using slider:
 
