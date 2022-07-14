@@ -66,6 +66,14 @@ Final alert notifying the user about entering the set perimeter.
 ![iPhone 13 mini WUT app final alert](Screenshots/alert.png)
 ![iPhone 13 mini WUT app final alert](Screenshots/alert_black.png)
 
+### Error and warnings :  
+These are possible error messages that you can get:
+
+You have entered a destination location which couldn't be found, or you do not have an internet connection to find your entered location. Verify that input is not empty and location has the correct spelling.
+
+![iPhone 13 mini WUT app final alert](Screenshots/error_msg.png)
+![iPhone 13 mini WUT app final alert](Screenshots/error_msg_black.png)
+
 ## Acknowledgements  
 
 ### API  

@@ -26,6 +26,7 @@ struct DistanceSelectionView: View {
     private let maxDistance: Double = 100
     @Binding var perimeter: Double
     @Binding var selectedPerimeter: Bool
+    @Binding var throwAlert: Bool
     @ObservedObject var input = NumbersOnly()
     
     var body: some View {
@@ -40,7 +41,8 @@ struct DistanceSelectionView: View {
                         .padding()
                     .keyboardType(.decimalPad)
                     Button {
-                        selectedPerimeter.toggle()
+                        selectedPerimeter = true
+                        throwAlert = true
                         NotificationController.instance.setPerimeter(perimeter: perimeter * 1000)
                     } label: {
                         Text("Submit")
@@ -77,6 +79,6 @@ struct DistanceSelectionView: View {
 
 struct DistanceSelectionView_Previews: PreviewProvider {
     static var previews: some View {
-        DistanceSelectionView(perimeter: .constant(2.5), selectedPerimeter: .constant(false))
+        DistanceSelectionView(perimeter: .constant(2.5), selectedPerimeter: .constant(false), throwAlert: .constant(false))
     }
 }

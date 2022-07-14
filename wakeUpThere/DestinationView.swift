@@ -15,7 +15,9 @@ struct DestinationView: View {
     @State private var destination : String = "" // user input of destination
     @State private var selectedDestination: Bool = false // user set destination
     @State private var selectedPerimeter: Bool = false // user set perimeter
+    @State private var throwAlert: Bool = false // show some alert to the user
     @State private var perimeter: Double = 2.5 // in km
+    @FocusState private var destinationInFocus: Bool
     var mapAPI: MapAPI = MapAPI.instance
     let vehicle: TransportType
     
@@ -35,13 +37,21 @@ struct DestinationView: View {
                 })
         VStack{ // START: View
             TextField("Enter your \(vehicle.rawValue) final destination!", text: binding)
+                .focused($destinationInFocus)
                 .font(.title2)
                 .multilineTextAlignment(.center)
             // show "set destination" button, until it is clicked
             if !selectedDestination {
                 Button("Set selected destination", action: {
-                    selectedDestination = true // let user enter distance
-                    selectedPerimeter = false
+                    if (suggestions.isEmpty){
+                        destinationInFocus = true
+                        perimeter = -1
+                        throwAlert = true
+                    }
+                    else{
+                        selectedDestination = true // let user enter distance
+                        selectedPerimeter = false
+                    }
                 })
             }
             ZStack{
@@ -58,27 +68,31 @@ struct DestinationView: View {
                     }
                 }
             }
-            .alert(isPresented: $selectedPerimeter,
+            .alert(isPresented: $throwAlert,
                    content: {
-                getAlert(trigerDistance: perimeter)
+                getAlert()
             })
         } // END: View
         .onAppear(perform: { // initialize with default values
             distanceView = DistanceSelectionView(
                 perimeter: $perimeter,
-                selectedPerimeter: $selectedPerimeter)})
+                selectedPerimeter: $selectedPerimeter,
+                throwAlert: $throwAlert)})
         .navigationBarTitle(Text(""), displayMode: .inline)
         .navigationBarItems(trailing: Image(systemName: vehicle.getIconName()))
     }
     
     /// Helper function to create a correctly formatted alert.
-    /// - Parameter trigerDistance: distance in km
-    /// - Returns: Alert object with remaining distance and triggered distance info message
-    private func getAlert(trigerDistance: Double) -> Alert{
+    /// - Returns: Alert object with remaining distance and triggered distance info message or error message in case of worng input
+    private func getAlert() -> Alert{
         
         let distance = mapAPI.getRemainingDistance()
         
-        if distance == Double.infinity{
+        if self.perimeter == -1 {
+            self.perimeter = 2.5
+            return Alert(title: Text("Enter a valid destination or check your internet connection!"))
+        }
+        else if distance == Double.infinity{
             return Alert(title: Text("Error ocurred try again later!"))
         }
         
@@ -90,7 +104,7 @@ struct DestinationView: View {
             formatedDistance =  String(format: "%d", locale: Locale.current, Int(round(distance))) +  " m"
         }
         return Alert(title: Text("Remaining distance is: \(formatedDistance)"),
-                     message: Text("You will be notified " + String(format: "%.1f", trigerDistance) + " km before your destination!"),
+                     message: Text("You will be notified " + String(format: "%.1f", self.perimeter) + " km before your destination!"),
                      primaryButton: .default(Text("OK")),
                      secondaryButton: .destructive(Text("Cancel"), action: {
             SoundManager.instance.stop()

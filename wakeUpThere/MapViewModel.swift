@@ -76,10 +76,9 @@ final class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate 
     /// Change the zoom of the map.
     /// - Parameter cooeficient: coefficient of a change bigger than 1 will zoom out and opposite
     public func updateZoom(cooeficient: Double){
-        if (self.region.span.longitudeDelta < 130 || cooeficient < 1)
-        {
-                self.region.span.latitudeDelta *= cooeficient
-                self.region.span.longitudeDelta *= cooeficient
+        if (self.region.span.longitudeDelta < 91 || cooeficient < 1){
+            self.region.span.latitudeDelta *= cooeficient
+            self.region.span.longitudeDelta *= cooeficient
         }
     }
     
