@@ -37,11 +37,21 @@ struct DestinationView: View {
                     }
                 })
         
+        let inputField = TextField(getTextPromt(), text: binding)
+            .focused($destinationInFocus)
+            .font(.title2)
+            .multilineTextAlignment(.center)
+            .disableAutocorrection(true)
+        
         VStack{ // START: View
-            TextField(getTextPromt(), text: binding)
-                .focused($destinationInFocus)
-                .font(.title2)
-                .multilineTextAlignment(.center)
+            
+            if (getVehicle() == .Airplane){
+                inputField.autocapitalization(UITextAutocapitalizationType.allCharacters)
+            }
+            else {
+                inputField
+            }
+                
             // show "set destination" button, until it is clicked
             if !selectedDestination {
                 Button(buttonText, action: {
@@ -166,7 +176,6 @@ private func formatDistnace(distance: Double) -> String{
 }
 
 struct DestinationView_Previews: PreviewProvider {
-    @State static var a : Bool = true
     static var previews: some View {
         DestinationView()
     }
