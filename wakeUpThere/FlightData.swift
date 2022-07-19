@@ -160,7 +160,7 @@ class FlightData{
             return
         }
         let headers = [
-            "X-RapidAPI-Key": "4e879a6157msh8d3d1a4c002c00ep14db1ejsn495a0bed8861",
+            "X-RapidAPI-Key": Constants.flightRadarAPIKey,
             "X-RapidAPI-Host": "flight-radar1.p.rapidapi.com"
         ]
 
