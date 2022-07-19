@@ -52,8 +52,8 @@ Entering destination name, list of possible destination over the map.
 ![iPhone 13 mini WUT app selecting destination](Screenshots/destination_view_black.png)
 
 Entering flight number.
-![iPhone 13 mini WUT app enter flightnumber](Screenshots/flight_destiantion.png)
-![iPhone 13 mini WUT app enter flightnumber](Screenshots/flight_destiantion_black.png)
+![iPhone 13 mini WUT app enter flightnumber](Screenshots/flight_destination.png)
+![iPhone 13 mini WUT app enter flightnumber](Screenshots/flight_destination_black.png)
 
 Choosing the distance from the destination by entering number or using slider:
 
