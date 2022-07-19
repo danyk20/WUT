@@ -56,7 +56,6 @@ class FlightData{
     private var estimatedArrivalTimeStamp = 0
     private var scheaduledArrivalTimeStamp: Int = 0
     private var timeZone: String = TimeZone.current.identifier
-    private let url: String = "https://flightaware.com/live/flight/"
     private var problem: Bool = false
     
     /// Chceck if there occure any error

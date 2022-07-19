@@ -91,6 +91,7 @@ You have entered a destination location which couldn't be found, or you do not h
 
 ### API  
 [positionstack](https://positionstack.com) - used to get the coordinates from user input
+[Flight Radar](https://rapidapi.com/apidojo/api/flight-radar1/details) - used to get flight information based on flight number
 
 ### Inspiration
 This app is based on an idea of [Viktoria Husovska](https://www.linkedin.com/in/viktória-husovská-272528224/), which I would like to thank this way. 
