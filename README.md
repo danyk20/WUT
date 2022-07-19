@@ -51,15 +51,27 @@ Entering destination name, list of possible destination over the map.
 ![iPhone 13 mini WUT app selecting destination](Screenshots/destination_view.png)
 ![iPhone 13 mini WUT app selecting destination](Screenshots/destination_view_black.png)
 
+Entering flight number.
+![iPhone 13 mini WUT app enter flightnumber](Screenshots/flight_destiantion.png)
+![iPhone 13 mini WUT app enter flightnumber](Screenshots/flight_destiantion_black.png)
+
 Choosing the distance from the destination by entering number or using slider:
 
 ![iPhone 13 mini WUT app selecting perimeter](Screenshots/select_perimeter.png)
 ![iPhone 13 mini WUT app selecting perimeter](Screenshots/select_perimeter_black.png)
 
+Choosing the number of minutes prior to arrival entering number or using slider:
+
+![iPhone 13 mini WUT app selecting minutes airplane](Screenshots/flight_perimeter.png)
+![iPhone 13 mini WUT app selecting minutes airplane](Screenshots/flight_perimeter_black.png)
+
 Temporal alert showing entered input.
 
 ![iPhone 13 mini WUT app distance alert](Screenshots/show_distance.png)
 ![iPhone 13 mini WUT app distance alert](Screenshots/show_distance_black.png)
+
+![iPhone 13 mini WUT app flight confirmation alert](Screenshots/flight_set.png)
+![iPhone 13 mini WUT app flight confirmation alert](Screenshots/flight_set_black.png)
 
 Final alert notifying the user about entering the set perimeter.
 
@@ -71,8 +83,8 @@ These are possible error messages that you can get:
 
 You have entered a destination location which couldn't be found, or you do not have an internet connection to find your entered location. Verify that input is not empty and location has the correct spelling.
 
-![iPhone 13 mini WUT app final alert](Screenshots/error_msg.png)
-![iPhone 13 mini WUT app final alert](Screenshots/error_msg_black.png)
+![iPhone 13 mini WUT app error message](Screenshots/error_msg.png)
+![iPhone 13 mini WUT app error message](Screenshots/error_msg_black.png)
 
 ## Acknowledgements  
 

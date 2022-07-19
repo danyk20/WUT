@@ -13,6 +13,8 @@ struct SelectView: View {
     private let prompt: String = "Choose mean of transport:"
     private let appName: String = "WUT"
     private let screenName: String = "Main screen"
+    
+    @StateObject private var travel: TravelModel = TravelModel()
 
     var body: some View {
         NavigationView{
@@ -26,7 +28,7 @@ struct SelectView: View {
                 
                 ForEach(TransportType.allCases, id: \.rawValue) { vehicle in
                     NavigationLink(
-                        destination: DestinationView(vehicle: vehicle),
+                        destination: DestinationView(),
                         label: {
                             RoundedRectangle(cornerRadius: 35)
                                 .fill(.ultraThickMaterial)
@@ -34,6 +36,9 @@ struct SelectView: View {
                                 .overlay(TransportView(transportType: vehicle)
                                     .accentColor(.primary))
                         })
+                    .simultaneousGesture(TapGesture().onEnded({
+                        travel.vehicle = vehicle
+                    }))
                 }
                 
                 MapView()
@@ -43,6 +48,7 @@ struct SelectView: View {
             .navigationTitle(screenName)
             .navigationBarHidden(true)
         }
+        .environmentObject(travel)
     }
 }
 

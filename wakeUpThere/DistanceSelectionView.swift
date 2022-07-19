@@ -22,8 +22,13 @@ class NumbersOnly: ObservableObject {
 
 struct DistanceSelectionView: View {
     
+    @EnvironmentObject var travel: TravelModel
+    
     private let minDistance: Double = 1
     private let maxDistance: Double = 100
+    @State var decimalPlaces: Int = 1
+    @State var unit: String = "km"
+    @State var title: String = "Perimeter:"
     @Binding var perimeter: Double
     @Binding var selectedPerimeter: Bool
     @Binding var throwAlert: Bool
@@ -32,10 +37,10 @@ struct DistanceSelectionView: View {
     var body: some View {
         VStack {
             VStack{
-                Text("Perimeter:")
+                Text(title)
                     .font(.title)
                 HStack {
-                    TextField(String(format: "%.1f", perimeter), text: $input.value)
+                    TextField(String(format: "%.\(decimalPlaces)f", perimeter), text: $input.value)
                         .padding()
                         .overlay(RoundedRectangle(cornerRadius: 10.0).strokeBorder())
                         .padding()
@@ -62,17 +67,24 @@ struct DistanceSelectionView: View {
                 HStack {
                     Slider(value: $perimeter,
                            in: minDistance...maxDistance,
-                           step: 0.1,
+                           step: travel.vehicle == .Airplane ? 1 : 0.1,
                            onEditingChanged: { (_) in
-                        input.value = String(format: "%.1f", perimeter)
+                        input.value = String(format: "%.\(decimalPlaces)f", perimeter)
                     },
-                           minimumValueLabel: Text("\(String(format: "%.1f", minDistance)) km "),
-                           maximumValueLabel: Text(" \(String(format: "%.1f", maxDistance)) km "),
+                           minimumValueLabel: Text("\(String(format: "%.\(decimalPlaces)f", minDistance)) \(unit) "),
+                           maximumValueLabel: Text(" \(String(format: "%.\(decimalPlaces)f", maxDistance)) \(unit) "),
                            label: {})
                     .padding(.horizontal)
                 }
             }            .background(.ultraThinMaterial)
             Spacer()
+        }
+        .onAppear(){
+            if travel.vehicle == .Airplane{
+                unit = "min"
+                decimalPlaces = 0
+                title = "Time prior to arrival:"
+            }
         }
     }
 }
