@@ -25,4 +25,13 @@ class TravelModel: ObservableObject{
     @Published var arrivalTime: Int
     @Published var alertCode: Int
     @Published var state: ViewState
+    
+    /// Reset all values except of state
+    public func reset(){
+        perimeter = 2.5
+        isPerimeterSelected = false
+        throwAlert = false
+        arrivalTime = 0
+        alertCode = 0
+    }
 }

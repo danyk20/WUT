@@ -41,8 +41,12 @@ struct AlertView: View {
                 return Alert(title: Text("Enter a valid destination or check your internet connection!"))
             }
             else if travel.alertCode == -2{
-                return NotificationController.getAlert(title: "You have approached to your destination!",
-                                                message: "Click Stop button to dismiss the notification.")
+                return Alert(title: Text("You have approached to your destination!"),
+                             message: Text("Click Stop button to dismiss the notification."),
+                             dismissButton:  .default(Text("Stop"), action: {
+                    SoundManager.instance.stop()
+                    travel.perimeter = 0
+                }))
             }
             else if distance == Double.infinity{
                 return Alert(title: Text("Error ocurred try again later!"))
@@ -52,7 +56,7 @@ struct AlertView: View {
                          primaryButton: .default(Text("OK")),
                          secondaryButton: .destructive(Text("Cancel"), action: {
                 SoundManager.instance.stop()
-                NotificationController.instance.setPerimeter(perimeter: 0.0)
+                travel.reset()
             }))
 
         }

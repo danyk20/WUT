@@ -43,9 +43,9 @@ struct DistanceSelectionView: View {
                         .padding()
                     .keyboardType(.decimalPad)
                     Button {
-                        NotificationController.instance.setPerimeter(perimeter: travel.perimeter * 1000)
                         travel.isPerimeterSelected = true
                         travel.throwAlert = true
+                        travel.alertCode = 0
                         travel.state = .waiting
                         NotificationController.instance.setTravelModel(travel: travel)
                     } label: {
