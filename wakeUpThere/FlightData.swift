@@ -96,8 +96,10 @@ class FlightData{
     /// - Returns: NSDate arrival time
     public func getArrivalTime() -> NSDate{
         if estimatedArrivalTimeStamp != 0{
+            NotificationController.instance.setArrivalTime(arrival: Double(estimatedArrivalTimeStamp))
             return convertTime(timeStamp: estimatedArrivalTimeStamp)
         }else if scheaduledArrivalTimeStamp != 0{
+            NotificationController.instance.setArrivalTime(arrival: Double(scheaduledArrivalTimeStamp))
             return convertTime(timeStamp: scheaduledArrivalTimeStamp)
         }
         return NSDate(timeIntervalSince1970: 0)

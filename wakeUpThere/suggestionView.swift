@@ -10,7 +10,6 @@ import SwiftUI
 struct suggestionView: View{
     
     @Binding var dataArray: [Location]
-    @State var mapView: MapView
     let mapAPI: MapAPI = MapAPI.instance
     
     var body: some View {
@@ -39,6 +38,6 @@ struct suggestionView: View{
 struct suggestionView_Previews: PreviewProvider {
     static var previews: some View {
         suggestionView(dataArray: .constant(
-            [Location(latitude: 0.0, longitude: 0.0, name: "Town")]), mapView: MapView())
+            [Location(latitude: 0.0, longitude: 0.0, name: "Town")]))
     }
 }

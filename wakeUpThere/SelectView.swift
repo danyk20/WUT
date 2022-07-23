@@ -13,7 +13,7 @@ struct SelectView: View {
     private let prompt: String = "Choose mean of transport:"
     private let appName: String = "WUT"
     private let screenName: String = "Main screen"
-    
+    @State private var mapView: MapView = MapView()
     @StateObject private var travel: TravelModel = TravelModel()
 
     var body: some View {
@@ -37,12 +37,17 @@ struct SelectView: View {
                                     .accentColor(.primary))
                         })
                     .simultaneousGesture(TapGesture().onEnded({
+                        travel.state = .destination
                         travel.vehicle = vehicle
                     }))
                 }
-                
-                MapView()
-                    .ignoresSafeArea()
+                ZStack{
+                    if travel.state == .main {
+                        AlertView()
+                        mapView
+                            .ignoresSafeArea()
+                    }
+                }
             }
             .font(.title)
             .navigationTitle(screenName)

@@ -10,24 +10,25 @@ import MapKit
 import CoreLocationUI
 
 struct MapView: View {
+    @EnvironmentObject var travel: TravelModel
     @ObservedObject private var mapAPI = MapAPI.instance // API to get suggested places
     @ObservedObject private var mapModel = MapViewModel() // map settings
+    @State private var map: Map<_DefaultAnnotatedMapContent<[Location]>>?
     @State private var destinationColor: Color = .blue // pin-mark color
-    
-    private let approachedTitle: String = "You have approached to your destination!"
-    private let approachedMessage: String = "Click Stop button to dismiss the notification."
     
     var body: some View {
         ZStack(alignment: .bottom){
-            Map(coordinateRegion: $mapModel.region,
-                showsUserLocation: true,
-                annotationItems: mapAPI.locations){ location in
-                MapMarker(coordinate: location.getCoordinates2D(), tint: destinationColor) // show pin-mark on the map after the user chose the destination
-            }
-                .ignoresSafeArea()
-                .onAppear{
-                    mapModel.chcekIfLocationServicesIsEnable()
+            map
+            // update map to see user location or zoom change
+                .onChange(of: mapModel.location) { _ in
+                    updateMap()
                 }
+            // update mapt ot see new pin on the map
+                .onChange(of: mapAPI.locations) { _ in
+                    updateMap()
+                }
+                .ignoresSafeArea()
+                
             VStack(){ // zoom in/out buttons
                 Spacer()
                 HStack{
@@ -47,16 +48,27 @@ struct MapView: View {
                     }, label: {
                         Image(systemName: "minus.magnifyingglass")
                             .font(.title)
-                        
                     })
                     .padding()
                 }
             }
+            .onAppear{
+                mapModel.setTravelModel(travel: travel)
+                mapModel.chcekIfLocationServicesIsEnable()
+                updateMap()
+            }
         }
-        .alert(isPresented: $mapModel.enteredPerimeter, content: {
-            return NotificationController.getAlert(title: approachedTitle, message: approachedMessage)
-        })
     }
+    
+    /// Reload map on the view with new updated parameters
+    public func updateMap(){
+        map = Map(coordinateRegion: $mapModel.region,
+                   showsUserLocation: true,
+                   annotationItems: mapAPI.locations){ location in
+                   MapMarker(coordinate: location.getCoordinates2D(), tint: destinationColor)
+        }
+    }
+    
 }
 
 struct MapView_Previews: PreviewProvider {

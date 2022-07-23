@@ -9,18 +9,15 @@ import SwiftUI
 import MapKit
 
 struct DestinationView: View {
-    @State private var mapView = MapView() // map in the background
+    @State var mapView: MapView = MapView() // map in the background
     @State private var distanceView : DistanceSelectionView? // view to set input perimeter
     @State private var suggestions: [Location] = [] // suggested places for user
     @State private var flightData: FlightData = FlightData.instance // selected flight info
     @State private var destination : String = "" // user input of destination
-    @State private var buttonText = "Set selected" // submit button text
+    @State private var buttonText = "submit" // submit button text
     @State private var selectedDestination: Bool = false // user set destination
-    @State private var selectedPerimeter: Bool = false // user set perimeter
-    @State private var throwAlert: Bool = false // show some alert to the user
-    @State private var perimeter: Double = 2.5 // in km
-    @FocusState private var destinationInFocus: Bool
-    @EnvironmentObject var travel: TravelModel
+    @FocusState private var destinationInFocus: Bool // popup user keyboard
+    @EnvironmentObject var travel: TravelModel // global storage
     var mapAPI: MapAPI = MapAPI.instance
     
     var body: some View {
@@ -28,6 +25,7 @@ struct DestinationView: View {
         let binding = Binding<String>(get: {
                     self.destination
                 }, set: {
+                    travel.state = .destination
                     selectedDestination = false // show again destination list
                     self.destination = $0
                     if (getVehicle() != .Airplane){
@@ -58,52 +56,46 @@ struct DestinationView: View {
                     if (getVehicle() == .Airplane){
                         flightData.setFlightNumber(flightNumber: destination)
                         selectedDestination = true // let user enter distance
-                        selectedPerimeter = false
+                        travel.isPerimeterSelected = false
                     } else if (suggestions.isEmpty){
                         destinationInFocus = true
-                        perimeter = -1
-                        throwAlert = true
+                        travel.alertCode = -1
+                        travel.throwAlert = true
                     }
                     else{
                         selectedDestination = true // let user enter distance
-                        selectedPerimeter = false
+                        travel.isPerimeterSelected = false
                     }
                 })
                 .onAppear{
+                    distanceView =  DistanceSelectionView()
                     switch getVehicle() {
                     case .Airplane:
-                        buttonText += " flight number"
+                        buttonText = "Set selected flight number"
                     default:
-                        buttonText += " destination"
+                        buttonText = "Set selected destination"
                     }
                 }
             }
             ZStack{
-                mapView
-                    .ignoresSafeArea()
+                if travel.state != .main{
+                    AlertView()
+                    mapView
+                        .ignoresSafeArea()
+                }
                 // show suggested destinations when there is some text and the button hasn't been clicked
                 if (!suggestions.isEmpty && !selectedDestination){
-                        suggestionView(dataArray: $suggestions, mapView: mapView)
+                        suggestionView(dataArray: $suggestions)
                 }
                 // let the user enter distance after he chose a destination but only until the distance is submitted
-                if (selectedDestination && !selectedPerimeter) {
-                    if let distanceView = distanceView {
-                        distanceView
-                    }
+                if (selectedDestination && !travel.isPerimeterSelected) {
+                    distanceView
                 }
             }
-            .alert(isPresented: $throwAlert,
-                   content: {
-                getAlert()
-            })
         } // END: View
-        .onAppear(perform: {
-            // initialize with default values
-            distanceView = DistanceSelectionView(
-                perimeter: $perimeter,
-                selectedPerimeter: $selectedPerimeter,
-                throwAlert: $throwAlert)
-        })
+        .onDisappear(){
+            travel.state = .main
+        }
         .navigationBarTitle(Text(""), displayMode: .inline)
         .navigationBarItems(trailing: Image(systemName: getVehicle().getIconName()))
     }
@@ -127,52 +119,6 @@ struct DestinationView: View {
         }
         return .Bus
     }
-    
-    /// Helper function to create a correctly formatted alert.
-    /// - Returns: Alert object with remaining distance and triggered distance info message or error message in case of worng input
-    private func getAlert() -> Alert{
-        
-        if getVehicle() == .Airplane{
-            if flightData.isProblem(){
-                return Alert(title: Text("Enter a valid flight number or check your internet connection!"))
-            }
-            return Alert(title: Text("Your expected arrival is \(flightData.getArrivalTime())"),
-                         message: Text("You will get a notification \(Int(perimeter)) min prior to the arrival."))
-        }
-        else{
-            let distance = mapAPI.getRemainingDistance()
-            
-            if self.perimeter == -1 {
-                self.perimeter = 2.5
-                return Alert(title: Text("Enter a valid destination or check your internet connection!"))
-            }
-            else if distance == Double.infinity{
-                return Alert(title: Text("Error ocurred try again later!"))
-            }
-            return Alert(title: Text("Remaining distance is: \(formatDistnace(distance:distance))"),
-                         message: Text("You will be notified " + String(format: "%.1f", self.perimeter) + " km before your destination!"),
-                         primaryButton: .default(Text("OK")),
-                         secondaryButton: .destructive(Text("Cancel"), action: {
-                SoundManager.instance.stop()
-                NotificationController.instance.setPerimeter(perimeter: 0.0)
-            }))
-
-        }
-    }
-}
-
-/// Helper function to correctly format distance based on value. Smaller than 10 km will remain in m the bigger will be converted to the km.
-/// - Parameter distance: value in meters
-/// - Returns: formated String
-private func formatDistnace(distance: Double) -> String{
-    var formatedDistance = ""
-    if distance > 10000{
-        formatedDistance =  String(format: "%d", locale: Locale.current, Int(round(distance/1000))) +  " km"
-    }
-    else {
-        formatedDistance =  String(format: "%d", locale: Locale.current, Int(round(distance))) +  " m"
-    }
-    return formatedDistance
 }
 
 struct DestinationView_Previews: PreviewProvider {

@@ -6,6 +6,7 @@
 //
 
 import MapKit
+import SwiftUI
 
 enum MapDetails {
     
@@ -16,9 +17,9 @@ enum MapDetails {
 /// Class to deal with location operation and map display settings.
 final class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     
-    @Published var region = MKCoordinateRegion(center: MapDetails.startingLocation , span: MapDetails.defaultSpan)
+    @Published var region: MKCoordinateRegion = MKCoordinateRegion(center: MapDetails.startingLocation , span: MapDetails.defaultSpan)
     @Published var location : CLLocation? // last updated user location (not in use)
-    @Published var enteredPerimeter: Bool = false
+    private var travel: TravelModel? // global storage
     
     var locationManager: CLLocationManager?
     
@@ -73,12 +74,21 @@ final class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate 
         }
     }
     
-    /// Change the zoom of the map.
+    /// Adding global varibale to the class
+    /// - Parameter travel: reference on global variable
+    public func setTravelModel(travel: TravelModel){
+        self.travel = travel
+    }
+    
+    /// Change the zoom of the map and update user position.
     /// - Parameter cooeficient: coefficient of a change bigger than 1 will zoom out and opposite
     public func updateZoom(cooeficient: Double){
         if (self.region.span.longitudeDelta < 91 || cooeficient < 1){
-            self.region.span.latitudeDelta *= cooeficient
-            self.region.span.longitudeDelta *= cooeficient
+            withAnimation {
+                self.location = locationManager?.location
+                self.region.span.latitudeDelta *= cooeficient
+                self.region.span.longitudeDelta *= cooeficient
+            }
         }
     }
     
@@ -89,7 +99,10 @@ final class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate 
     public func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         self.location = locations.first
         
-        enteredPerimeter = NotificationController.instance.setRemainingDistance(distance: MapAPI.instance.getRemainingDistance())
+        if NotificationController.instance.setRemainingDistance(distance: MapAPI.instance.getRemainingDistance()){
+            travel?.alertCode = -2
+            travel?.throwAlert = true
+        }
         // centre map to new user location
         if let newLocation = self.location {
             region.center = CLLocationCoordinate2D(latitude: newLocation.coordinate.latitude, longitude: newLocation.coordinate.longitude)

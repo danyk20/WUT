@@ -29,9 +29,6 @@ struct DistanceSelectionView: View {
     @State var decimalPlaces: Int = 1
     @State var unit: String = "km"
     @State var title: String = "Perimeter:"
-    @Binding var perimeter: Double
-    @Binding var selectedPerimeter: Bool
-    @Binding var throwAlert: Bool
     @ObservedObject var input = NumbersOnly()
     
     var body: some View {
@@ -40,15 +37,17 @@ struct DistanceSelectionView: View {
                 Text(title)
                     .font(.title)
                 HStack {
-                    TextField(String(format: "%.\(decimalPlaces)f", perimeter), text: $input.value)
+                    TextField(String(format: "%.\(decimalPlaces)f", travel.perimeter), text: $input.value)
                         .padding()
                         .overlay(RoundedRectangle(cornerRadius: 10.0).strokeBorder())
                         .padding()
                     .keyboardType(.decimalPad)
                     Button {
-                        selectedPerimeter = true
-                        throwAlert = true
-                        NotificationController.instance.setPerimeter(perimeter: perimeter * 1000)
+                        NotificationController.instance.setPerimeter(perimeter: travel.perimeter * 1000)
+                        travel.isPerimeterSelected = true
+                        travel.throwAlert = true
+                        travel.state = .waiting
+                        NotificationController.instance.setTravelModel(travel: travel)
                     } label: {
                         Text("Submit")
                             .padding()
@@ -65,11 +64,11 @@ struct DistanceSelectionView: View {
                 }
         
                 HStack {
-                    Slider(value: $perimeter,
+                    Slider(value: $travel.perimeter,
                            in: minDistance...maxDistance,
                            step: travel.vehicle == .Airplane ? 1 : 0.1,
                            onEditingChanged: { (_) in
-                        input.value = String(format: "%.\(decimalPlaces)f", perimeter)
+                        input.value = String(format: "%.\(decimalPlaces)f", travel.perimeter)
                     },
                            minimumValueLabel: Text("\(String(format: "%.\(decimalPlaces)f", minDistance)) \(unit) "),
                            maximumValueLabel: Text(" \(String(format: "%.\(decimalPlaces)f", maxDistance)) \(unit) "),
@@ -80,6 +79,7 @@ struct DistanceSelectionView: View {
             Spacer()
         }
         .onAppear(){
+            travel.state = .perimeter
             if travel.vehicle == .Airplane{
                 unit = "min"
                 decimalPlaces = 0
@@ -91,6 +91,6 @@ struct DistanceSelectionView: View {
 
 struct DistanceSelectionView_Previews: PreviewProvider {
     static var previews: some View {
-        DistanceSelectionView(perimeter: .constant(2.5), selectedPerimeter: .constant(false), throwAlert: .constant(false))
+        DistanceSelectionView()
     }
 }

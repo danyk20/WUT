@@ -1,8 +1,8 @@
 //
-//  Transport.swift
+//  Enums.swift
 //  wakeUpThere
 //
-//  Created by Daniel Košč on 04/06/2022.
+//  Created by Daniel Košč on 22/07/2022.
 //
 
 import Foundation
@@ -28,4 +28,11 @@ enum TransportType : String, CaseIterable{
             return "tram"
         }
     }
+}
+
+enum ViewState : String{
+    case main
+    case destination
+    case perimeter
+    case waiting
 }
