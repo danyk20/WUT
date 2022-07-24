@@ -32,12 +32,15 @@ The application is currently in the early developing stage with fundamental func
 - always centre map based on your position
 - zoom in or zoom out the map
 - see the selected destination as a pin on the map
-- a slider as user input for distance
+- a slider as user input for distance or number of minutes
 - works in background
 - plays a sound when approaching the final destination
 - show scroll list of destinations based on text input
 - calculate remaining distance
 - support dark mode
+- find flight based on flight number
+- convert time between timezones
+- shows estimated arrival time for flights
 
 ### Main screen :  
 Selection of tranport type.

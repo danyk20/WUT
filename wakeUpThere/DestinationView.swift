@@ -54,7 +54,7 @@ struct DestinationView: View {
             if !selectedDestination {
                 Button(buttonText, action: {
                     if (getVehicle() == .Airplane){
-                        flightData.setFlightNumber(flightNumber: destination)
+                        flightData.setFlightNumber(flightNumber: destination.filter({!$0.isWhitespace}))
                         selectedDestination = true // let user enter distance
                         travel.isPerimeterSelected = false
                     } else if (suggestions.isEmpty){
