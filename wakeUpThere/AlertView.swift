@@ -50,7 +50,7 @@ struct AlertView: View {
             return Alert(title: Text("No information about future flight with this flight number have been found."))
         }
         else if travel.alertCode == 3{
-            return Alert(title: Text("Cannot dowload flight data, check your internet connection!"))
+            return Alert(title: Text("Cannot download flight data, check your internet connection!"))
         }
         else if travel.alertCode == 1{
             return Alert(title: Text("Your flight cannot be found, enter a valid flight number!"))
