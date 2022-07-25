@@ -14,7 +14,7 @@ struct TimeData: Codable{
 
 struct FlightTime: Codable{
     let scheduled: TimeData
-//    let real: TimeData
+   // let real: TimeData
     let estimated: TimeData
    // let other: String
 }
@@ -46,7 +46,7 @@ struct APIResult: Codable{
     let result: FlightRequest
 }
 
-/// Singleton Model to represent flight data recieved by API
+/// Singleton Model to represent flight data received by API
 class FlightData{
     
     static let instance = FlightData()
@@ -56,20 +56,24 @@ class FlightData{
     private var estimatedArrivalTimeStamp = 0
     private var scheaduledArrivalTimeStamp: Int = 0
     private var timeZone: String = TimeZone.current.identifier
-    private var problem: Bool = false
+    private var errCode: Int = -10
     
-    /// Chceck if there occure any error
-    /// - Returns: Boolean value if error occure
-    public func isProblem() ->Bool{
-        return problem
+    /// Getter of error codes
+    /// - Returns: Integer error code value
+    public func getErr() -> Int{
+        return errCode
     }
     
     /// Select the next arriving flight with the entered flight number
     /// - Parameter flightNumber: String representation of flight number
     public func setFlightNumber(flightNumber: String){
         self.flightNumber = flightNumber
-        self.getData {
-            if let myFlight = self.getNextFlight(){
+        self.getData(completion: {errorCode in
+            self.errCode = errorCode
+            if errorCode != 0{
+                return
+            }
+            else if let myFlight = self.getNextFlight(){
                 if let arivalScheduledTime = myFlight.time.scheduled.arrival{
                     self.scheaduledArrivalTimeStamp = arivalScheduledTime
                 }
@@ -77,7 +81,10 @@ class FlightData{
                     self.estimatedArrivalTimeStamp = arivalEstimatedTime
                 }
             }
-        }
+            else{
+                self.errCode = 4
+            }
+        })
     }
     
     /// Is arrival closer than selected amount of seconds from now
@@ -157,10 +164,7 @@ class FlightData{
     
     /// Call API to get all flight data about the flight with previously selected flight number
     /// - Parameter completion: trigger called after recieving the data
-    private func getData(completion: @escaping (() -> Void)){
-        if flightNumber == ""{
-            return
-        }
+    private func getData(completion: @escaping ((Int) -> Void)){
         let headers = [
             "X-RapidAPI-Key": Constants.flightRadarAPIKey,
             "X-RapidAPI-Host": "flight-radar1.p.rapidapi.com"
@@ -175,14 +179,35 @@ class FlightData{
         let session = URLSession.shared
         let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
             guard let data = data else {
+                completion(3)
                 return
             }
-            guard let flightData = try? JSONDecoder().decode(APIResult.self, from: data) else {return}
+            guard let flightData = try? JSONDecoder().decode(APIResult.self, from: data) else {
+                completion(1)
+                return
+            }
             
             self.data = flightData
-            
-            completion()
+            completion(0)
         })
         dataTask.resume()
+    }
+    
+    public static func flightNumberCheck(flightNumber: String) -> Bool{
+        if flightNumber.count < 3 || flightNumber.count > 6{
+            return false
+        }
+        let firstLetter = flightNumber[flightNumber.startIndex]
+        let secondLetter = flightNumber[flightNumber.index(flightNumber.startIndex, offsetBy: 1)]
+        
+        if !firstLetter.isLetter || !secondLetter.isLetter {
+            return false
+        }
+        for character in flightNumber[flightNumber.index(flightNumber.startIndex, offsetBy: 2)...flightNumber.index(before: flightNumber.endIndex)] {
+            if !character.isNumber{
+                return false
+            }
+        }
+        return true
     }
 }

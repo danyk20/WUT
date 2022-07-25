@@ -44,10 +44,15 @@ struct DistanceSelectionView: View {
                     .keyboardType(.decimalPad)
                     Button {
                         travel.isPerimeterSelected = true
-                        travel.throwAlert = true
-                        travel.alertCode = 0
+                        if travel.vehicle == .Airplane{
+                            travel.alertCode = FlightData.instance.getErr()
+                        }
+                        else{
+                            travel.alertCode = 0
+                        }
                         travel.state = .waiting
                         NotificationController.instance.setTravelModel(travel: travel)
+                        travel.throwAlert = true
                     } label: {
                         Text("Submit")
                             .padding()

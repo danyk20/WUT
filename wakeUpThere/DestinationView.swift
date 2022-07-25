@@ -54,6 +54,11 @@ struct DestinationView: View {
             if !selectedDestination {
                 Button(buttonText, action: {
                     if (getVehicle() == .Airplane){
+                        if !FlightData.flightNumberCheck(flightNumber: destination.filter({!$0.isWhitespace})){
+                            travel.alertCode = 10
+                            travel.throwAlert = true
+                            return
+                        }
                         flightData.setFlightNumber(flightNumber: destination.filter({!$0.isWhitespace}))
                         selectedDestination = true // let user enter distance
                         travel.isPerimeterSelected = false
@@ -79,9 +84,9 @@ struct DestinationView: View {
             }
             ZStack{
                 if travel.state != .main{
-                    AlertView()
                     mapView
                         .ignoresSafeArea()
+                    AlertView()
                 }
                 // show suggested destinations when there is some text and the button hasn't been clicked
                 if (!suggestions.isEmpty && !selectedDestination){

@@ -16,12 +16,14 @@ class TravelModel: ObservableObject{
         arrivalTime = 0
         alertCode = 0
         state = .main
+        loading = false
     }
     
     @Published var vehicle: TransportType?
     @Published var perimeter: Double
     @Published var isPerimeterSelected: Bool
     @Published var throwAlert: Bool
+    @Published var loading: Bool
     @Published var arrivalTime: Int
     @Published var alertCode: Int
     @Published var state: ViewState
@@ -33,5 +35,6 @@ class TravelModel: ObservableObject{
         throwAlert = false
         arrivalTime = 0
         alertCode = 0
+        loading = false
     }
 }

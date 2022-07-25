@@ -43,9 +43,9 @@ struct SelectView: View {
                 }
                 ZStack{
                     if travel.state == .main {
-                        AlertView()
                         mapView
                             .ignoresSafeArea()
+                        AlertView()
                     }
                 }
             }
