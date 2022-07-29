@@ -17,14 +17,18 @@ class TravelModel: ObservableObject{
         alertCode = 0
         state = .main
         loading = false
+        remainingDistance = 0
+        remainingTime = 0
     }
     
     @Published var vehicle: TransportType?
     @Published var perimeter: Double
+    @Published var remainingDistance: Double
+    @Published var remainingTime: Double
     @Published var isPerimeterSelected: Bool
     @Published var throwAlert: Bool
     @Published var loading: Bool
-    @Published var arrivalTime: Int
+    @Published var arrivalTime: Double
     @Published var alertCode: Int
     @Published var state: ViewState
     
@@ -36,5 +40,11 @@ class TravelModel: ObservableObject{
         arrivalTime = 0
         alertCode = 0
         loading = false
+        remainingDistance = 0
+        remainingTime = 0
+    }
+    
+    public func updateArrivalTime(){
+        remainingTime = arrivalTime - perimeter * 60 - NSDate().timeIntervalSince1970
     }
 }

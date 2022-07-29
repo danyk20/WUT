@@ -12,7 +12,7 @@ class TimerModel: ObservableObject{
     @Published var now: Date = Date()
     private var repeats: Bool = false
     private var period: Double = 10.0
-    private var travel: TravelModel = TravelModel()
+    private var travel: TravelModel
     
     var timer: Timer?
     init(repeats: Bool, period: Double, travel: TravelModel){
@@ -21,8 +21,12 @@ class TimerModel: ObservableObject{
         self.repeats = repeats
     }
     
-    init(period: Double) {
+    init(period: Double, travel: TravelModel) {
+        self.travel = travel
+        travel.updateArrivalTime()
+        NotificationController.instance.periodUpdate()
         timer = Timer.scheduledTimer(withTimeInterval: period, repeats: true, block: { _ in
+            travel.updateArrivalTime()
             NotificationController.instance.periodUpdate()
         })
     }

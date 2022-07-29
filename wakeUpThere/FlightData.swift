@@ -103,10 +103,10 @@ class FlightData{
     /// - Returns: NSDate arrival time
     public func getArrivalTime() -> NSDate{
         if estimatedArrivalTimeStamp != 0{
-            NotificationController.instance.setArrivalTime(arrival: Double(estimatedArrivalTimeStamp))
+            NotificationController.instance.startPeriodicalUpdate(arrival: Double(estimatedArrivalTimeStamp))
             return convertTime(timeStamp: estimatedArrivalTimeStamp)
         }else if scheaduledArrivalTimeStamp != 0{
-            NotificationController.instance.setArrivalTime(arrival: Double(scheaduledArrivalTimeStamp))
+            NotificationController.instance.startPeriodicalUpdate(arrival: Double(scheaduledArrivalTimeStamp))
             return convertTime(timeStamp: scheaduledArrivalTimeStamp)
         }
         return NSDate(timeIntervalSince1970: 0)
@@ -198,9 +198,8 @@ class FlightData{
             return false
         }
         let firstLetter = flightNumber[flightNumber.startIndex]
-        let secondLetter = flightNumber[flightNumber.index(flightNumber.startIndex, offsetBy: 1)]
         
-        if !firstLetter.isLetter || !secondLetter.isLetter {
+        if !firstLetter.isLetter{
             return false
         }
         for character in flightNumber[flightNumber.index(flightNumber.startIndex, offsetBy: 2)...flightNumber.index(before: flightNumber.endIndex)] {

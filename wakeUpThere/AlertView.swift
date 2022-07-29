@@ -36,7 +36,6 @@ struct AlertView: View {
     /// Helper function to create a correctly formatted alert.
     /// - Returns: Alert object with remaining distance and triggered distance info message or error message in case of worng input
     private func getAlert() -> Alert{
-        
         if (travel.vehicle == .Airplane && travel.alertCode == 0){
             return Alert(title: Text("Your expected arrival is \(flightData.getArrivalTime())"),
                          message: Text("You will get a notification \(Int(travel.perimeter)) min prior to the arrival."))
@@ -72,27 +71,13 @@ struct AlertView: View {
         else if distance == Double.infinity{
             return Alert(title: Text("Error ocurred try again later!"))
         }
-        return Alert(title: Text("Remaining distance is: \(formatDistnace(distance:distance))"),
+        return Alert(title: Text("Remaining distance is: \(TextFormatter.formatDistnace(distance:distance))"),
                      message: Text("You will be notified " + String(format: "%.1f", travel.perimeter) + " km before your destination!"),
                      primaryButton: .default(Text("OK")),
                      secondaryButton: .destructive(Text("Cancel"), action: {
             SoundManager.instance.stop()
             travel.reset()
         }))
-    }
-    
-    /// Helper function to correctly format distance based on value. Smaller than 10 km will remain in m the bigger will be converted to the km.
-    /// - Parameter distance: value in meters
-    /// - Returns: formated String
-    private func formatDistnace(distance: Double) -> String{
-        var formatedDistance = ""
-        if distance > 10000{
-            formatedDistance =  String(format: "%d", locale: Locale.current, Int(round(distance/1000))) +  " km"
-        }
-        else {
-            formatedDistance =  String(format: "%d", locale: Locale.current, Int(round(distance))) +  " m"
-        }
-        return formatedDistance
     }
 }
 

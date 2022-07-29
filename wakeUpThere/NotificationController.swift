@@ -12,9 +12,8 @@ import SwiftUI
 class NotificationController: ObservableObject{
     
     static let instance = NotificationController()
-    
+
     private var remainingDistance: Double = Double.infinity
-    private var arrivalTime: Double = 0
     private var timeUpdater: TimerModel? = nil
     
     var travel: TravelModel? // global storage
@@ -25,11 +24,17 @@ class NotificationController: ObservableObject{
         self.travel = travel
     }
     
-    /// Set flight arrival time and start periodic check
+    /// Set flight arrival time and start periodic check but must follow afther setTraveModel function
     /// - Parameter arrival: arrival time as timestamp
-    public func setArrivalTime(arrival: Double){
-        self.arrivalTime = arrival
-        timeUpdater = TimerModel(period: 60.0)
+    public func startPeriodicalUpdate(arrival: Double){
+        if travel?.arrivalTime != arrival{
+            travel?.arrivalTime = arrival
+        }
+        if timeUpdater == nil{
+            if let travel = self.travel{
+                timeUpdater = TimerModel(period: 60.0, travel: travel)
+            }
+        }
     }
     
     /// Set the remaining distance and check if the alert should be triggered.
@@ -48,17 +53,13 @@ class NotificationController: ObservableObject{
     
     /// Periodic check of flight arrival time, in case that arival time is triggered then user is notified
     public func periodUpdate(){
-        if let perimeter = travel?.perimeter{
-            if Double(arrivalTime) <= Date().timeIntervalSince1970 + perimeter * 60 {
+        if let travel = travel {
+            if travel.remainingTime <= 0 {
                 SoundManager.instance.playSound()
-                if let travel = travel {
-                    travel.alertCode = -2
-                    travel.throwAlert = true
-                }
+                travel.alertCode = -2
+                travel.throwAlert = true
                 timeUpdater = nil
-                
             }
         }
-        
     }
 }

@@ -44,10 +44,22 @@ struct DestinationView: View {
         VStack{ // START: View
             
             if (getVehicle() == .Airplane){
-                inputField.autocapitalization(UITextAutocapitalizationType.allCharacters)
+                HStack{
+                    inputField.autocapitalization(UITextAutocapitalizationType.allCharacters)
+                    if travel.state == .waiting && travel.arrivalTime != 0 {
+                        Text("remaining : \(TextFormatter.formatTime(timestamp: travel.remainingTime))")
+                            .padding(.horizontal)
+                    }
+                }
             }
             else {
-                inputField
+                HStack{
+                    inputField
+                    if travel.state == .waiting && travel.remainingDistance != Double.infinity{
+                        Text("remaining : \(TextFormatter.formatDistnace(distance:travel.remainingDistance))")
+                            .padding(.horizontal)
+                    }
+                }
             }
                 
             // show "set destination" button, until it is clicked
