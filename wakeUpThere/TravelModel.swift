@@ -44,7 +44,7 @@ class TravelModel: ObservableObject{
         remainingTime = 0
     }
     
-    public func updateArrivalTime(){
+    public func updateRemainingTime(){
         remainingTime = arrivalTime - perimeter * 60 - NSDate().timeIntervalSince1970
     }
 }

@@ -164,7 +164,7 @@ class FlightData{
     
     /// Call API to get all flight data about the flight with previously selected flight number
     /// - Parameter completion: trigger called after recieving the data
-    private func getData(completion: @escaping ((Int) -> Void)){
+    public func getData(completion: @escaping ((Int) -> Void)){
         let headers = [
             "X-RapidAPI-Key": Constants.flightRadarAPIKey,
             "X-RapidAPI-Host": "flight-radar1.p.rapidapi.com"
