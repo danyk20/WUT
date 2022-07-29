@@ -37,7 +37,7 @@ struct AlertView: View {
     /// - Returns: Alert object with remaining distance and triggered distance info message or error message in case of worng input
     private func getAlert() -> Alert{
         if (travel.vehicle == .Airplane && travel.alertCode == 0){
-            return Alert(title: Text("Your expected arrival is \(flightData.getArrivalTime())"),
+            return Alert(title: Text("Your expected arrival is \(flightData.getArrivalDate())"),
                          message: Text("You will get a notification \(Int(travel.perimeter)) min prior to the arrival."))
         }
         let distance = mapAPI.getRemainingDistance()

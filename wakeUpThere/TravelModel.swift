@@ -28,7 +28,11 @@ class TravelModel: ObservableObject{
     @Published var isPerimeterSelected: Bool
     @Published var throwAlert: Bool
     @Published var loading: Bool
-    @Published var arrivalTime: Double
+    @Published var arrivalTime: Double {
+        didSet{
+            self.updateRemainingTime()
+        }
+    }
     @Published var alertCode: Int
     @Published var state: ViewState
     

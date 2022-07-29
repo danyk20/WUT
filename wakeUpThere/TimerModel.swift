@@ -23,18 +23,21 @@ class TimerModel: ObservableObject{
     }
     
     init(period: Double, travel: TravelModel) {
+        let flightAPI = FlightData.instance
         self.travel = travel
-        travel.updateRemainingTime()
         if (travel.remainingTime / 2 > 10 * 60){
             fligtDataPeriodUpdate = NSDate().timeIntervalSince1970 + travel.remainingTime / 2
         }
         NotificationController.instance.periodUpdate()
+        
         timer = Timer.scheduledTimer(withTimeInterval: period, repeats: true, block: { [self] _ in
+            travel.updateRemainingTime()
             var errCode = 0
             if fligtDataPeriodUpdate < NSDate().timeIntervalSince1970 || errCode != 0{
-                FlightData.instance.getData { errorCode in
+                flightAPI.getData { errorCode in
                     errCode = errorCode
                 }
+                travel.arrivalTime = Double(flightAPI.getExpectedArrivalTimestamp())
                 if (travel.remainingTime / 2 > 10 * 60){
                     fligtDataPeriodUpdate = NSDate().timeIntervalSince1970 + travel.remainingTime / 2
                 }
@@ -42,7 +45,6 @@ class TimerModel: ObservableObject{
                     fligtDataPeriodUpdate = Double.infinity
                 }
             }
-            travel.updateRemainingTime()
             NotificationController.instance.periodUpdate()
         })
     }

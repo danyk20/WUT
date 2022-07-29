@@ -53,7 +53,7 @@ class FlightData{
     
     private var flightNumber: String = ""
     private var data: APIResult?
-    private var estimatedArrivalTimeStamp = 0
+    private var estimatedArrivalTimeStamp: Int = 0
     private var scheaduledArrivalTimeStamp: Int = 0
     private var timeZone: String = TimeZone.current.identifier
     private var errCode: Int = -10
@@ -73,18 +73,25 @@ class FlightData{
             if errorCode != 0{
                 return
             }
-            else if let myFlight = self.getNextFlight(){
-                if let arivalScheduledTime = myFlight.time.scheduled.arrival{
-                    self.scheaduledArrivalTimeStamp = arivalScheduledTime
-                }
-                if let arivalEstimatedTime = myFlight.time.estimated.arrival{
-                    self.estimatedArrivalTimeStamp = arivalEstimatedTime
-                }
-            }
-            else{
-                self.errCode = 4
+            else {
+                self.extractEstimatedTime()
             }
         })
+    }
+    
+    /// Load expected arrival time from API data respons.
+    public func extractEstimatedTime(){
+        if let myFlight = self.getNextFlight(){
+            if let arivalScheduledTime = myFlight.time.scheduled.arrival{
+                self.scheaduledArrivalTimeStamp = arivalScheduledTime
+            }
+            if let arivalEstimatedTime = myFlight.time.estimated.arrival{
+                self.estimatedArrivalTimeStamp = arivalEstimatedTime
+            }
+        }
+        else{
+            self.errCode = 4
+        }
     }
     
     /// Is arrival closer than selected amount of seconds from now
@@ -99,17 +106,23 @@ class FlightData{
         return false
     }
     
-    /// Get most acurat arrival time
-    /// - Returns: NSDate arrival time
-    public func getArrivalTime() -> NSDate{
+    /// Getter function get get expected arrival
+    /// - Returns: timestamp as Integer value
+    public func getExpectedArrivalTimestamp() -> Int{
         if estimatedArrivalTimeStamp != 0{
-            NotificationController.instance.startPeriodicalUpdate(arrival: Double(estimatedArrivalTimeStamp))
-            return convertTime(timeStamp: estimatedArrivalTimeStamp)
+           return estimatedArrivalTimeStamp
         }else if scheaduledArrivalTimeStamp != 0{
-            NotificationController.instance.startPeriodicalUpdate(arrival: Double(scheaduledArrivalTimeStamp))
-            return convertTime(timeStamp: scheaduledArrivalTimeStamp)
+            return scheaduledArrivalTimeStamp
         }
-        return NSDate(timeIntervalSince1970: 0)
+        return 0
+    }
+    
+    /// Get most acurat arrival time converted to local timezone and start periodic check
+    /// - Returns: NSDate arrival time
+    public func getArrivalDate() -> NSDate{
+        let arrivalTimestamp = getExpectedArrivalTimestamp()
+        NotificationController.instance.startPeriodicalUpdate(arrival: Double(arrivalTimestamp))
+        return convertTime(timeStamp: arrivalTimestamp)
     }
     
     /// Get estimated arrival time
