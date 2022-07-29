@@ -99,7 +99,7 @@ final class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate 
     public func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         self.location = locations.first
         
-        travel?.remainingDistance = MapAPI.instance.getRemainingDistance()
+        travel?.remainingDistance = MapAPI.instance.getRemainingDistance() - (travel?.perimeter ?? 0) * 1000
         if NotificationController.instance.setRemainingDistance(distance: MapAPI.instance.getRemainingDistance()){
             travel?.alertCode = -2
             travel?.throwAlert = true

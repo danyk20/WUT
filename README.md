@@ -41,6 +41,8 @@ The application is currently in the early developing stage with fundamental func
 - find flight based on flight number
 - convert time between timezones
 - shows estimated arrival time for flights
+- remaining time/distance count down
+- checker of the valid flight number
 
 ### Main screen :  
 Selection of tranport type.
@@ -76,6 +78,16 @@ Temporal alert showing entered input.
 
 ![iPhone 13 mini WUT app flight confirmation alert](Screenshots/flight_set.png)
 ![iPhone 13 mini WUT app flight confirmation alert](Screenshots/flight_set_black.png)
+
+While traveling to the destination on the ground displaying remaining distance.
+
+![iPhone 13 mini WUT app traveling to destination with remaining distance](Screenshots/destination_view_waiting.png)
+![iPhone 13 mini WUT app traveling to destination with remaining distance](Screenshots/destination_view_waiting_black.png)
+
+While traveling to the destination by airplane displaying remaining time.
+
+![iPhone 13 mini WUT app traveling to destination with remaining distance](Screenshots/destination_view_waiting_airplane.png)
+![iPhone 13 mini WUT app traveling to destination with remaining distance](Screenshots/destination_view_waiting_airplane_black.png)
 
 Final alert notifying the user about entering the set perimeter.
 

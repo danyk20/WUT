@@ -197,9 +197,11 @@ class FlightData{
         if flightNumber.count < 3 || flightNumber.count > 6{
             return false
         }
-        let firstLetter = flightNumber[flightNumber.startIndex]
         
-        if !firstLetter.isLetter{
+        let firstLetter = flightNumber[flightNumber.startIndex]
+        let secondLetter = flightNumber[flightNumber.index(flightNumber.startIndex, offsetBy: 1)]
+        
+        if !(firstLetter.isLetter || secondLetter.isLetter) {
             return false
         }
         for character in flightNumber[flightNumber.index(flightNumber.startIndex, offsetBy: 2)...flightNumber.index(before: flightNumber.endIndex)] {
