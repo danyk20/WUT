@@ -37,6 +37,12 @@ class NotificationController: ObservableObject{
         }
     }
     
+    /// Stop tperiodical updates
+    public func cancelPeriodicalUpdate(){
+        timeUpdater?.stop()
+        timeUpdater = nil
+    }
+    
     /// Set the remaining distance and check if the alert should be triggered.
     /// - Parameter distance: distance in km
     /// - Returns: true if the user enter perimeter otherwise false

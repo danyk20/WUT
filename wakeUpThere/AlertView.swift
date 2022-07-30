@@ -61,8 +61,7 @@ struct AlertView: View {
             return Alert(title: Text("You have approached to your destination!"),
                          message: Text("Click Stop button to dismiss the notification."),
                          dismissButton:  .default(Text("Stop"), action: {
-                SoundManager.instance.stop()
-                travel.reset()
+                setDefault()
             }))
         }
         else if travel.alertCode == -10{
@@ -75,9 +74,15 @@ struct AlertView: View {
                      message: Text("You will be notified " + String(format: "%.1f", travel.perimeter) + " km before your destination!"),
                      primaryButton: .default(Text("OK")),
                      secondaryButton: .destructive(Text("Cancel"), action: {
-            SoundManager.instance.stop()
-            travel.reset()
+            setDefault()
         }))
+    }
+    
+    /// Stop playing the sound, reset all global variables and stop periodical updates
+    private func setDefault(){
+        SoundManager.instance.stop()
+        travel.reset()
+        NotificationController.instance.cancelPeriodicalUpdate()
     }
 }
 

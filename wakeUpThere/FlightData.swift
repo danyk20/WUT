@@ -170,6 +170,11 @@ class FlightData{
                         nextFlight = flight
                     }
                 }
+                if let arrival = flight.time.estimated.arrival{
+                    if TimeInterval(arrival) > currentTime{
+                        nextFlight = flight
+                    }
+                }
             }
         }
         return nextFlight

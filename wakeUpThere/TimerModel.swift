@@ -7,9 +7,7 @@
 
 import Foundation
 
-class TimerModel: ObservableObject{
-    
-    @Published var now: Date = Date()
+class TimerModel{
     private var repeats: Bool = false
     private var period: Double = 10.0
     private var fligtDataPeriodUpdate: Double = Double.infinity
@@ -57,8 +55,12 @@ class TimerModel: ObservableObject{
             travel.loading = false
         })
     }
-    deinit {
+    
+    public func stop(){
         timer?.invalidate()
+    }
+    deinit {
+        stop()
     }
 
 }
