@@ -10,7 +10,7 @@ import MapKit
 
 struct DestinationView: View {
     @State var mapView: MapView = MapView() // map in the background
-    @State private var distanceView : DistanceSelectionView? // view to set input perimeter
+    @State private var distanceView : DistanceSelectionView = DistanceSelectionView() // view to set input perimeter
     @State private var suggestions: [Location] = [] // suggested places for user
     @State private var flightData: FlightData = FlightData.instance // selected flight info
     @State private var destination : String = "" // user input of destination
@@ -85,7 +85,6 @@ struct DestinationView: View {
                     }
                 })
                 .onAppear{
-                    distanceView =  DistanceSelectionView()
                     switch getVehicle() {
                     case .Airplane:
                         buttonText = "Set selected flight number"
