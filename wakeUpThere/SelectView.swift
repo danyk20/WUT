@@ -37,12 +37,12 @@ struct SelectView: View {
                                     .accentColor(.primary))
                         })
                     .simultaneousGesture(TapGesture().onEnded({
-                        travel.state = .destination
+                        travel.state = .destinationInput
                         travel.vehicle = vehicle
                     }))
                 }
                 ZStack{
-                    if travel.state == .main {
+                    if travel.state == .vehicleSelection {
                         mapView
                             .ignoresSafeArea()
                         AlertView()

@@ -15,7 +15,7 @@ class TravelModel: ObservableObject{
         throwAlert = false
         arrivalTime = 0
         alertCode = 0
-        state = .main
+        state = .vehicleSelection
         loading = false
         remainingDistance = 0
         remainingTime = 0

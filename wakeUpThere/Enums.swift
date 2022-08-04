@@ -31,8 +31,8 @@ enum TransportType : String, CaseIterable{
 }
 
 enum ViewState : String{
-    case main
-    case destination
-    case perimeter
-    case waiting
+    case vehicleSelection
+    case destinationInput
+    case approachSetting
+    case allSet
 }

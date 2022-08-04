@@ -50,7 +50,7 @@ struct DistanceSelectionView: View {
                         else{
                             travel.alertCode = 0
                         }
-                        travel.state = .waiting
+                        travel.state = .allSet
                         NotificationController.instance.setTravelModel(travel: travel)
                         travel.throwAlert = true
                     } label: {
@@ -84,7 +84,7 @@ struct DistanceSelectionView: View {
             Spacer()
         }
         .onAppear(){
-            travel.state = .perimeter
+            travel.state = .approachSetting
             if travel.vehicle == .Airplane{
                 unit = "min"
                 decimalPlaces = 0

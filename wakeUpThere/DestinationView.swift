@@ -25,7 +25,7 @@ struct DestinationView: View {
         let binding = Binding<String>(get: {
                     self.destination
                 }, set: {
-                    travel.state = .destination
+                    travel.state = .destinationInput
                     selectedDestination = false // show again destination list
                     self.destination = $0
                     if (getVehicle() != .Airplane){
@@ -46,7 +46,7 @@ struct DestinationView: View {
             if (getVehicle() == .Airplane){
                 HStack{
                     inputField.autocapitalization(UITextAutocapitalizationType.allCharacters)
-                    if travel.state == .waiting && travel.arrivalTime != 0 {
+                    if travel.state == .allSet && travel.arrivalTime != 0 {
                         Text("remaining : \(TextFormatter.formatTime(timestamp: travel.remainingTime))")
                             .padding(.horizontal)
                     }
@@ -55,7 +55,7 @@ struct DestinationView: View {
             else {
                 HStack{
                     inputField
-                    if travel.state == .waiting && travel.remainingDistance != Double.infinity{
+                    if travel.state == .allSet && travel.remainingDistance != Double.infinity{
                         Text("remaining : \(TextFormatter.formatDistnace(distance:travel.remainingDistance))")
                             .padding(.horizontal)
                     }
@@ -95,7 +95,7 @@ struct DestinationView: View {
                 }
             }
             ZStack{
-                if travel.state != .main{
+                if travel.state != .vehicleSelection{
                     mapView
                         .ignoresSafeArea()
                     AlertView()
@@ -111,7 +111,7 @@ struct DestinationView: View {
             }
         } // END: View
         .onDisappear(){
-            travel.state = .main
+            travel.state = .vehicleSelection
         }
         .navigationBarTitle(Text(""), displayMode: .inline)
         .navigationBarItems(trailing: Image(systemName: getVehicle().getIconName()))
