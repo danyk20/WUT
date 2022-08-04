@@ -14,7 +14,6 @@ struct DestinationView: View {
     @State private var suggestions: [Location] = [] // suggested places for user
     @State private var flightData: FlightData = FlightData.instance // selected flight info
     @State private var destination : String = "" // user input of destination
-    @State private var buttonText = "submit" // submit button text
     @State private var selectedDestination: Bool = false // user set destination
     @FocusState private var destinationInFocus: Bool // popup user keyboard
     @EnvironmentObject var travel: TravelModel // global storage
@@ -64,7 +63,8 @@ struct DestinationView: View {
                 
             // show "set destination" button, until it is clicked
             if !selectedDestination {
-                Button(buttonText, action: {
+                Button(getVehicle() == .Airplane ? "Set selected flight number" : "Set selected destination",
+                       action: {
                     if (getVehicle() == .Airplane){
                         if !FlightData.flightNumberCheck(flightNumber: destination.filter({!$0.isWhitespace})){
                             travel.alertCode = 10
@@ -84,14 +84,6 @@ struct DestinationView: View {
                         travel.isPerimeterSelected = false
                     }
                 })
-                .onAppear{
-                    switch getVehicle() {
-                    case .Airplane:
-                        buttonText = "Set selected flight number"
-                    default:
-                        buttonText = "Set selected destination"
-                    }
-                }
             }
             ZStack{
                 if travel.state != .vehicleSelection{
