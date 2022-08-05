@@ -26,7 +26,7 @@ struct suggestionView: View{
                             .cornerRadius(25)
                     })
                         .padding(5)
-                        .foregroundColor(.black)
+                        .foregroundColor(.primary)
                 }
             }
             .frame(maxHeight: UIScreen.main.bounds.height/5) // max 20% of the height
