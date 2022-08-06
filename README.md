@@ -1,5 +1,7 @@
 # WUT - Wake Up There  
 
+![Icon logo](WUT_logo.png)
+
 ## Table of contents  
 * [General info](#General-info)
 * [Technologies](#Technologies)
