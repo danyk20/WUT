@@ -99,11 +99,14 @@ final class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate 
     public func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         self.location = locations.first
         
-        travel?.remainingDistance = MapAPI.instance.getRemainingDistance() - (travel?.perimeter ?? 0) * 1000
-        if NotificationController.instance.setRemainingDistance(distance: MapAPI.instance.getRemainingDistance()){
-            travel?.alertCode = -2
-            travel?.throwAlert = true
+        if let travel = travel {
+            travel.remainingDistance = MapAPI.instance.getRemainingDistance() - travel.perimeter * 1000
+            if travel.isPerimeterSelected && NotificationController.instance.setRemainingDistance(distance: MapAPI.instance.getRemainingDistance()){
+                travel.alertCode = -2
+                travel.throwAlert = true
+            }
         }
+        
         // centre map to new user location
         if let newLocation = self.location {
             region.center = CLLocationCoordinate2D(latitude: newLocation.coordinate.latitude, longitude: newLocation.coordinate.longitude)
