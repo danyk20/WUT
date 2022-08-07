@@ -102,15 +102,16 @@ class MapAPI: ObservableObject{
     }
     
     /// Add selected place to locations array for pin-mark on the map.
-    /// - Parameter selectedLocation: place represented as Location instance
-    func setDestination(selectedLocation: Location){
+    /// - Parameter selectedLocation: place represented as Location instance, in case of nil pin-mark will not be shown
+    func setDestination(selectedLocation: Location?){
             DispatchQueue.main.async {
                 self.locations.removeAll()
-                self.locations.insert(Location(latitude: selectedLocation.latitude,
-                             longitude: selectedLocation.longitude,
-                             name: selectedLocation.name), at: 0)
-                
-                print("Sucessfuly founded location")
+                if let selectedLocation = selectedLocation {
+                    self.locations.insert(Location(latitude: selectedLocation.latitude,
+                                 longitude: selectedLocation.longitude,
+                                 name: selectedLocation.name), at: 0)
+                    print("Sucessfuly founded location")
+                }
             }
     }
 

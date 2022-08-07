@@ -83,6 +83,7 @@ struct AlertView: View {
         SoundManager.instance.stop()
         travel.reset()
         NotificationController.instance.cancelPeriodicalUpdate()
+        mapAPI.setDestination(selectedLocation: nil)
     }
 }
 
