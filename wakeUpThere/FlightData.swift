@@ -229,4 +229,13 @@ class FlightData{
         }
         return true
     }
+    
+    public func resetData(){
+        flightNumber = ""
+        data = nil
+        estimatedArrivalTimeStamp = 0
+        scheaduledArrivalTimeStamp = 0
+        timeZone = TimeZone.current.identifier
+        errCode = -10
+    }
 }

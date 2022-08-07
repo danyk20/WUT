@@ -82,6 +82,7 @@ struct AlertView: View {
     private func setDefault(){
         SoundManager.instance.stop()
         travel.reset()
+        flightData.resetData()
         mapAPI.setDestination(selectedLocation: nil)
     }
 }
