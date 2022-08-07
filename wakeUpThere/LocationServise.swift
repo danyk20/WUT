@@ -34,7 +34,7 @@ struct Location: Codable, Hashable, Identifiable{
         self.countryCode = countryCode
     }
     
-    func hash(into hasher: inout Hasher) {
+    public func hash(into hasher: inout Hasher) {
         hasher.combine(latitude)
         hasher.combine(longitude)
         hasher.combine(name)
@@ -42,7 +42,7 @@ struct Location: Codable, Hashable, Identifiable{
     
     /// Convert latitude and longitude attributes to CLLocationCoordinate2D instance.
     /// - Returns: CLLocationCoordinate2D instance of selected Location
-    func getCoordinates2D() -> CLLocationCoordinate2D{
+    public func getCoordinates2D() -> CLLocationCoordinate2D{
         return CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
     }
 }
@@ -62,7 +62,7 @@ class MapAPI: ObservableObject{
     /// - Parameters:
     ///   - address: address represented as a String
     ///   - completion: value containing all suggestions as a Location array that will be returned after function is finished
-    func getPossiblePlaces(address: String, completion: @escaping (([Location]) -> Void)){
+    public func getPossiblePlaces(address: String, completion: @escaping (([Location]) -> Void)){
         let pAddress = address.replacingOccurrences(of: " ", with: "%20")
         let url_string = "\(baseURL)?access_key=\(apiKey)&query=\(pAddress)"
         guard let url = URL(string: url_string) else{
@@ -88,7 +88,7 @@ class MapAPI: ObservableObject{
     /// Get air distance from a selected destination in location array and current location.
     /// - Parameter startLocation: current user's coordinates
     /// - Returns: distance in meters
-    func getRemainingDistance(startLocation: CLLocationCoordinate2D? = MapViewModel.getCurrentLocation()) -> Double{
+    public func getRemainingDistance(startLocation: CLLocationCoordinate2D? = MapViewModel.getCurrentLocation()) -> Double{
         if locations.isEmpty{
             return Double.infinity
         }
@@ -103,7 +103,7 @@ class MapAPI: ObservableObject{
     
     /// Add selected place to locations array for pin-mark on the map.
     /// - Parameter selectedLocation: place represented as Location instance, in case of nil pin-mark will not be shown
-    func setDestination(selectedLocation: Location?){
+    public func setDestination(selectedLocation: Location?){
             DispatchQueue.main.async {
                 self.locations.removeAll()
                 if let selectedLocation = selectedLocation {

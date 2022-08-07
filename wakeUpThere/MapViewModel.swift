@@ -24,7 +24,7 @@ final class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate 
     var locationManager: CLLocationManager?
     
     /// Check if the user has location service turned on with necessary permissions and set background tracking.
-    func chcekIfLocationServicesIsEnable() {
+    public func chcekIfLocationServicesIsEnable() {
         if CLLocationManager.locationServicesEnabled() {
             locationManager = CLLocationManager()
             if let locationManager = locationManager {

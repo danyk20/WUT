@@ -37,12 +37,6 @@ class NotificationController: ObservableObject{
         }
     }
     
-    /// Stop tperiodical updates
-    public func cancelPeriodicalUpdate(){
-        timeUpdater?.stop()
-        timeUpdater = nil
-    }
-    
     /// Set the remaining distance and check if the alert should be triggered.
     /// - Parameter distance: distance in km
     /// - Returns: true if the user enter perimeter otherwise false
@@ -58,14 +52,17 @@ class NotificationController: ObservableObject{
     }
     
     /// Periodic check of flight arrival time, in case that arival time is triggered then user is notified
-    public func periodUpdate(){
+    /// - Returns: notification triggered
+    public func periodUpdate() -> Bool{
         if let travel = travel {
             if travel.remainingTime <= 0 {
                 SoundManager.instance.playSound()
                 travel.alertCode = -2
                 travel.throwAlert = true
                 timeUpdater = nil
+                return true
             }
         }
+        return false
     }
 }
