@@ -131,6 +131,6 @@ struct DestinationView: View {
 
 struct DestinationView_Previews: PreviewProvider {
     static var previews: some View {
-        DestinationView()
+        DestinationView().environmentObject(TravelModel())
     }
 }

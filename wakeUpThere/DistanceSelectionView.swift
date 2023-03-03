@@ -96,6 +96,6 @@ struct DistanceSelectionView: View {
 
 struct DistanceSelectionView_Previews: PreviewProvider {
     static var previews: some View {
-        DistanceSelectionView()
+        DistanceSelectionView().environmentObject(TravelModel())
     }
 }
