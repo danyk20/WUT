@@ -23,7 +23,7 @@ struct MapView: View {
                 .onChange(of: mapModel.location) { _ in
                     updateMap()
                 }
-            // update mapt ot see new pin on the map
+            // update map to see new pin on the map
                 .onChange(of: mapAPI.locations) { _ in
                     updateMap()
                 }
@@ -54,7 +54,7 @@ struct MapView: View {
             }
             .onAppear{
                 mapModel.setTravelModel(travel: travel)
-                mapModel.chcekIfLocationServicesIsEnable()
+                mapModel.setRegionCenteredOnUserLocation()
                 updateMap()
             }
         }

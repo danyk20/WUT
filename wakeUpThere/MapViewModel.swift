@@ -23,18 +23,24 @@ final class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate 
     
     var locationManager: CLLocationManager?
     
-    /// Check if the user has location service turned on with necessary permissions and set background tracking.
-    public func chcekIfLocationServicesIsEnable() {
-        if CLLocationManager.locationServicesEnabled() {
-            locationManager = CLLocationManager()
-            if let locationManager = locationManager {
-                locationManager.delegate = self
-                locationManager.startUpdatingLocation()
-                locationManager.allowsBackgroundLocationUpdates = true
-            }
+    override init() {
+        super.init()
+        self.locationManager = CLLocationManager()
+        if let locationManager = self.locationManager {
+            locationManager.delegate = self
+            locationManager.startUpdatingLocation()
+            locationManager.allowsBackgroundLocationUpdates = true
+            self.location = locationManager.location
         }
         else {
             print("Show alert")
+        }
+    }
+    
+    /// Set region attribute based on user current location
+    public func setRegionCenteredOnUserLocation(){
+        if let newLocation = self.location {
+            self.region.center = CLLocationCoordinate2D(latitude: newLocation.coordinate.latitude, longitude: newLocation.coordinate.longitude)
         }
     }
     
@@ -107,9 +113,6 @@ final class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate 
             }
         }
         
-        // centre map to new user location
-        if let newLocation = self.location {
-            region.center = CLLocationCoordinate2D(latitude: newLocation.coordinate.latitude, longitude: newLocation.coordinate.longitude)
-        }
+        self.setRegionCenteredOnUserLocation()
     }
 }
