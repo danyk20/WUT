@@ -7,30 +7,29 @@
 
 import Foundation
 
-enum TransportType : String, CaseIterable{
-    case Bus
-    case Airplane
-    case Boat
-    case Train
-    
+enum TransportType: String, CaseIterable {
+    case bus
+    case airplane
+    case boat
+    case train
+
     /// Get string representation of icon from library.
     /// - Returns: String name of the icon
-    func getIconName () -> String
-    {
+    func getIconName () -> String {
         switch self {
-        case .Bus:
-            return "bus"
-        case .Airplane:
-            return "airplane"
-        case .Boat:
-            return "ferry.fill"
-        case .Train:
-            return "tram"
+            case .bus:
+                return "bus"
+            case .airplane:
+                return "airplane"
+            case .boat:
+                return "ferry.fill"
+            case .train:
+                return "tram"
         }
     }
 }
 
-enum ViewState : String{
+enum ViewState: String {
     case vehicleSelection
     case destinationInput
     case approachSetting

@@ -15,9 +15,9 @@ struct MapView: View {
     @ObservedObject private var mapModel = MapViewModel() // map settings
     @State private var map: Map<_DefaultAnnotatedMapContent<[Location]>>?
     @State private var destinationColor: Color = .blue // pin-mark color
-    
+
     var body: some View {
-        ZStack(alignment: .bottom){
+        ZStack(alignment: .bottom) {
             map
             // update map to see user location or zoom change
                 .onChange(of: mapModel.location) { _ in
@@ -28,10 +28,10 @@ struct MapView: View {
                     updateMap()
                 }
                 .ignoresSafeArea()
-                
-            VStack(){ // zoom in/out buttons
+
+            VStack { // zoom in/out buttons
                 Spacer()
-                HStack{
+                HStack {
                     Spacer()
                     Button(action: {
                         mapModel.updateZoom(cooeficient: 0.5)
@@ -41,7 +41,7 @@ struct MapView: View {
                     })
                     .padding()
                 }
-                HStack{
+                HStack {
                     Spacer()
                     Button(action: {
                         mapModel.updateZoom(cooeficient: 2)
@@ -52,23 +52,22 @@ struct MapView: View {
                     .padding()
                 }
             }
-            .onAppear{
+            .onAppear {
                 mapModel.setTravelModel(travel: travel)
                 mapModel.setRegionCenteredOnUserLocation()
                 updateMap()
             }
         }
     }
-    
+
     /// Reload map on the view with new updated parameters
-    public func updateMap(){
+    public func updateMap() {
         map = Map(coordinateRegion: $mapModel.region,
                    showsUserLocation: true,
-                   annotationItems: mapAPI.locations){ location in
+                   annotationItems: mapAPI.locations) { location in
                    MapMarker(coordinate: location.getCoordinates2D(), tint: destinationColor)
         }
     }
-    
 }
 
 struct MapView_Previews: PreviewProvider {

@@ -8,7 +8,7 @@
 import SwiftUI
 
 @main
-struct wakeUpThereApp: App {
+struct WakeUpThereApp: App {
     var body: some Scene {
         WindowGroup {
             SelectView()

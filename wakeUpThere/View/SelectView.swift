@@ -17,15 +17,15 @@ struct SelectView: View {
     @StateObject private var travel: TravelModel = TravelModel()
 
     var body: some View {
-        NavigationView{
+        NavigationView {
             VStack(alignment: .center, spacing: 30) {
                 Text(appName)
                     .font(.largeTitle)
                     .fontWeight(.bold)
-                
+
                 Text(prompt)
                     .fontWeight(.bold)
-                
+
                 ForEach(TransportType.allCases, id: \.rawValue) { vehicle in
                     NavigationLink(
                         destination: DestinationView(),
@@ -41,7 +41,7 @@ struct SelectView: View {
                         travel.vehicle = vehicle
                     }))
                 }
-                ZStack{
+                ZStack {
                     if travel.state == .vehicleSelection {
                         mapView
                             .ignoresSafeArea()

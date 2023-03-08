@@ -8,11 +8,11 @@
 import SwiftUI
 
 struct TransportView: View {
-    
+
     let transportType: TransportType
-    
+
     var body: some View {
-        HStack{
+        HStack {
             Image(systemName: transportType.getIconName())
             Text("\(transportType.rawValue)")
                 .fontWeight(.bold)
@@ -22,9 +22,9 @@ struct TransportView: View {
 
 struct TransportView_Previews: PreviewProvider {
     static var previews: some View {
-        VStack{
-            TransportView(transportType: TransportType.Boat)
-            TransportView(transportType: TransportType.Bus)
+        VStack {
+            TransportView(transportType: .boat)
+            TransportView(transportType: .bus)
         }
     }
 }

@@ -7,9 +7,9 @@
 
 import Foundation
 
-class TravelModel: ObservableObject{
-    
-    init(){
+class TravelModel: ObservableObject {
+
+    init() {
         perimeter = 2.5
         isPerimeterSelected = false
         throwAlert = false
@@ -20,7 +20,7 @@ class TravelModel: ObservableObject{
         remainingDistance = 0
         remainingTime = 0
     }
-    
+
     @Published var vehicle: TransportType?
     @Published var perimeter: Double
     @Published var remainingDistance: Double
@@ -29,15 +29,15 @@ class TravelModel: ObservableObject{
     @Published var throwAlert: Bool
     @Published var loading: Bool
     @Published var arrivalTime: Double {
-        didSet{
+        didSet {
             self.updateRemainingTime()
         }
     }
     @Published var alertCode: Int
     @Published var state: ViewState
-    
+
     /// Reset all values except of state
-    public func reset(){
+    public func reset() {
         perimeter = 2.5
         isPerimeterSelected = false
         throwAlert = false
@@ -47,8 +47,8 @@ class TravelModel: ObservableObject{
         remainingDistance = 0
         remainingTime = 0
     }
-    
-    public func updateRemainingTime(){
+
+    public func updateRemainingTime() {
         remainingTime = arrivalTime - perimeter * 60 - NSDate().timeIntervalSince1970
     }
 }

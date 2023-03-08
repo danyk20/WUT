@@ -12,7 +12,7 @@ class NumbersOnly: ObservableObject {
     @Published var value = "" {
         didSet {
             let filtered = value.filter { $0.isNumber ||  $0 == "."}
-            
+
             if value != filtered {
                 value = filtered
             }
@@ -21,19 +21,19 @@ class NumbersOnly: ObservableObject {
 }
 
 struct DistanceSelectionView: View {
-    
+
     @EnvironmentObject var travel: TravelModel
-    
+
     private let minDistance: Double = 1
     private let maxDistance: Double = 100
     @State var decimalPlaces: Int = 1
     @State var unit: String = "km"
     @State var title: String = "Perimeter:"
     @ObservedObject var input = NumbersOnly()
-    
+
     var body: some View {
         VStack {
-            VStack{
+            VStack {
                 Text(title)
                     .font(.title)
                 HStack {
@@ -44,10 +44,9 @@ struct DistanceSelectionView: View {
                     .keyboardType(.decimalPad)
                     Button {
                         travel.isPerimeterSelected = true
-                        if travel.vehicle == .Airplane{
+                        if travel.vehicle == .airplane {
                             travel.alertCode = FlightData.instance.getErr()
-                        }
-                        else{
+                        } else {
                             travel.alertCode = 0
                         }
                         travel.state = .allSet
@@ -67,11 +66,11 @@ struct DistanceSelectionView: View {
                     }
                     .padding()
                 }
-        
+
                 HStack {
                     Slider(value: $travel.perimeter,
                            in: minDistance...maxDistance,
-                           step: travel.vehicle == .Airplane ? 1 : 0.1,
+                           step: travel.vehicle == .airplane ? 1 : 0.1,
                            onEditingChanged: { (_) in
                         input.value = String(format: "%.\(decimalPlaces)f", travel.perimeter)
                     },
@@ -83,9 +82,9 @@ struct DistanceSelectionView: View {
             }            .background(.ultraThinMaterial)
             Spacer()
         }
-        .onAppear(){
+        .onAppear {
             travel.state = .approachSetting
-            if travel.vehicle == .Airplane{
+            if travel.vehicle == .airplane {
                 unit = "min"
                 decimalPlaces = 0
                 title = "Time prior to arrival:"

@@ -7,19 +7,18 @@
 
 import SwiftUI
 
-struct suggestionView: View{
-    
+struct SuggestionView: View {
+
     @Binding var dataArray: [Location]
     let mapAPI: MapAPI = MapAPI.instance
-    
+
     var body: some View {
-        
-        VStack{
-            ScrollView{
-                ForEach(dataArray, id: \.self){ place in
+        VStack {
+            ScrollView {
+                ForEach(dataArray, id: \.self) { place in
                     Button(action: {
                         mapAPI.setDestination(selectedLocation: place)
-                    },label: {
+                    }, label: {
                         Text("\(place.name.uppercased())  \(place.countryCode)")
                             .padding()
                             .background(.ultraThinMaterial)
@@ -35,9 +34,9 @@ struct suggestionView: View{
     }
 }
 
-struct suggestionView_Previews: PreviewProvider {
+struct SuggestionView_Previews: PreviewProvider {
     static var previews: some View {
-        suggestionView(dataArray: .constant(
+        SuggestionView(dataArray: .constant(
             [Location(latitude: 0.0, longitude: 0.0, name: "Town")]))
     }
 }
