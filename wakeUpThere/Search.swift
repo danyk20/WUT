@@ -19,15 +19,15 @@ final class LocalSearchService {
         self.center = center
         self.radius = radius
     }
-    
+
     public func searchCities(searchText: String) {
         request(resultType: .address, searchText: searchText)
     }
-    
+
     public func searchPointOfInterests(searchText: String) {
         request(searchText: searchText)
     }
-    
+
     private func request(resultType: MKLocalSearch.ResultType = .pointOfInterest,
                          searchText: String) {
         let request = MKLocalSearch.Request()
@@ -53,7 +53,7 @@ struct LocalSearchViewData: Identifiable {
     var id = UUID()
     var title: String
     var subtitle: String
-    
+
     init(mapItem: MKMapItem) {
         self.title = mapItem.name ?? ""
         self.subtitle = mapItem.placemark.title ?? ""

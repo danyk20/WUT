@@ -10,15 +10,15 @@ import AVKit
 
 /// Singleton class for dealing with sounds in the app.
 class SoundManager {
-    
+
     static let instance = SoundManager()
-    
+
     private var player: AVAudioPlayer?
-    
+
     /// Play default sound bell.mp3.
     public func playSound() {
         guard let url = Bundle.main.url(forResource: "bell", withExtension: ".mp3") else { return }
-        
+
         do {
             player = try AVAudioPlayer(contentsOf: url)
             player?.numberOfLoops = -1
@@ -27,9 +27,9 @@ class SoundManager {
             print("Error while playing the sound. \(error.localizedDescription)")
         }
     }
-    
+
     /// Stop playing sound.
-    public func stop(){
+    public func stop() {
         player?.stop()
     }
 }
