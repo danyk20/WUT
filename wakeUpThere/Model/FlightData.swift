@@ -181,7 +181,8 @@ class FlightData {
         if !(firstLetter.isLetter || secondLetter.isLetter) {
             return false
         }
-        for character in flightNumber[flightNumber.index(flightNumber.startIndex, offsetBy: 2)...flightNumber.index(before: flightNumber.endIndex)] where !character.isNumber{
+        for character in flightNumber[flightNumber.index(flightNumber.startIndex, offsetBy: 2)...flightNumber.index(before: flightNumber.endIndex)]
+        where !character.isNumber {
             return false
         }
 
