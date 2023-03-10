@@ -52,8 +52,8 @@ class MapAPI: ObservableObject {
 
     static let instance = MapAPI()
 
-    private let baseURL = "http://api.positionstack.com/v1/forward"
-    private let apiKey = "268d3f7afcbf9cbc398559f20b456ca1"
+    private static let baseURL = "http://api.positionstack.com/v1/forward"
+    private static let apiKey = Constants.positionstackAPIKey
 
     @Published var locations: [Location] = []
 
@@ -63,7 +63,7 @@ class MapAPI: ObservableObject {
     ///   - completion: value containing all suggestions as a Location array that will be returned after function is finished
     public func getPossiblePlaces(address: String, completion: @escaping (([Location]) -> Void)) {
         let pAddress = address.replacingOccurrences(of: " ", with: "%20")
-        let urlString = "\(baseURL)?access_key=\(apiKey)&query=\(pAddress)"
+        let urlString = "\(MapAPI.baseURL)?access_key=\(MapAPI.apiKey)&query=\(pAddress)"
         guard let url = URL(string: urlString) else {
             print("Invalid URL")
             return
