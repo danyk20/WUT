@@ -35,6 +35,7 @@
 		9BEFC125286DE2AD005D22AD /* SoundManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BEFC124286DE2AD005D22AD /* SoundManager.swift */; };
 		9BEFC128286DEE61005D22AD /* bell.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9BEFC127286DEE61005D22AD /* bell.mp3 */; };
 		C57B2BDF29BB187B00A40BB1 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = C57B2BDE29BB187B00A40BB1 /* Constants.swift */; };
+		C581110529BBE8E100AC9036 /* BackgroundMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = C581110429BBE8E100AC9036 /* BackgroundMap.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -68,6 +69,7 @@
 		9BEFC124286DE2AD005D22AD /* SoundManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundManager.swift; sourceTree = "<group>"; };
 		9BEFC127286DEE61005D22AD /* bell.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = bell.mp3; sourceTree = "<group>"; };
 		C57B2BDE29BB187B00A40BB1 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		C581110429BBE8E100AC9036 /* BackgroundMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundMap.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,6 +110,7 @@
 				03C57D9829B8B00900F7CD73 /* FlightInfo.swift */,
 				03C57D9A29B8B01600F7CD73 /* FlightRequest.swift */,
 				03C57D9C29B8B02800F7CD73 /* ApiResult.swift */,
+				C581110429BBE8E100AC9036 /* BackgroundMap.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -283,6 +286,7 @@
 				9BB35CB9284BFA3C0034FAB3 /* TransportView.swift in Sources */,
 				03C57D9529B8AFA200F7CD73 /* FlightTime.swift in Sources */,
 				9B8F62032881084500972A3A /* FlightData.swift in Sources */,
+				C581110529BBE8E100AC9036 /* BackgroundMap.swift in Sources */,
 				9B4419E12845AD5B0046FC9E /* MapViewModel.swift in Sources */,
 				9B8572872889A8F7008905FC /* TimerModel.swift in Sources */,
 				9B5BEF7C286FCB2900BA6326 /* DistanceSelectionView.swift in Sources */,
