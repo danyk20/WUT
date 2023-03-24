@@ -106,8 +106,9 @@ final class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate 
         self.location = locations.first
 
         if let travel = travel {
-            travel.remainingDistance = MapAPI.instance.getRemainingDistance() - travel.perimeter * 1000
-            if travel.isPerimeterSelected && NotificationController.instance.setRemainingDistance(distance: MapAPI.instance.getRemainingDistance()) {
+            let remainingDistance = MapAPI.instance.getRemainingDistance()
+            travel.remainingDistance = remainingDistance - travel.perimeter * 1000
+            if travel.isPerimeterSelected && NotificationController.instance.setRemainingDistance(distance: remainingDistance) {
                 travel.alertCode = -2
                 travel.throwAlert = true
             }
