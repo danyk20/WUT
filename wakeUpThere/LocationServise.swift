@@ -87,7 +87,7 @@ class MapAPI: ObservableObject {
     /// Get air distance from a selected destination in location array and current location.
     /// - Parameter startLocation: current user's coordinates
     /// - Returns: distance in meters
-    public func getRemainingDistance(startLocation: CLLocationCoordinate2D? = MapViewModel.getCurrentLocation()) -> Double {
+    public func getRemainingDistance(startLocation: CLLocationCoordinate2D? = PositionLocator.getCurrentLocation()) -> Double {
         if locations.isEmpty {
             return Double.infinity
         }

@@ -12,7 +12,7 @@ import CoreLocationUI
 struct MapView: View {
     @EnvironmentObject var travel: TravelModel
     @ObservedObject private var mapAPI = MapAPI.instance // API to get suggested places
-    @ObservedObject private var mapModel = MapViewModel() // map settings
+    @ObservedObject private var mapModel = PositionLocator() // map settings
 
     @State public var zoom: Int = 65536
     @State public var locations: [Location] = []
