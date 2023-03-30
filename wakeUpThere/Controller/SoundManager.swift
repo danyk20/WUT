@@ -17,12 +17,14 @@ class SoundManager {
 
     /// Play default sound bell.mp3.
     public func playSound() {
+        let generator = UINotificationFeedbackGenerator()
         guard let url = Bundle.main.url(forResource: "bell", withExtension: ".mp3") else { return }
 
         do {
             player = try AVAudioPlayer(contentsOf: url)
             player?.numberOfLoops = -1
             player?.play()
+            generator.notificationOccurred(.success)
         } catch let error {
             print("Error while playing the sound. \(error.localizedDescription)")
         }
