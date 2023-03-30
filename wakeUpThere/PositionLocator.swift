@@ -68,7 +68,11 @@ final class PositionLocator: NSObject, ObservableObject, CLLocationManagerDelega
             case .denied:
                 break
             case .authorizedAlways:
-            PositionLocator.region = MKCoordinateRegion(center: locationManager.location!.coordinate, span: MapDetails.defaultSpan)
+            if let currentLocation = locationManager.location {
+                PositionLocator.region = MKCoordinateRegion(center: currentLocation.coordinate, span: MapDetails.defaultSpan)
+            } else {
+                print("No location avaible!")
+            }
             case .authorizedWhenInUse:
                 print("Wrong permition")
                 locationManager.requestAlwaysAuthorization()

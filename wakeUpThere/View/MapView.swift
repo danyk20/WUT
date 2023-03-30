@@ -27,26 +27,28 @@ struct MapView: View {
                 }
 
             VStack { // zoom in/out buttons
-                Spacer()
-                HStack {
+                if let map = map {
                     Spacer()
-                    Button(action: {
-                        map!.zoomIn()
-                    }, label: {
-                        Image(systemName: "plus.magnifyingglass")
-                            .font(.title)
-                    })
-                    .padding()
-                }
-                HStack {
-                    Spacer()
-                    Button(action: {
-                        map!.zoomOut()
-                    }, label: {
-                        Image(systemName: "minus.magnifyingglass")
-                            .font(.title)
-                    })
-                    .padding()
+                    HStack {
+                        Spacer()
+                        Button(action: {
+                            map.zoomIn()
+                        }, label: {
+                            Image(systemName: "plus.magnifyingglass")
+                                .font(.title)
+                        })
+                        .padding()
+                    }
+                    HStack {
+                        Spacer()
+                        Button(action: {
+                            map.zoomOut()
+                        }, label: {
+                            Image(systemName: "minus.magnifyingglass")
+                                .font(.title)
+                        })
+                        .padding()
+                    }
                 }
             }
             .onAppear {

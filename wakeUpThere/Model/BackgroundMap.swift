@@ -15,7 +15,8 @@ struct BackgroundMap: UIViewRepresentable {
     @Binding public var locations: [Location]
 
     var locationManager = CLLocationManager()
-    func setupManager() {
+
+    private func setupManager() {
       locationManager.desiredAccuracy = kCLLocationAccuracyBest
       locationManager.requestWhenInUseAuthorization()
       locationManager.requestAlwaysAuthorization()
@@ -25,29 +26,22 @@ struct BackgroundMap: UIViewRepresentable {
         setupManager()
         let mapView = MKMapView(frame: UIScreen.main.bounds)
         mapView.showsUserLocation = true
-        let region = MKCoordinateRegion(
-            center: locationManager.location!.coordinate,
-            latitudinalMeters: CLLocationDistance(exactly: zoom)!,
-            longitudinalMeters: CLLocationDistance(exactly: zoom)!)
-        mapView.setRegion(mapView.regionThatFits(region), animated: true)
+        mapView.setRegion(mapView.regionThatFits(getCurrentRegion()), animated: true)
         return mapView
     }
 
     func updateUIView(_ uiView: MKMapView, context: Context) {
         // update zoom
-        uiView.setRegion(MKCoordinateRegion(
-            center: locationManager.location!.coordinate,
-            latitudinalMeters: CLLocationDistance(exactly: zoom) ?? 65536.0,
-            longitudinalMeters: CLLocationDistance(exactly: zoom) ?? 65536.0), animated: true)
+        uiView.setRegion(getCurrentRegion(), animated: true)
         // update pin on the Map
         let annotation = MKPointAnnotation()
-        if locations.count > 0 {
+        if locations.count > 0, let target = locations.first {
             if !uiView.annotations.isEmpty {
                 uiView.removeAnnotations(uiView.annotations)
             }
-            let centerCoordinate = CLLocationCoordinate2D(latitude: locations.first!.latitude, longitude: locations.first!.longitude)
+            let centerCoordinate = CLLocationCoordinate2D(latitude: target.latitude, longitude: target.longitude)
             annotation.coordinate = centerCoordinate
-            annotation.title = locations.first?.name
+            annotation.title = target.name
             uiView.addAnnotation(annotation)
         }
     }
@@ -62,6 +56,17 @@ struct BackgroundMap: UIViewRepresentable {
         if zoom > 10 {
             zoom /= 2
         }
+    }
+
+    private func getCurrentRegion() -> MKCoordinateRegion {
+        if let currentLocation = locationManager.location {
+            return MKCoordinateRegion(
+                center: currentLocation.coordinate,
+                latitudinalMeters: CLLocationDistance(exactly: zoom) ?? 65536.0,
+                longitudinalMeters: CLLocationDistance(exactly: zoom) ?? 65536.0)
+        }
+        print("Current location is unknown")
+        return MKCoordinateRegion()
     }
 
 }

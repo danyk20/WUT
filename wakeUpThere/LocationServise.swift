@@ -71,7 +71,7 @@ class MapAPI: ObservableObject {
 
         URLSession.shared.dataTask(with: url) { (data, _, error) in
             guard let data = data else {
-                print(error!.localizedDescription)
+                print(error?.localizedDescription ?? "Error Occured while requesting data from API!")
                 return
             }
             guard let newCoordinates = try? JSONDecoder().decode(PositionstackResponse.self, from: data) else {return}
