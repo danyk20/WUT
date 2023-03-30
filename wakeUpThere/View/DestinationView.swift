@@ -20,32 +20,28 @@ struct DestinationView: View {
     var mapAPI: MapAPI = MapAPI.instance
 
     var body: some View {
-        // watch the value of TextField, and if it has been changed, trigger these events
-        let binding = Binding<String>(get: {
-                    self.destination
-                }, set: {
-                    travel.state = .destinationInput
-                    selectedDestination = false // show again destination list
-                    self.destination = $0
-                    if getVehicle() != .airplane {
-                        mapAPI.getPossiblePlaces(address: destination) { places in
-                            suggestions = places
-                        }
-                    }
-                })
 
-        let inputField = TextField(getTextPromt(), text: binding)
+        let inputField = TextField(getTextPromt(), text: $destination)
             .focused($destinationInFocus)
             .font(.title2)
             .multilineTextAlignment(.center)
             .disableAutocorrection(true)
+            .onChange(of: destination) { _ in
+                travel.state = .destinationInput
+                selectedDestination = false // show again destination list
+                if getVehicle() != .airplane {
+                    mapAPI.getPossiblePlaces(address: destination) { places in
+                        suggestions = places
+                    }
+                }
+            }
 
         VStack { // START: View
             if getVehicle() == .airplane {
                 HStack {
                     inputField.autocapitalization(UITextAutocapitalizationType.allCharacters)
                     if travel.state == .allSet && travel.arrivalTime != 0 {
-                        Text("remaining : \(TextFormatter.formatTime(timestamp: travel.remainingTime))")
+                        Text("alert in: \(TextFormatter.formatTime(timestamp: travel.remainingTime))")
                             .padding(.horizontal)
                     }
                 }
@@ -53,7 +49,7 @@ struct DestinationView: View {
                 HStack {
                     inputField
                     if travel.state == .allSet && travel.remainingDistance != Double.infinity {
-                        Text("remaining : \(TextFormatter.formatDistnace(distance: travel.remainingDistance))")
+                        Text("alert in: \(TextFormatter.formatDistnace(distance: travel.remainingDistance))")
                             .padding(.horizontal)
                     }
                 }
@@ -63,6 +59,7 @@ struct DestinationView: View {
             if !selectedDestination {
                 Button(getVehicle() == .airplane ? "Set selected flight number" : "Set selected destination",
                        action: {
+                    destinationInFocus = false
                     if getVehicle() == .airplane {
                         if !FlightData.flightNumberCheck(flightNumber: destination.filter({!$0.isWhitespace})) {
                             travel.alertCode = 10
@@ -98,6 +95,9 @@ struct DestinationView: View {
                 }
             }
         } // END: View
+        .onAppear {
+            destinationInFocus = true
+        }
         .onDisappear {
             travel.state = .vehicleSelection
         }

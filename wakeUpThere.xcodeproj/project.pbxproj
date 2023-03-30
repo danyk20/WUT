@@ -18,7 +18,7 @@
 		9B0E8566283A85E400114FF4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9B0E8565283A85E400114FF4 /* Assets.xcassets */; };
 		9B0E8569283A85E400114FF4 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9B0E8568283A85E400114FF4 /* Preview Assets.xcassets */; };
 		9B0E8578283AA5E000114FF4 /* SelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B0E8577283AA5E000114FF4 /* SelectView.swift */; };
-		9B4419E12845AD5B0046FC9E /* MapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B4419E02845AD5A0046FC9E /* MapViewModel.swift */; };
+		9B4419E12845AD5B0046FC9E /* PositionLocator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B4419E02845AD5A0046FC9E /* PositionLocator.swift */; };
 		9B49ABA62893544300F35B54 /* TextFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B49ABA52893544200F35B54 /* TextFormatter.swift */; };
 		9B5BEF7C286FCB2900BA6326 /* DistanceSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B5BEF7B286FCB2900BA6326 /* DistanceSelectionView.swift */; };
 		9B5BEF802873448A00BA6326 /* NotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B5BEF7F2873448A00BA6326 /* NotificationController.swift */; };
@@ -35,6 +35,7 @@
 		9BEFC125286DE2AD005D22AD /* SoundManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BEFC124286DE2AD005D22AD /* SoundManager.swift */; };
 		9BEFC128286DEE61005D22AD /* bell.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9BEFC127286DEE61005D22AD /* bell.mp3 */; };
 		C57B2BDF29BB187B00A40BB1 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = C57B2BDE29BB187B00A40BB1 /* Constants.swift */; };
+		C581110529BBE8E100AC9036 /* BackgroundMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = C581110429BBE8E100AC9036 /* BackgroundMap.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,7 +51,7 @@
 		9B0E8565283A85E400114FF4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9B0E8568283A85E400114FF4 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		9B0E8577283AA5E000114FF4 /* SelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectView.swift; sourceTree = "<group>"; };
-		9B4419E02845AD5A0046FC9E /* MapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewModel.swift; sourceTree = "<group>"; };
+		9B4419E02845AD5A0046FC9E /* PositionLocator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PositionLocator.swift; sourceTree = "<group>"; };
 		9B4419E22845B1F30046FC9E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		9B49ABA52893544200F35B54 /* TextFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFormatter.swift; sourceTree = "<group>"; };
 		9B5BEF7B286FCB2900BA6326 /* DistanceSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DistanceSelectionView.swift; sourceTree = "<group>"; };
@@ -68,6 +69,7 @@
 		9BEFC124286DE2AD005D22AD /* SoundManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundManager.swift; sourceTree = "<group>"; };
 		9BEFC127286DEE61005D22AD /* bell.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = bell.mp3; sourceTree = "<group>"; };
 		C57B2BDE29BB187B00A40BB1 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		C581110429BBE8E100AC9036 /* BackgroundMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundMap.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,7 +102,6 @@
 			children = (
 				9B8F62022881084500972A3A /* FlightData.swift */,
 				9B8F620428862B3400972A3A /* TravelModel.swift */,
-				9B4419E02845AD5A0046FC9E /* MapViewModel.swift */,
 				9B8572862889A8F7008905FC /* TimerModel.swift */,
 				03C57D9229B8AF7D00F7CD73 /* TimeData.swift */,
 				03C57D9429B8AFA200F7CD73 /* FlightTime.swift */,
@@ -108,6 +109,7 @@
 				03C57D9829B8B00900F7CD73 /* FlightInfo.swift */,
 				03C57D9A29B8B01600F7CD73 /* FlightRequest.swift */,
 				03C57D9C29B8B02800F7CD73 /* ApiResult.swift */,
+				C581110429BBE8E100AC9036 /* BackgroundMap.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -145,6 +147,7 @@
 				03C57D9029B8AF1600F7CD73 /* Model */,
 				03C57D8F29B8AF0000F7CD73 /* View */,
 				9B4419E22845B1F30046FC9E /* Info.plist */,
+				9B4419E02845AD5A0046FC9E /* PositionLocator.swift */,
 				C57B2BDE29BB187B00A40BB1 /* Constants.swift */,
 				9B83CF06288B880000B6C5F1 /* Enums.swift */,
 				9B9ED3C42856DDA90091181A /* LocationServise.swift */,
@@ -283,7 +286,8 @@
 				9BB35CB9284BFA3C0034FAB3 /* TransportView.swift in Sources */,
 				03C57D9529B8AFA200F7CD73 /* FlightTime.swift in Sources */,
 				9B8F62032881084500972A3A /* FlightData.swift in Sources */,
-				9B4419E12845AD5B0046FC9E /* MapViewModel.swift in Sources */,
+				C581110529BBE8E100AC9036 /* BackgroundMap.swift in Sources */,
+				9B4419E12845AD5B0046FC9E /* PositionLocator.swift in Sources */,
 				9B8572872889A8F7008905FC /* TimerModel.swift in Sources */,
 				9B5BEF7C286FCB2900BA6326 /* DistanceSelectionView.swift in Sources */,
 				9B49ABA62893544300F35B54 /* TextFormatter.swift in Sources */,
