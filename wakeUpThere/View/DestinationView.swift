@@ -9,7 +9,7 @@ import SwiftUI
 import MapKit
 
 struct DestinationView: View {
-    @State var mapView: MapView = MapView() // map in the background
+    @State var mapView: MapView // map in the background
     @State private var distanceView: DistanceSelectionView = DistanceSelectionView() // view to set input perimeter
     @State private var suggestions: [Location] = [] // suggested places for user
     @State private var flightData: FlightData = FlightData.instance // selected flight info
@@ -78,11 +78,9 @@ struct DestinationView: View {
                 })
             }
             ZStack {
-                if travel.state != .vehicleSelection {
-                    mapView
-                        .ignoresSafeArea()
-                    AlertView()
-                }
+                mapView
+                    .ignoresSafeArea()
+                AlertView()
                 // show suggested destinations when there is some text and the button hasn't been clicked
                 if !suggestions.isEmpty && travel.state == .destinationInput {
                         SuggestionView(dataArray: $suggestions)
@@ -128,6 +126,6 @@ struct DestinationView: View {
 
 struct DestinationView_Previews: PreviewProvider {
     static var previews: some View {
-        DestinationView().environmentObject(TravelModel())
+        DestinationView(mapView: MapView()).environmentObject(TravelModel())
     }
 }

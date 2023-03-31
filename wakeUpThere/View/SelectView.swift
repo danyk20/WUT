@@ -28,7 +28,7 @@ struct SelectView: View {
 
                 ForEach(TransportType.allCases, id: \.rawValue) { vehicle in
                     NavigationLink(
-                        destination: DestinationView(),
+                        destination: DestinationView(mapView: mapView),
                         label: {
                             RoundedRectangle(cornerRadius: 35)
                                 .fill(.ultraThickMaterial)
@@ -42,11 +42,9 @@ struct SelectView: View {
                     }))
                 }
                 ZStack {
-                    if travel.state == .vehicleSelection {
-                        mapView
-                            .ignoresSafeArea()
-                        AlertView()
-                    }
+                    mapView
+                        .ignoresSafeArea()
+                    AlertView()
                 }
             }
             .font(.title)
