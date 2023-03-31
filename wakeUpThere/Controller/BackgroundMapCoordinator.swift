@@ -22,6 +22,11 @@ class MapViewCoordinator: NSObject, MKMapViewDelegate {
         let newCoordinates = (gestureRecognizer.view as? MKMapView)?.convert(touchPoint, toCoordinateFrom: gestureRecognizer.view)
         if let cordinates = newCoordinates {
             MapAPI.instance.setDestination(selectedLocation: Location(location2D: cordinates))
+            MapAPI.instance.getPositionFromCoordinates(coordinates: cordinates) { locations in
+                if !locations.isEmpty {
+                    MapAPI.instance.setDestination(selectedLocation: locations[0])
+                }
+            }
         }
         travel.state = .approachSetting
     }

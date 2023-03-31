@@ -16,7 +16,8 @@ struct DestinationView: View {
     @State private var destination: String = "" // user input of destination
     @FocusState private var destinationInFocus: Bool // popup user keyboard
     @EnvironmentObject var travel: TravelModel // global storage
-    var mapAPI: MapAPI = MapAPI.instance
+    @State private var textInput: Bool = true
+    @ObservedObject var mapAPI: MapAPI = MapAPI.instance
 
     var body: some View {
 
@@ -26,12 +27,15 @@ struct DestinationView: View {
             .multilineTextAlignment(.center)
             .disableAutocorrection(true)
             .onChange(of: destination) { _ in
-                travel.state = .destinationInput
-                if getVehicle() != .airplane {
-                    mapAPI.getPossiblePlaces(address: destination) { places in
-                        suggestions = places
+                if textInput {
+                    travel.state = .destinationInput
+                    if getVehicle() != .airplane {
+                        mapAPI.getPossiblePlaces(address: destination) { places in
+                            suggestions = places
+                        }
                     }
                 }
+                textInput = true
             }
 
         VStack { // START: View
@@ -79,6 +83,13 @@ struct DestinationView: View {
             }
             ZStack {
                 mapView
+                    .onChange(of: mapAPI.locations) { locations in
+                        // update textField only on tap gesture input
+                        if travel.state == .approachSetting {
+                            self.textInput = false
+                            destination = locations[0].name
+                        }
+                    }
                     .ignoresSafeArea()
                 AlertView()
                 // show suggested destinations when there is some text and the button hasn't been clicked

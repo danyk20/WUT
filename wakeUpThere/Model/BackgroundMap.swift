@@ -47,6 +47,7 @@ struct BackgroundMap: UIViewRepresentable {
             let centerCoordinate = CLLocationCoordinate2D(latitude: target.latitude, longitude: target.longitude)
             annotation.coordinate = centerCoordinate
             annotation.title = target.name
+            annotation.subtitle = target.region
             uiView.addAnnotation(annotation)
         }
     }
