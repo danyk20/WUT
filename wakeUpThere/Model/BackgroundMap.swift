@@ -13,6 +13,7 @@ import MapKit
 struct BackgroundMap: UIViewRepresentable {
     @Binding var zoom: Int
     @Binding public var locations: [Location]
+    @EnvironmentObject var travel: TravelModel
 
     var locationManager = CLLocationManager()
 
@@ -74,7 +75,7 @@ struct BackgroundMap: UIViewRepresentable {
     }
 
     internal func makeCoordinator() -> MapViewCoordinator {
-        MapViewCoordinator(self)
+        MapViewCoordinator(self, travel: travel)
     }
 
 }

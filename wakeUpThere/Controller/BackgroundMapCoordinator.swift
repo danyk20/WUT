@@ -10,9 +10,11 @@ import MapKit
 
 class MapViewCoordinator: NSObject, MKMapViewDelegate {
     private var mapViewController: BackgroundMap
+    var travel: TravelModel
 
-    init(_ control: BackgroundMap) {
+    init(_ control: BackgroundMap, travel: TravelModel) {
         self.mapViewController = control
+        self.travel = travel
     }
 
     @objc func addPinBasedOnGesture(_ gestureRecognizer: UIGestureRecognizer) {
@@ -21,6 +23,7 @@ class MapViewCoordinator: NSObject, MKMapViewDelegate {
         if let cordinates = newCoordinates {
             MapAPI.instance.setDestination(selectedLocation: Location(location2D: cordinates))
         }
+        travel.state = .approachSetting
     }
 
 }

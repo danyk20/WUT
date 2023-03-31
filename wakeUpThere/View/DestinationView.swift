@@ -14,7 +14,6 @@ struct DestinationView: View {
     @State private var suggestions: [Location] = [] // suggested places for user
     @State private var flightData: FlightData = FlightData.instance // selected flight info
     @State private var destination: String = "" // user input of destination
-    @State private var selectedDestination: Bool = false // user set destination
     @FocusState private var destinationInFocus: Bool // popup user keyboard
     @EnvironmentObject var travel: TravelModel // global storage
     var mapAPI: MapAPI = MapAPI.instance
@@ -28,7 +27,6 @@ struct DestinationView: View {
             .disableAutocorrection(true)
             .onChange(of: destination) { _ in
                 travel.state = .destinationInput
-                selectedDestination = false // show again destination list
                 if getVehicle() != .airplane {
                     mapAPI.getPossiblePlaces(address: destination) { places in
                         suggestions = places
@@ -56,7 +54,7 @@ struct DestinationView: View {
             }
 
             // show "set destination" button, until it is clicked
-            if !selectedDestination {
+            if travel.state == .destinationInput {
                 Button(getVehicle() == .airplane ? "Set selected flight number" : "Set selected destination",
                        action: {
                     destinationInFocus = false
@@ -67,14 +65,14 @@ struct DestinationView: View {
                             return
                         }
                         flightData.setFlightNumber(flightNumber: destination.filter({!$0.isWhitespace}))
-                        selectedDestination = true // let user enter distance
+                        travel.state = .approachSetting
                         travel.isPerimeterSelected = false
                     } else if suggestions.isEmpty && mapAPI.locations.isEmpty {
                         destinationInFocus = true
                         travel.alertCode = -1
                         travel.throwAlert = true
                     } else {
-                        selectedDestination = true // let user enter distance
+                        travel.state = .approachSetting
                         travel.isPerimeterSelected = false
                     }
                 })
@@ -86,12 +84,14 @@ struct DestinationView: View {
                     AlertView()
                 }
                 // show suggested destinations when there is some text and the button hasn't been clicked
-                if !suggestions.isEmpty && !selectedDestination {
+                if !suggestions.isEmpty && travel.state == .destinationInput {
                         SuggestionView(dataArray: $suggestions)
                 }
                 // let the user enter distance after he chose a destination but only until the distance is submitted
-                if selectedDestination && !travel.isPerimeterSelected {
-                    distanceView
+                if travel.state == .approachSetting {
+                    distanceView.onAppear {
+                        destinationInFocus = false
+                    }
                 }
             }
         } // END: View
