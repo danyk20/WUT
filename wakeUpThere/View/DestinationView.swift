@@ -69,7 +69,7 @@ struct DestinationView: View {
                         flightData.setFlightNumber(flightNumber: destination.filter({!$0.isWhitespace}))
                         selectedDestination = true // let user enter distance
                         travel.isPerimeterSelected = false
-                    } else if suggestions.isEmpty {
+                    } else if suggestions.isEmpty && mapAPI.locations.isEmpty {
                         destinationInFocus = true
                         travel.alertCode = -1
                         travel.throwAlert = true
