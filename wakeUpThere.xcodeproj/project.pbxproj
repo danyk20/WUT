@@ -36,6 +36,7 @@
 		9BEFC128286DEE61005D22AD /* bell.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9BEFC127286DEE61005D22AD /* bell.mp3 */; };
 		C57B2BDF29BB187B00A40BB1 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = C57B2BDE29BB187B00A40BB1 /* Constants.swift */; };
 		C581110529BBE8E100AC9036 /* BackgroundMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = C581110429BBE8E100AC9036 /* BackgroundMap.swift */; };
+		C5F1B47C29D657560031446D /* BackgroundMapCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5F1B47B29D657560031446D /* BackgroundMapCoordinator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -70,6 +71,7 @@
 		9BEFC127286DEE61005D22AD /* bell.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = bell.mp3; sourceTree = "<group>"; };
 		C57B2BDE29BB187B00A40BB1 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		C581110429BBE8E100AC9036 /* BackgroundMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundMap.swift; sourceTree = "<group>"; };
+		C5F1B47B29D657560031446D /* BackgroundMapCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundMapCoordinator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,6 +121,7 @@
 			children = (
 				9B5BEF7F2873448A00BA6326 /* NotificationController.swift */,
 				9BEFC124286DE2AD005D22AD /* SoundManager.swift */,
+				C5F1B47B29D657560031446D /* BackgroundMapCoordinator.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -291,6 +294,7 @@
 				9B8572872889A8F7008905FC /* TimerModel.swift in Sources */,
 				9B5BEF7C286FCB2900BA6326 /* DistanceSelectionView.swift in Sources */,
 				9B49ABA62893544300F35B54 /* TextFormatter.swift in Sources */,
+				C5F1B47C29D657560031446D /* BackgroundMapCoordinator.swift in Sources */,
 				9BEFC125286DE2AD005D22AD /* SoundManager.swift in Sources */,
 				03C57D9B29B8B01600F7CD73 /* FlightRequest.swift in Sources */,
 				9B83CF07288B880000B6C5F1 /* Enums.swift in Sources */,

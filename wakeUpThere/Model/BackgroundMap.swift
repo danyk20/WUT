@@ -27,6 +27,10 @@ struct BackgroundMap: UIViewRepresentable {
         let mapView = MKMapView(frame: UIScreen.main.bounds)
         mapView.showsUserLocation = true
         mapView.setRegion(mapView.regionThatFits(getCurrentRegion()), animated: true)
+        mapView.delegate = context.coordinator
+        let longPressed = UILongPressGestureRecognizer(target: context.coordinator,
+                                                           action: #selector(context.coordinator.addPinBasedOnGesture(_:)))
+        mapView.addGestureRecognizer(longPressed)
         return mapView
     }
 
@@ -67,6 +71,10 @@ struct BackgroundMap: UIViewRepresentable {
         }
         print("Current location is unknown")
         return MKCoordinateRegion()
+    }
+
+    internal func makeCoordinator() -> MapViewCoordinator {
+        MapViewCoordinator(self)
     }
 
 }

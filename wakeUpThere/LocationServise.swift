@@ -34,6 +34,13 @@ struct Location: Codable, Hashable, Identifiable {
         self.countryCode = countryCode
     }
 
+    init(location2D: CLLocationCoordinate2D) {
+        self.longitude = location2D.longitude
+        self.latitude = location2D.latitude
+        self.name = ""
+        self.countryCode = ""
+    }
+
     public func hash(into hasher: inout Hasher) {
         hasher.combine(latitude)
         hasher.combine(longitude)
