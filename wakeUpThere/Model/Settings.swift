@@ -8,13 +8,13 @@
 import Foundation
 import AVFoundation
 
-struct Settings {
+struct Settings: Codable {
     var tone: String
     var volume: Float
     var isVibrationEnabled: Bool
 
     static let defaultSettings = Settings(
-        tone: "bell",
+        tone: "bells",
         volume: AVAudioSession.sharedInstance().outputVolume,
         isVibrationEnabled: true
     )

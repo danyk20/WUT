@@ -10,20 +10,34 @@ import UserNotifications
 
 class SettingsController: ObservableObject {
 
-    @Published var settings: Settings
+    var settings: Settings = Settings.defaultSettings
     var systemSounds: [String]
 
-    init(settings: Settings) {
-        self.settings = settings
+    init() {
         self.systemSounds = []
         self.systemSounds = getSounds()
+        self.getSettings()
     }
 
     func saveSettings() {
-        // Implement your code to save the settings here
+        let defaults = UserDefaults.standard
+        let encoder = JSONEncoder()
+        if let encoded = try? encoder.encode(settings) {
+            defaults.set(encoded, forKey: "MySettings")
+        }
     }
 
-    func getSounds() -> [String] {
+    func getSettings() {
+        let defaults = UserDefaults.standard
+        if let savedSettings = defaults.object(forKey: "MySettings") as? Data {
+            let decoder = JSONDecoder()
+            if let loadedSettings = try? decoder.decode(Settings.self, from: savedSettings) {
+                settings = loadedSettings
+            }
+        }
+    }
+
+    private func getSounds() -> [String] {
         guard let path = Bundle.main.resourcePath else {
             return []
         }

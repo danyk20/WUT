@@ -16,7 +16,7 @@ struct SelectView: View {
     private let screenName: String = "Main screen"
     @State private var mapView: MapView = MapView()
     @StateObject private var travel: TravelModel = TravelModel()
-    @StateObject var settingsController = SettingsController(settings: Settings.defaultSettings)
+    @StateObject var settingsController = SettingsController()
 
     var body: some View {
         NavigationView {
