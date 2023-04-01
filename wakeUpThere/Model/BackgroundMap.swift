@@ -11,12 +11,12 @@ import CoreLocation
 import MapKit
 
 struct BackgroundMap: UIViewRepresentable {
-    @Binding var zoom: Int
-    @Binding public var locations: [Location]
+    var zoom: Int = 65536
+    @State var locations: [Location] = []
     @EnvironmentObject var travel: TravelModel
-
+    @ObservedObject var mapAPI: MapAPI = MapAPI.instance
     var locationManager = CLLocationManager()
-
+    
     private func setupManager() {
       locationManager.desiredAccuracy = kCLLocationAccuracyBest
       locationManager.requestWhenInUseAuthorization()
@@ -24,6 +24,7 @@ struct BackgroundMap: UIViewRepresentable {
     }
 
     func makeUIView(context: Context) -> MKMapView {
+        print("Initializing BackgroundMap") // when it is called and why?
         setupManager()
         let mapView = MKMapView(frame: UIScreen.main.bounds)
         mapView.showsUserLocation = true
@@ -32,6 +33,7 @@ struct BackgroundMap: UIViewRepresentable {
         let longPressed = UILongPressGestureRecognizer(target: context.coordinator,
                                                            action: #selector(context.coordinator.addPinBasedOnGesture(_:)))
         mapView.addGestureRecognizer(longPressed)
+        PositionLocator().setTravelModel(travel: travel)
         return mapView
     }
 
@@ -52,13 +54,13 @@ struct BackgroundMap: UIViewRepresentable {
         }
     }
 
-    public func zoomOut() {
+    public mutating func zoomOut() {
         if zoom < 16777216 {
             zoom *= 2
         }
     }
 
-    public func zoomIn() {
+    public mutating func zoomIn() {
         if zoom > 10 {
             zoom /= 2
         }

@@ -24,7 +24,10 @@ class MapViewCoordinator: NSObject, MKMapViewDelegate {
             MapAPI.instance.setDestination(selectedLocation: Location(location2D: cordinates))
             MapAPI.instance.getPositionFromCoordinates(coordinates: cordinates) { locations in
                 if !locations.isEmpty {
+                    // save location for target computation
                     MapAPI.instance.setDestination(selectedLocation: locations[0])
+                    // show pin on the map
+                    self.mapViewController.locations = [locations[0]]
                 }
             }
         }

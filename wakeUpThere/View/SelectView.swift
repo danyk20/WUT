@@ -28,7 +28,7 @@ struct SelectView: View {
 
                 ForEach(TransportType.allCases, id: \.rawValue) { vehicle in
                     NavigationLink(
-                        destination: DestinationView(mapView: mapView),
+                        destination: DestinationView(mapView: mapView), // Destination view is inicilized with uninicilized mapView
                         label: {
                             RoundedRectangle(cornerRadius: 35)
                                 .fill(.ultraThickMaterial)
