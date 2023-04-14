@@ -43,7 +43,6 @@
 		9BB35CBD284C0DC90034FAB3 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB35CBC284C0DC90034FAB3 /* MapView.swift */; };
 		9BDC6E99288AFBB4008594B0 /* AlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BDC6E98288AFBB3008594B0 /* AlertView.swift */; };
 		9BEFC125286DE2AD005D22AD /* SoundManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BEFC124286DE2AD005D22AD /* SoundManager.swift */; };
-		C57B2BDF29BB187B00A40BB1 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = C57B2BDE29BB187B00A40BB1 /* Constants.swift */; };
 		C581110529BBE8E100AC9036 /* BackgroundMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = C581110429BBE8E100AC9036 /* BackgroundMap.swift */; };
 /* End PBXBuildFile section */
 
@@ -97,7 +96,6 @@
 		9BB35CBC284C0DC90034FAB3 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		9BDC6E98288AFBB3008594B0 /* AlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertView.swift; sourceTree = "<group>"; };
 		9BEFC124286DE2AD005D22AD /* SoundManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundManager.swift; sourceTree = "<group>"; };
-		C57B2BDE29BB187B00A40BB1 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		C581110429BBE8E100AC9036 /* BackgroundMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundMap.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -210,7 +208,6 @@
 				03C57D8F29B8AF0000F7CD73 /* View */,
 				9B4419E22845B1F30046FC9E /* Info.plist */,
 				9B4419E02845AD5A0046FC9E /* PositionLocator.swift */,
-				C57B2BDE29BB187B00A40BB1 /* Constants.swift */,
 				9B83CF06288B880000B6C5F1 /* Enums.swift */,
 				9B9ED3C42856DDA90091181A /* LocationServise.swift */,
 				9B49ABA52893544200F35B54 /* TextFormatter.swift */,
@@ -394,7 +391,6 @@
 				9BEFC125286DE2AD005D22AD /* SoundManager.swift in Sources */,
 				03C57D9B29B8B01600F7CD73 /* FlightRequest.swift in Sources */,
 				9B83CF07288B880000B6C5F1 /* Enums.swift in Sources */,
-				C57B2BDF29BB187B00A40BB1 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
