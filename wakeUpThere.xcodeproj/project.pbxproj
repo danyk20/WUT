@@ -7,6 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0310BE4129C77FE100DC584F /* NotificationControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0310BE4029C77FE100DC584F /* NotificationControllerTests.swift */; };
+		0310BE4329C78A2A00DC584F /* FlightDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0310BE4229C78A2A00DC584F /* FlightDataTests.swift */; };
+		037FA6D929CCE4E900D2B820 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 037FA6D829CCE4E900D2B820 /* SettingsView.swift */; };
+		037FA6DB29CD9B2F00D2B820 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 037FA6DA29CD9B2F00D2B820 /* Settings.swift */; };
+		037FA6DD29CD9B7D00D2B820 /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 037FA6DC29CD9B7D00D2B820 /* SettingsController.swift */; };
+		037FA6ED29CDC2AE00D2B820 /* happy.wav in Resources */ = {isa = PBXBuildFile; fileRef = 037FA6E829CDC2AE00D2B820 /* happy.wav */; };
+		037FA6EE29CDC2AE00D2B820 /* announce.wav in Resources */ = {isa = PBXBuildFile; fileRef = 037FA6E929CDC2AE00D2B820 /* announce.wav */; };
+		037FA6EF29CDC2AE00D2B820 /* panam.wav in Resources */ = {isa = PBXBuildFile; fileRef = 037FA6EA29CDC2AE00D2B820 /* panam.wav */; };
+		037FA6F029CDC2AE00D2B820 /* bells.wav in Resources */ = {isa = PBXBuildFile; fileRef = 037FA6EB29CDC2AE00D2B820 /* bells.wav */; };
+		037FA6F129CDC2AE00D2B820 /* bell.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 037FA6EC29CDC2AE00D2B820 /* bell.mp3 */; };
 		03C57D9329B8AF7D00F7CD73 /* TimeData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03C57D9229B8AF7D00F7CD73 /* TimeData.swift */; };
 		03C57D9529B8AFA200F7CD73 /* FlightTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03C57D9429B8AFA200F7CD73 /* FlightTime.swift */; };
 		03C57D9729B8AFF300F7CD73 /* Flight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03C57D9629B8AFF300F7CD73 /* Flight.swift */; };
@@ -33,12 +43,31 @@
 		9BB35CBD284C0DC90034FAB3 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB35CBC284C0DC90034FAB3 /* MapView.swift */; };
 		9BDC6E99288AFBB4008594B0 /* AlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BDC6E98288AFBB3008594B0 /* AlertView.swift */; };
 		9BEFC125286DE2AD005D22AD /* SoundManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BEFC124286DE2AD005D22AD /* SoundManager.swift */; };
-		9BEFC128286DEE61005D22AD /* bell.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9BEFC127286DEE61005D22AD /* bell.mp3 */; };
-		C57B2BDF29BB187B00A40BB1 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = C57B2BDE29BB187B00A40BB1 /* Constants.swift */; };
 		C581110529BBE8E100AC9036 /* BackgroundMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = C581110429BBE8E100AC9036 /* BackgroundMap.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		0310BE3B29C77FAA00DC584F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9B0E8556283A85DB00114FF4 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9B0E855D283A85DB00114FF4;
+			remoteInfo = wakeUpThere;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
+		0310BE3729C77FAA00DC584F /* wakeUpThereTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = wakeUpThereTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		0310BE4029C77FE100DC584F /* NotificationControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationControllerTests.swift; sourceTree = "<group>"; };
+		0310BE4229C78A2A00DC584F /* FlightDataTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlightDataTests.swift; sourceTree = "<group>"; };
+		037FA6D829CCE4E900D2B820 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		037FA6DA29CD9B2F00D2B820 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
+		037FA6DC29CD9B7D00D2B820 /* SettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
+		037FA6E829CDC2AE00D2B820 /* happy.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = happy.wav; sourceTree = "<group>"; };
+		037FA6E929CDC2AE00D2B820 /* announce.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = announce.wav; sourceTree = "<group>"; };
+		037FA6EA29CDC2AE00D2B820 /* panam.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = panam.wav; sourceTree = "<group>"; };
+		037FA6EB29CDC2AE00D2B820 /* bells.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = bells.wav; sourceTree = "<group>"; };
+		037FA6EC29CDC2AE00D2B820 /* bell.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = bell.mp3; sourceTree = "<group>"; };
 		03C57D9229B8AF7D00F7CD73 /* TimeData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeData.swift; sourceTree = "<group>"; };
 		03C57D9429B8AFA200F7CD73 /* FlightTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlightTime.swift; sourceTree = "<group>"; };
 		03C57D9629B8AFF300F7CD73 /* Flight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Flight.swift; sourceTree = "<group>"; };
@@ -67,12 +96,17 @@
 		9BB35CBC284C0DC90034FAB3 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		9BDC6E98288AFBB3008594B0 /* AlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertView.swift; sourceTree = "<group>"; };
 		9BEFC124286DE2AD005D22AD /* SoundManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundManager.swift; sourceTree = "<group>"; };
-		9BEFC127286DEE61005D22AD /* bell.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = bell.mp3; sourceTree = "<group>"; };
-		C57B2BDE29BB187B00A40BB1 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		C581110429BBE8E100AC9036 /* BackgroundMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundMap.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		0310BE3429C77FAA00DC584F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		9B0E855B283A85DB00114FF4 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -83,6 +117,27 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0310BE3829C77FAA00DC584F /* wakeUpThereTests */ = {
+			isa = PBXGroup;
+			children = (
+				0310BE4029C77FE100DC584F /* NotificationControllerTests.swift */,
+				0310BE4229C78A2A00DC584F /* FlightDataTests.swift */,
+			);
+			path = wakeUpThereTests;
+			sourceTree = "<group>";
+		};
+		037FA6E729CDC2AE00D2B820 /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				037FA6E829CDC2AE00D2B820 /* happy.wav */,
+				037FA6E929CDC2AE00D2B820 /* announce.wav */,
+				037FA6EA29CDC2AE00D2B820 /* panam.wav */,
+				037FA6EB29CDC2AE00D2B820 /* bells.wav */,
+				037FA6EC29CDC2AE00D2B820 /* bell.mp3 */,
+			);
+			path = Sounds;
+			sourceTree = "<group>";
+		};
 		03C57D8F29B8AF0000F7CD73 /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -93,6 +148,7 @@
 				9BB35CB8284BFA3B0034FAB3 /* TransportView.swift */,
 				9B7A36E328600A76006C721F /* SuggestionView.swift */,
 				9B0E8577283AA5E000114FF4 /* SelectView.swift */,
+				037FA6D829CCE4E900D2B820 /* SettingsView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -110,6 +166,7 @@
 				03C57D9A29B8B01600F7CD73 /* FlightRequest.swift */,
 				03C57D9C29B8B02800F7CD73 /* ApiResult.swift */,
 				C581110429BBE8E100AC9036 /* BackgroundMap.swift */,
+				037FA6DA29CD9B2F00D2B820 /* Settings.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -119,6 +176,7 @@
 			children = (
 				9B5BEF7F2873448A00BA6326 /* NotificationController.swift */,
 				9BEFC124286DE2AD005D22AD /* SoundManager.swift */,
+				037FA6DC29CD9B7D00D2B820 /* SettingsController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -128,6 +186,7 @@
 			children = (
 				03E9913029B8B4D6002C0C21 /* .swiftlint.yml */,
 				9B0E8560283A85DB00114FF4 /* wakeUpThere */,
+				0310BE3829C77FAA00DC584F /* wakeUpThereTests */,
 				9B0E855F283A85DB00114FF4 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -136,6 +195,7 @@
 			isa = PBXGroup;
 			children = (
 				9B0E855E283A85DB00114FF4 /* wakeUpThere.app */,
+				0310BE3729C77FAA00DC584F /* wakeUpThereTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -148,13 +208,12 @@
 				03C57D8F29B8AF0000F7CD73 /* View */,
 				9B4419E22845B1F30046FC9E /* Info.plist */,
 				9B4419E02845AD5A0046FC9E /* PositionLocator.swift */,
-				C57B2BDE29BB187B00A40BB1 /* Constants.swift */,
 				9B83CF06288B880000B6C5F1 /* Enums.swift */,
 				9B9ED3C42856DDA90091181A /* LocationServise.swift */,
 				9B49ABA52893544200F35B54 /* TextFormatter.swift */,
 				9B0E8561283A85DB00114FF4 /* wakeUpThereApp.swift */,
-				9BEFC126286DE5C7005D22AD /* Sounds */,
 				9B0E8565283A85E400114FF4 /* Assets.xcassets */,
+				037FA6E729CDC2AE00D2B820 /* Sounds */,
 				9B0E8567283A85E400114FF4 /* Preview Content */,
 			);
 			path = wakeUpThere;
@@ -168,17 +227,27 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
-		9BEFC126286DE5C7005D22AD /* Sounds */ = {
-			isa = PBXGroup;
-			children = (
-				9BEFC127286DEE61005D22AD /* bell.mp3 */,
-			);
-			path = Sounds;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		0310BE3629C77FAA00DC584F /* wakeUpThereTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0310BE3F29C77FAB00DC584F /* Build configuration list for PBXNativeTarget "wakeUpThereTests" */;
+			buildPhases = (
+				0310BE3329C77FAA00DC584F /* Sources */,
+				0310BE3429C77FAA00DC584F /* Frameworks */,
+				0310BE3529C77FAA00DC584F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				0310BE3C29C77FAA00DC584F /* PBXTargetDependency */,
+			);
+			name = wakeUpThereTests;
+			productName = wakeUpThereTests;
+			productReference = 0310BE3729C77FAA00DC584F /* wakeUpThereTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		9B0E855D283A85DB00114FF4 /* wakeUpThere */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9B0E856C283A85E400114FF4 /* Build configuration list for PBXNativeTarget "wakeUpThere" */;
@@ -204,9 +273,13 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1340;
+				LastSwiftUpdateCheck = 1420;
 				LastUpgradeCheck = 1340;
 				TargetAttributes = {
+					0310BE3629C77FAA00DC584F = {
+						CreatedOnToolsVersion = 14.2;
+						TestTargetID = 9B0E855D283A85DB00114FF4;
+					};
 					9B0E855D283A85DB00114FF4 = {
 						CreatedOnToolsVersion = 13.4;
 					};
@@ -226,19 +299,31 @@
 			projectRoot = "";
 			targets = (
 				9B0E855D283A85DB00114FF4 /* wakeUpThere */,
+				0310BE3629C77FAA00DC584F /* wakeUpThereTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		0310BE3529C77FAA00DC584F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		9B0E855C283A85DB00114FF4 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				037FA6EE29CDC2AE00D2B820 /* announce.wav in Resources */,
 				03E9913129B8B4D6002C0C21 /* .swiftlint.yml in Resources */,
+				037FA6EF29CDC2AE00D2B820 /* panam.wav in Resources */,
 				9B0E8569283A85E400114FF4 /* Preview Assets.xcassets in Resources */,
 				9B0E8566283A85E400114FF4 /* Assets.xcassets in Resources */,
-				9BEFC128286DEE61005D22AD /* bell.mp3 in Resources */,
+				037FA6F129CDC2AE00D2B820 /* bell.mp3 in Resources */,
+				037FA6ED29CDC2AE00D2B820 /* happy.wav in Resources */,
+				037FA6F029CDC2AE00D2B820 /* bells.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -266,12 +351,23 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		0310BE3329C77FAA00DC584F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0310BE4329C78A2A00DC584F /* FlightDataTests.swift in Sources */,
+				0310BE4129C77FE100DC584F /* NotificationControllerTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		9B0E855A283A85DB00114FF4 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				037FA6DD29CD9B7D00D2B820 /* SettingsController.swift in Sources */,
 				03C57D9329B8AF7D00F7CD73 /* TimeData.swift in Sources */,
 				9B0E8562283A85DB00114FF4 /* wakeUpThereApp.swift in Sources */,
+				037FA6DB29CD9B2F00D2B820 /* Settings.swift in Sources */,
 				9B7A36E428600A76006C721F /* SuggestionView.swift in Sources */,
 				03C57D9D29B8B02800F7CD73 /* ApiResult.swift in Sources */,
 				9B88E8452852DEE50015A024 /* DestinationView.swift in Sources */,
@@ -285,6 +381,7 @@
 				9BDC6E99288AFBB4008594B0 /* AlertView.swift in Sources */,
 				9BB35CB9284BFA3C0034FAB3 /* TransportView.swift in Sources */,
 				03C57D9529B8AFA200F7CD73 /* FlightTime.swift in Sources */,
+				037FA6D929CCE4E900D2B820 /* SettingsView.swift in Sources */,
 				9B8F62032881084500972A3A /* FlightData.swift in Sources */,
 				C581110529BBE8E100AC9036 /* BackgroundMap.swift in Sources */,
 				9B4419E12845AD5B0046FC9E /* PositionLocator.swift in Sources */,
@@ -294,13 +391,60 @@
 				9BEFC125286DE2AD005D22AD /* SoundManager.swift in Sources */,
 				03C57D9B29B8B01600F7CD73 /* FlightRequest.swift in Sources */,
 				9B83CF07288B880000B6C5F1 /* Enums.swift in Sources */,
-				C57B2BDF29BB187B00A40BB1 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		0310BE3C29C77FAA00DC584F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9B0E855D283A85DB00114FF4 /* wakeUpThere */;
+			targetProxy = 0310BE3B29C77FAA00DC584F /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		0310BE3D29C77FAB00DC584F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 5X6SQ742K3;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = edu.truman.kosc.wakeUpThereTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/wakeUpThere.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/wakeUpThere";
+			};
+			name = Debug;
+		};
+		0310BE3E29C77FAB00DC584F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 5X6SQ742K3;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = edu.truman.kosc.wakeUpThereTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/wakeUpThere.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/wakeUpThere";
+			};
+			name = Release;
+		};
 		9B0E856A283A85E400114FF4 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -424,7 +568,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"wakeUpThere/Preview Content\"";
-				DEVELOPMENT_TEAM = 5VFP4D6SX2;
+				DEVELOPMENT_TEAM = 5X6SQ742K3;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = wakeUpThere/Info.plist;
@@ -433,7 +577,6 @@
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "This app needs access to your location to provide you with information about the remaining distance to your destination and a trigger alert at the right distance before arrival, even when it is running in the background.";
 				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "This app needs access to your location to provide you with information about the remaining distance to your destination and a trigger alert at the right distance before arrival, even when it is running in the background.";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "This app needs access to your location to provide you with information about the remaining distance to your destination and a trigger alert at the right distance before arrival, even when it is running in the background.";
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
@@ -444,7 +587,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = edu.truman.kosc.wakeUpThere;
+				PRODUCT_BUNDLE_IDENTIFIER = edu.truman.kosc.wakeUpThere1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -471,7 +614,6 @@
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "This app needs access to your location to provide you with information about the remaining distance to your destination and a trigger alert at the right distance before arrival, even when it is running in the background.";
 				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "This app needs access to your location to provide you with information about the remaining distance to your destination and a trigger alert at the right distance before arrival, even when it is running in the background.";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "This app needs access to your location to provide you with information about the remaining distance to your destination and a trigger alert at the right distance before arrival, even when it is running in the background.";
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
@@ -494,6 +636,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		0310BE3F29C77FAB00DC584F /* Build configuration list for PBXNativeTarget "wakeUpThereTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0310BE3D29C77FAB00DC584F /* Debug */,
+				0310BE3E29C77FAB00DC584F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		9B0E8559283A85DB00114FF4 /* Build configuration list for PBXProject "wakeUpThere" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
