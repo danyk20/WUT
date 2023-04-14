@@ -105,7 +105,12 @@ struct DestinationView: View {
             }
         } // END: View
         .onAppear {
-            destinationInFocus = true
+            if let target = mapAPI.locations.first {
+                destination = target.name
+                textInput = false
+            } else {
+                destinationInFocus = true
+            }
         }
         .onDisappear {
             travel.state = .vehicleSelection

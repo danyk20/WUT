@@ -53,8 +53,10 @@ struct MapView: View {
             }
             .onAppear {
                 mapModel.setTravelModel(travel: travel)
-                map = BackgroundMap(zoom: $zoom, locations: $locations)
-            }
+                if map == nil {
+                    map = BackgroundMap(zoom: $zoom)
+                    }
+                }
         }
     }
 }

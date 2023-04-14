@@ -13,7 +13,7 @@ struct SelectView: View {
     private let prompt: String = "Choose mean of transport:"
     private let appName: String = "WUT"
     private let screenName: String = "Main screen"
-    @State private var mapView: MapView = MapView()
+    private var mapView: MapView = MapView()
     @StateObject private var travel: TravelModel = TravelModel()
 
     var body: some View {
@@ -37,7 +37,11 @@ struct SelectView: View {
                                     .accentColor(.primary))
                         })
                     .simultaneousGesture(TapGesture().onEnded({
-                        travel.state = .destinationInput
+                        if MapAPI.instance.locations.isEmpty {
+                            travel.state = .destinationInput
+                        } else {
+                            travel.state = .approachSetting
+                        }
                         travel.vehicle = vehicle
                     }))
                 }

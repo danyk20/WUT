@@ -145,7 +145,6 @@ class MapAPI: ObservableObject {
                                                    longitude: selectedLocation.longitude,
                                                    name: selectedLocation.name,
                                                    region: selectedLocation.region), at: 0)
-                    print("Sucessfuly founded location")
                 }
             }
     }
