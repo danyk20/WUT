@@ -17,6 +17,7 @@ struct SelectView: View {
     @State private var mapView: MapView = MapView()
     @StateObject private var travel: TravelModel = TravelModel()
     @StateObject var settingsController = SettingsController()
+    @Environment(\.colorScheme) var colorScheme
 
     var body: some View {
         NavigationView {
@@ -54,7 +55,6 @@ struct SelectView: View {
                     VStack {
                         Text(appName)
                             .font(.title)
-                            .foregroundColor(Color.black)
                     }
                 }
             }
@@ -63,7 +63,7 @@ struct SelectView: View {
                 Spacer()
                 NavigationLink(destination: SettingsView(settingsController: settingsController)) {
                     Image(systemName: "gearshape")
-                        .foregroundColor(.black)
+                        .foregroundColor(colorScheme == .dark ? Color.white : Color.black)
                 }
             }
 
