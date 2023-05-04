@@ -24,6 +24,9 @@ struct MapView: View {
             // update map to see new pin on the map
                 .onChange(of: mapAPI.locations) { _ in
                     locations = mapAPI.locations
+                    if !locations.isEmpty {
+                        travel.destination = locations[0]
+                    }
                 }
 
             VStack { // zoom in/out buttons

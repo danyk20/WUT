@@ -35,6 +35,7 @@ class TravelModel: ObservableObject {
     }
     @Published var alertCode: Int
     @Published var state: ViewState
+    var destination: Location?
 
     /// Reset all values except of state
     public func reset() {

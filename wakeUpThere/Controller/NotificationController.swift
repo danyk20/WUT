@@ -7,16 +7,17 @@
 
 import Foundation
 import SwiftUI
+import CoreLocation
 
 /// Singleton class that handles all notifications and alerts for the entire app.
-class NotificationController: ObservableObject {
+class NotificationController: NSObject, ObservableObject {
 
     static let instance = NotificationController()
-
     private var remainingDistance: Double = Double.infinity
     private var timeUpdater: TimerModel?
-
     var travel: TravelModel? // global storage
+    let notificationCenter = UNUserNotificationCenter.current()
+    var selectedDistanceForNotification: Double = 0
 
     /// Adding global varibale to the class
     /// - Parameter travel: reference on global variable
@@ -64,5 +65,68 @@ class NotificationController: ObservableObject {
             }
         }
         return false
+    }
+
+    public func requestNotificationAuthorization() {
+        let options: UNAuthorizationOptions = [.sound, .alert]
+        notificationCenter
+            .requestAuthorization(options: options) { [weak self] result, _ in
+                print("Auth Request result: \(result)")
+                if result {
+                    guard let selectedLocation = self?.travel?.destination else { return }
+                    self?.registerNotification(selectedLocation: selectedLocation)
+                }
+            }
+    }
+
+    private func registerNotification(selectedLocation: Location) {
+        let notificationContent = UNMutableNotificationContent()
+        notificationContent.title = "You arrived at the location"
+        notificationContent.body = "You are here!"
+        notificationContent.sound = .default
+
+        let trigger = UNLocationNotificationTrigger(region: makeStoreRegion(selectedLocation: selectedLocation), repeats: false)
+
+        let request = UNNotificationRequest(
+            identifier: UUID().uuidString,
+            content: notificationContent,
+            trigger: trigger)
+
+        notificationCenter
+            .add(request) { error in
+                if error != nil {
+                    print("Error: \(String(describing: error))")
+                }
+            }
+    }
+
+    private func makeStoreRegion(selectedLocation: Location) -> CLCircularRegion {
+        let region = CLCircularRegion(
+            center: selectedLocation.getCoordinates2D(),
+            radius: (travel?.perimeter ?? 2.5) * 1000,
+            identifier: UUID().uuidString)
+        region.notifyOnEntry = true
+        return region
+    }
+}
+
+extension NotificationController: UNUserNotificationCenterDelegate {
+    func userNotificationCenter(
+        _ center: UNUserNotificationCenter,
+        didReceive response: UNNotificationResponse,
+        withCompletionHandler completionHandler: @escaping () -> Void
+    ) {
+        print("Received Notification")
+        completionHandler()
+    }
+
+    func userNotificationCenter(
+        _ center: UNUserNotificationCenter,
+        willPresent notification: UNNotification,
+        withCompletionHandler completionHandler:
+        @escaping (UNNotificationPresentationOptions) -> Void
+    ) {
+        print("Received Notification in Foreground")
+        completionHandler(.sound)
     }
 }
