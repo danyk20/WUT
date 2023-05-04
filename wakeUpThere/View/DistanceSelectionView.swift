@@ -50,9 +50,11 @@ struct DistanceSelectionView: View {
                             travel.alertCode = 0
                         }
                         travel.state = .allSet
-                        NotificationController.instance.setTravelModel(travel: travel)
+                        let notificationController = NotificationController.instance
                         travel.throwAlert = true
                         travel.remainingDistance = MapAPI.instance.getRemainingDistance() - travel.perimeter * 1000
+                        notificationController.setTravelModel(travel: travel)
+                        notificationController.requestNotificationAuthorization()
                     } label: {
                         Text("Submit")
                             .padding()

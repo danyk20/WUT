@@ -10,19 +10,18 @@ import MapKit
 import CoreLocationUI
 
 struct SelectView: View {
+
     private let prompt: String = "Choose mean of transport:"
     private let appName: String = "WUT"
     private let screenName: String = "Main screen"
     private var mapView: MapView = MapView()
     @StateObject private var travel: TravelModel = TravelModel()
+    @StateObject var settingsController = SettingsController()
+    @Environment(\.colorScheme) var colorScheme
 
     var body: some View {
         NavigationView {
             VStack(alignment: .center, spacing: 30) {
-                Text(appName)
-                    .font(.largeTitle)
-                    .fontWeight(.bold)
-
                 Text(prompt)
                     .fontWeight(.bold)
 
@@ -52,8 +51,25 @@ struct SelectView: View {
                 }
             }
             .font(.title)
-            .navigationTitle(screenName)
-            .navigationBarHidden(true)
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .principal) {
+                    VStack {
+                        Text(appName)
+                            .font(.title)
+                    }
+                }
+            }
+            .navigationBarItems(trailing:
+                                    HStack {
+                Spacer()
+                NavigationLink(destination: SettingsView(settingsController: settingsController)) {
+                    Image(systemName: "gearshape")
+                        .foregroundColor(colorScheme == .dark ? Color.white : Color.black)
+                }
+            }
+
+            )
         }
         .environmentObject(travel)
     }
