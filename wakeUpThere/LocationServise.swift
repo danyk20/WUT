@@ -17,7 +17,7 @@ struct PositionstackResponse: Codable {
 struct Location: Codable, Hashable, Identifiable {
     let id = UUID()
     let latitude, longitude: Double
-    let name, countryCode: String
+    let name, countryCode, region: String
 
     // only these attributes will be decoded from the JSON
     enum CodingKeys: String, CodingKey {
@@ -25,19 +25,30 @@ struct Location: Codable, Hashable, Identifiable {
         case longitude = "longitude"
         case name = "name"
         case countryCode = "country_code"
+        case region = "region"
         }
 
-    init(latitude: Double, longitude: Double, name: String, countryCode: String = "") {
+    init(latitude: Double, longitude: Double, name: String, countryCode: String = "", region: String = "") {
         self.longitude = longitude
         self.latitude = latitude
         self.name = name
         self.countryCode = countryCode
+        self.region = region
+    }
+
+    init(location2D: CLLocationCoordinate2D) {
+        self.longitude = location2D.longitude
+        self.latitude = location2D.latitude
+        self.name = ""
+        self.countryCode = ""
+        self.region = ""
     }
 
     public func hash(into hasher: inout Hasher) {
         hasher.combine(latitude)
         hasher.combine(longitude)
         hasher.combine(name)
+        hasher.combine(region)
     }
 
     /// Convert latitude and longitude attributes to CLLocationCoordinate2D instance.
@@ -53,6 +64,7 @@ class MapAPI: ObservableObject {
     static let instance = MapAPI()
 
     private static let baseURL = "http://api.positionstack.com/v1/forward"
+    private static let reverseURL = "http://api.positionstack.com/v1/reverse"
     private static let apiKey = Constants.positionstackAPIKey
 
     @Published var locations: [Location] = []
@@ -64,6 +76,29 @@ class MapAPI: ObservableObject {
     public func getPossiblePlaces(address: String, completion: @escaping (([Location]) -> Void)) {
         let pAddress = address.replacingOccurrences(of: " ", with: "%20")
         let urlString = "\(MapAPI.baseURL)?access_key=\(MapAPI.apiKey)&query=\(pAddress)"
+        guard let url = URL(string: urlString) else {
+            print("Invalid URL")
+            return
+        }
+
+        URLSession.shared.dataTask(with: url) { (data, _, error) in
+            guard let data = data else {
+                print(error?.localizedDescription ?? "Error Occured while requesting data from API!")
+                return
+            }
+            guard let newCoordinates = try? JSONDecoder().decode(PositionstackResponse.self, from: data) else {return}
+            if newCoordinates.data.isEmpty {
+                print("Could not find the address...")
+                return
+            }
+            self.setDestination(selectedLocation: newCoordinates.data[0])
+            completion(newCoordinates.data)
+        }.resume()
+    }
+
+    public func getPositionFromCoordinates(coordinates: CLLocationCoordinate2D, completion: @escaping (([Location]) -> Void)) {
+        let query = "\(coordinates.latitude),\(coordinates.longitude)"
+        let urlString = "\(MapAPI.reverseURL)?access_key=\(MapAPI.apiKey)&query=\(query)"
         guard let url = URL(string: urlString) else {
             print("Invalid URL")
             return
@@ -107,9 +142,9 @@ class MapAPI: ObservableObject {
                 self.locations.removeAll()
                 if let selectedLocation = selectedLocation {
                     self.locations.insert(Location(latitude: selectedLocation.latitude,
-                                 longitude: selectedLocation.longitude,
-                                 name: selectedLocation.name), at: 0)
-                    print("Sucessfuly founded location")
+                                                   longitude: selectedLocation.longitude,
+                                                   name: selectedLocation.name,
+                                                   region: selectedLocation.region), at: 0)
                 }
             }
     }

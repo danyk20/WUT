@@ -12,7 +12,8 @@ import MapKit
 
 struct BackgroundMap: UIViewRepresentable {
     @Binding var zoom: Int
-    @Binding public var locations: [Location]
+    @EnvironmentObject var travel: TravelModel
+    @ObservedObject var mapApi: MapAPI = MapAPI.instance
 
     var locationManager = CLLocationManager()
 
@@ -27,6 +28,11 @@ struct BackgroundMap: UIViewRepresentable {
         let mapView = MKMapView(frame: UIScreen.main.bounds)
         mapView.showsUserLocation = true
         mapView.setRegion(mapView.regionThatFits(getCurrentRegion()), animated: true)
+        mapView.delegate = context.coordinator
+        let longPressed = UILongPressGestureRecognizer(target: context.coordinator,
+                                                           action: #selector(context.coordinator.addPinBasedOnGesture(_:)))
+        mapView.addGestureRecognizer(longPressed)
+        putPin(locations: mapApi.locations, map: mapView)
         return mapView
     }
 
@@ -34,15 +40,20 @@ struct BackgroundMap: UIViewRepresentable {
         // update zoom
         uiView.setRegion(getCurrentRegion(), animated: true)
         // update pin on the Map
+        putPin(locations: mapApi.locations, map: uiView)
+    }
+
+    private func putPin(locations: [Location], map: MKMapView) {
         let annotation = MKPointAnnotation()
-        if locations.count > 0, let target = locations.first {
-            if !uiView.annotations.isEmpty {
-                uiView.removeAnnotations(uiView.annotations)
+        if !locations.isEmpty, let target = locations.first {
+            if !map.annotations.isEmpty {
+                map.removeAnnotations(map.annotations)
             }
             let centerCoordinate = CLLocationCoordinate2D(latitude: target.latitude, longitude: target.longitude)
             annotation.coordinate = centerCoordinate
             annotation.title = target.name
-            uiView.addAnnotation(annotation)
+            annotation.subtitle = target.region
+            map.addAnnotation(annotation)
         }
     }
 
@@ -67,6 +78,10 @@ struct BackgroundMap: UIViewRepresentable {
         }
         print("Current location is unknown")
         return MKCoordinateRegion()
+    }
+
+    internal func makeCoordinator() -> MapViewCoordinator {
+        MapViewCoordinator(self, travel: travel)
     }
 
 }

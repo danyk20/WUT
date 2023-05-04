@@ -43,7 +43,10 @@
 		9BB35CBD284C0DC90034FAB3 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB35CBC284C0DC90034FAB3 /* MapView.swift */; };
 		9BDC6E99288AFBB4008594B0 /* AlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BDC6E98288AFBB3008594B0 /* AlertView.swift */; };
 		9BEFC125286DE2AD005D22AD /* SoundManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BEFC124286DE2AD005D22AD /* SoundManager.swift */; };
+		9BEFC128286DEE61005D22AD /* bell.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9BEFC127286DEE61005D22AD /* bell.mp3 */; };
+		C57B2BDF29BB187B00A40BB1 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = C57B2BDE29BB187B00A40BB1 /* Constants.swift */; };
 		C581110529BBE8E100AC9036 /* BackgroundMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = C581110429BBE8E100AC9036 /* BackgroundMap.swift */; };
+		C5F1B47C29D657560031446D /* BackgroundMapCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5F1B47B29D657560031446D /* BackgroundMapCoordinator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -96,7 +99,10 @@
 		9BB35CBC284C0DC90034FAB3 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		9BDC6E98288AFBB3008594B0 /* AlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertView.swift; sourceTree = "<group>"; };
 		9BEFC124286DE2AD005D22AD /* SoundManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundManager.swift; sourceTree = "<group>"; };
+		9BEFC127286DEE61005D22AD /* bell.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = bell.mp3; sourceTree = "<group>"; };
+		C57B2BDE29BB187B00A40BB1 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		C581110429BBE8E100AC9036 /* BackgroundMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundMap.swift; sourceTree = "<group>"; };
+		C5F1B47B29D657560031446D /* BackgroundMapCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundMapCoordinator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -177,6 +183,7 @@
 				9B5BEF7F2873448A00BA6326 /* NotificationController.swift */,
 				9BEFC124286DE2AD005D22AD /* SoundManager.swift */,
 				037FA6DC29CD9B7D00D2B820 /* SettingsController.swift */,
+				C5F1B47B29D657560031446D /* BackgroundMapCoordinator.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -208,10 +215,12 @@
 				03C57D8F29B8AF0000F7CD73 /* View */,
 				9B4419E22845B1F30046FC9E /* Info.plist */,
 				9B4419E02845AD5A0046FC9E /* PositionLocator.swift */,
+				C57B2BDE29BB187B00A40BB1 /* Constants.swift */,
 				9B83CF06288B880000B6C5F1 /* Enums.swift */,
 				9B9ED3C42856DDA90091181A /* LocationServise.swift */,
 				9B49ABA52893544200F35B54 /* TextFormatter.swift */,
 				9B0E8561283A85DB00114FF4 /* wakeUpThereApp.swift */,
+				9BEFC126286DE5C7005D22AD /* Sounds */,
 				9B0E8565283A85E400114FF4 /* Assets.xcassets */,
 				037FA6E729CDC2AE00D2B820 /* Sounds */,
 				9B0E8567283A85E400114FF4 /* Preview Content */,
@@ -225,6 +234,14 @@
 				9B0E8568283A85E400114FF4 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		9BEFC126286DE5C7005D22AD /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				9BEFC127286DEE61005D22AD /* bell.mp3 */,
+			);
+			path = Sounds;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -388,9 +405,11 @@
 				9B8572872889A8F7008905FC /* TimerModel.swift in Sources */,
 				9B5BEF7C286FCB2900BA6326 /* DistanceSelectionView.swift in Sources */,
 				9B49ABA62893544300F35B54 /* TextFormatter.swift in Sources */,
+				C5F1B47C29D657560031446D /* BackgroundMapCoordinator.swift in Sources */,
 				9BEFC125286DE2AD005D22AD /* SoundManager.swift in Sources */,
 				03C57D9B29B8B01600F7CD73 /* FlightRequest.swift in Sources */,
 				9B83CF07288B880000B6C5F1 /* Enums.swift in Sources */,
+				C57B2BDF29BB187B00A40BB1 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -568,7 +587,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"wakeUpThere/Preview Content\"";
-				DEVELOPMENT_TEAM = 5X6SQ742K3;
+				DEVELOPMENT_TEAM = 5VFP4D6SX2;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = wakeUpThere/Info.plist;
@@ -577,6 +596,7 @@
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "This app needs access to your location to provide you with information about the remaining distance to your destination and a trigger alert at the right distance before arrival, even when it is running in the background.";
 				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "This app needs access to your location to provide you with information about the remaining distance to your destination and a trigger alert at the right distance before arrival, even when it is running in the background.";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "This app needs access to your location to provide you with information about the remaining distance to your destination and a trigger alert at the right distance before arrival, even when it is running in the background.";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
@@ -587,7 +607,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = edu.truman.kosc.wakeUpThere1;
+				PRODUCT_BUNDLE_IDENTIFIER = edu.truman.kosc.wakeUpThere;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -606,6 +626,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"wakeUpThere/Preview Content\"";
 				DEVELOPMENT_TEAM = 5VFP4D6SX2;
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 5VFP4D6SX2;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = wakeUpThere/Info.plist;
@@ -614,6 +635,7 @@
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "This app needs access to your location to provide you with information about the remaining distance to your destination and a trigger alert at the right distance before arrival, even when it is running in the background.";
 				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "This app needs access to your location to provide you with information about the remaining distance to your destination and a trigger alert at the right distance before arrival, even when it is running in the background.";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "This app needs access to your location to provide you with information about the remaining distance to your destination and a trigger alert at the right distance before arrival, even when it is running in the background.";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
@@ -627,6 +649,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = edu.truman.kosc.wakeUpThere;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "WUT App Store";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "WUT App Store";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

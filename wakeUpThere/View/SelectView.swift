@@ -14,7 +14,7 @@ struct SelectView: View {
     private let prompt: String = "Choose mean of transport:"
     private let appName: String = "WUT"
     private let screenName: String = "Main screen"
-    @State private var mapView: MapView = MapView()
+    private var mapView: MapView = MapView()
     @StateObject private var travel: TravelModel = TravelModel()
     @StateObject var settingsController = SettingsController()
     @Environment(\.colorScheme) var colorScheme
@@ -27,7 +27,7 @@ struct SelectView: View {
 
                 ForEach(TransportType.allCases, id: \.rawValue) { vehicle in
                     NavigationLink(
-                        destination: DestinationView(),
+                        destination: DestinationView(mapView: mapView),
                         label: {
                             RoundedRectangle(cornerRadius: 35)
                                 .fill(.ultraThickMaterial)
@@ -36,16 +36,18 @@ struct SelectView: View {
                                     .accentColor(.primary))
                         })
                     .simultaneousGesture(TapGesture().onEnded({
-                        travel.state = .destinationInput
+                        if MapAPI.instance.locations.isEmpty {
+                            travel.state = .destinationInput
+                        } else {
+                            travel.state = .approachSetting
+                        }
                         travel.vehicle = vehicle
                     }))
                 }
                 ZStack {
-                    if travel.state == .vehicleSelection {
-                        mapView
-                            .ignoresSafeArea()
-                        AlertView()
-                    }
+                    mapView
+                        .ignoresSafeArea()
+                    AlertView()
                 }
             }
             .font(.title)

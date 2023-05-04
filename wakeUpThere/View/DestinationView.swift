@@ -9,15 +9,15 @@ import SwiftUI
 import MapKit
 
 struct DestinationView: View {
-    @State var mapView: MapView = MapView() // map in the background
+    @State var mapView: MapView // map in the background
     @State private var distanceView: DistanceSelectionView = DistanceSelectionView() // view to set input perimeter
     @State private var suggestions: [Location] = [] // suggested places for user
     @State private var flightData: FlightData = FlightData.instance // selected flight info
     @State private var destination: String = "" // user input of destination
-    @State private var selectedDestination: Bool = false // user set destination
     @FocusState private var destinationInFocus: Bool // popup user keyboard
     @EnvironmentObject var travel: TravelModel // global storage
-    var mapAPI: MapAPI = MapAPI.instance
+    @State private var textInput: Bool = true
+    @ObservedObject var mapAPI: MapAPI = MapAPI.instance
 
     var body: some View {
 
@@ -27,13 +27,15 @@ struct DestinationView: View {
             .multilineTextAlignment(.center)
             .disableAutocorrection(true)
             .onChange(of: destination) { _ in
-                travel.state = .destinationInput
-                selectedDestination = false // show again destination list
-                if getVehicle() != .airplane {
-                    mapAPI.getPossiblePlaces(address: destination) { places in
-                        suggestions = places
+                if textInput {
+                    travel.state = .destinationInput
+                    if getVehicle() != .airplane {
+                        mapAPI.getPossiblePlaces(address: destination) { places in
+                            suggestions = places
+                        }
                     }
                 }
+                textInput = true
             }
 
         VStack { // START: View
@@ -56,7 +58,7 @@ struct DestinationView: View {
             }
 
             // show "set destination" button, until it is clicked
-            if !selectedDestination {
+            if travel.state == .destinationInput {
                 Button(getVehicle() == .airplane ? "Set selected flight number" : "Set selected destination",
                        action: {
                     destinationInFocus = false
@@ -67,36 +69,48 @@ struct DestinationView: View {
                             return
                         }
                         flightData.setFlightNumber(flightNumber: destination.filter({!$0.isWhitespace}))
-                        selectedDestination = true // let user enter distance
+                        travel.state = .approachSetting
                         travel.isPerimeterSelected = false
-                    } else if suggestions.isEmpty {
+                    } else if suggestions.isEmpty && mapAPI.locations.isEmpty {
                         destinationInFocus = true
                         travel.alertCode = -1
                         travel.throwAlert = true
                     } else {
-                        selectedDestination = true // let user enter distance
+                        travel.state = .approachSetting
                         travel.isPerimeterSelected = false
                     }
                 })
             }
             ZStack {
-                if travel.state != .vehicleSelection {
-                    mapView
-                        .ignoresSafeArea()
-                    AlertView()
-                }
+                mapView
+                    .onChange(of: mapAPI.locations) { locations in
+                        // update textField only on tap gesture input
+                        if travel.state == .approachSetting {
+                            self.textInput = false
+                            destination = locations[0].name
+                        }
+                    }
+                    .ignoresSafeArea()
+                AlertView()
                 // show suggested destinations when there is some text and the button hasn't been clicked
-                if !suggestions.isEmpty && !selectedDestination {
+                if !suggestions.isEmpty && travel.state == .destinationInput {
                         SuggestionView(dataArray: $suggestions)
                 }
                 // let the user enter distance after he chose a destination but only until the distance is submitted
-                if selectedDestination && !travel.isPerimeterSelected {
-                    distanceView
+                if travel.state == .approachSetting {
+                    distanceView.onAppear {
+                        destinationInFocus = false
+                    }
                 }
             }
         } // END: View
         .onAppear {
-            destinationInFocus = true
+            if let target = mapAPI.locations.first {
+                destination = target.name
+                textInput = false
+            } else {
+                destinationInFocus = true
+            }
         }
         .onDisappear {
             travel.state = .vehicleSelection
@@ -128,6 +142,6 @@ struct DestinationView: View {
 
 struct DestinationView_Previews: PreviewProvider {
     static var previews: some View {
-        DestinationView().environmentObject(TravelModel())
+        DestinationView(mapView: MapView()).environmentObject(TravelModel())
     }
 }
