@@ -79,8 +79,8 @@ class MapAPI: ObservableObject {
                 print("Could not find the address...")
                 return
             }
-                self.setDestination(selectedLocation: newCoordinates.data[0])
-                completion(newCoordinates.data)
+            self.setDestination(selectedLocation: newCoordinates.data[0])
+            completion(newCoordinates.data)
         }.resume()
     }
 
